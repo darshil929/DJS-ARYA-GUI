@@ -7,7 +7,7 @@ const io = require('socket.io')(server, { cors: { origin: "*"} })
 // const guiPath = path.join(__dirname, '/GUI_Main');
 // console.log(path.join(__dirname, '../draft02/index_v2.html'));
 // console.log(guiPath)
-app.use(express.static('GUI_Main'));
+app.use(express.static('Public'));
 
 server.listen(3000,() => {
     console.log(`Server is UP on port 3000`);
