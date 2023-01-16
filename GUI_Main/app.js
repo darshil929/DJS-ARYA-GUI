@@ -26,22 +26,6 @@ const tileUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const tiles = L.tileLayer(tileUrl);
 tiles.addTo(map);
 
-// tabs.forEach(tab => {
-//   tab.addEventListener('click', () => {
-//     setTimeout(function () { map.invalidateSize() }, 1)
-//     const target = document.querySelector(tab.dataset.tabTarget)
-//     tabContents.forEach(tabContent => {
-//         tabContent.classList.remove('active')
-//     })
-//     tabs.forEach(tab => {
-//         tab.classList.remove('active')
-//     })
-//     tab.classList.add('active')
-//     target.classList.add('active')
-//   })
-// })
-
-
 
 // // When the user scrolls the page, execute myFunction
 // window.onscroll = function() {myFunction()};

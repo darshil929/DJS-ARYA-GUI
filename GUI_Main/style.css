@@ -24,7 +24,7 @@ button {
     width: 45px;
     border-radius: 100%;
     border: none;
-    color: #0071c5;
+    color: #008080; /* find some good color for buttons */
     background-color: #E1EBEE;
     font-size: 40px;
     cursor: pointer;
@@ -41,31 +41,84 @@ button:hover {
     transform: translateY(4px);
 } */
 
-form {
+.example {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 45%;
+}
+
+.example input[type=text] {
+    padding: 10px;
+    font-size: 15px;
+    border: 2px solid #008080;
+    font-style: italic;
+    float: left;
+    height: 70%;
+    width: 100%;
+    background: #E1EBEE;
+    border-radius: 10px;
+    font-family: Trebuchet MS;
+  }
+  
+.example button {
+    /* float: right; */
+    width: 10%;
+    padding: 1px;
+    background: #008080;
+    color: #E1EBEE;
+    border: 1px solid #008080;
+    border-left: none;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.1s ease-in-out;
+    font-family: Trebuchet MS;
+    font-size: 25px;
+    /* text-align: center; */
+    margin-left: 1%;
+  }
+  
+.example button:hover {
+    background:#008080;
+  }
+.example button:active {
+    transform: scale(1.025);
+}
+
+.example::after {
+    content: "";
+    clear: both;
+    /* display: table; */
+  }
+
+/* form {
     display: flex;   
     justify-content: center;
     align-items: center; 
-}
+} */
 
-input {
-    margin: 0px 10px;
+/* input {
+    margin: 0px 0px;
     width: 270px;
     height: 37px;
     border-radius: 10px;
-    border: 3px solid #008080;
+    border-bottom: 3px solid #008080;
     background-color: #E1EBEE;
-}
+} */
 
-#btn4 {
+/* #btn4 {
     font-size: 2rem;
     cursor: pointer;
     color: #0071c5;
     margin-right: 10px;
-}
+    height: 30px;
+    width: 30px;
+} */
 
-#btn4:hover {
+/* #btn4:hover {
     transform: scale(1.1);
-}
+} */
 
 .flexbox-head {
     display: flex;
@@ -121,12 +174,14 @@ input {
 .Item-1 {
     display: flex;
     justify-content: flex-start;
-    width: 26%;
+    width: 30%;
     border: 3px solid #008080;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     padding: 5px;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
+    background-color: #008080;
+    color: #E1EBEE;
 }
 
 .Item-2 {
@@ -217,10 +272,10 @@ input {
 
 .flexbox-c {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     flex-direction: column;
-    height: 165px;
+    height: 170px;
     width: 21%;
     /* border: 3px solid #008080;
     border-radius: 15px; */
@@ -229,11 +284,11 @@ input {
 
 .c1 {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
     height: 45%;
-    /* border: 1px solid #008080;
+    /* border: 3px solid #008080;
     border-radius: 10px; */
 }
 
@@ -242,8 +297,8 @@ input {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 42%;
-    border: 3px solid #008080;
+    height: 30%;
+    border: 2px solid #008080;
     border-radius: 10px;
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2);
     /* background-color: #008080; */
@@ -252,6 +307,7 @@ input {
     font-weight: 600;
     line-height: 1.3em;
     margin-right: 5px;
+    /* padding: 3px 0px; */
 }
 
 .tabs {
@@ -268,9 +324,9 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 3px solid #0071c5;
+    border: 3px solid #333;
     width: 110px;
-    background-color: #0071c5;
+    background-color: #333;
     border-radius: 10px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
     margin: 15px 0px;
@@ -278,8 +334,8 @@ input {
 }
 
 .tab.active {
-    background-color: #333;
-    border: 3px solid #333;
+    background-color: #0071c5;
+    border: 3px solid #0071c5;
 }
 
 .tab:hover {
@@ -319,8 +375,8 @@ input {
     align-items: flex-start;
     height: 1000px;
     width: 1480px;
-    border: 3px solid #008080;
-    border-radius: 15px;
+    /* border: 3px solid #008080;
+    border-radius: 15px; */
 }
 
 .part-1 {
@@ -355,10 +411,16 @@ input {
     flex-direction: column;
     height: 75%;
     width: 20%;
-    border: 3px solid #008080;
-    border-radius: 15px;
+    /* border: 3px solid #008080;
+    border-radius: 15px; */
     margin-right: 7px;
     margin-top: 20px;
+}
+
+.states-heading {
+    margin-bottom: 20px;
+    font-weight: 800;
+    font-size: 2.1rem;
 }
 
 .card-s {
@@ -371,16 +433,17 @@ input {
     border: 3px solid #008080;
     border-radius: 15px;
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2);
-    background-color: #008080;
-    color: #E1EBEE;
+    background-color: #E1EBEE;
+    color: #333;
     font-size: 1.5rem;
     font-weight: 600;
     line-height: 1.2em;
 }
 
 .card-s:hover {
-    background-color: lightsalmon;
-    border: 3px solid #333;
+    color: #E1EBEE;
+    background-color: #008080;
+    border: 3px solid #008080;
     transform: scale(1.1);
 }
 

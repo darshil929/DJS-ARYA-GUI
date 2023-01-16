@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.socket.io/4.5.3/socket.io.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+    <title>DJS ARYA GUI</title>
+    <script type="text/javascript" src="https://unpkg.com/vis-graph3d@latest/dist/vis-graph3d.min.js"></script>
+</head>
+<body onload="drawVisualization();">
+    <div class="flexbox-head">
+        <img src="/image.jpeg" alt="" id="logo">
+        <div id="heading">
+            <div id="name">TEAM DJS ARYA</div>
+            <div class="ID">
+                <div class="Item-1">MISSION_TIME: 00:00:00.00</div>
+                <div class="Item-2">TEAM_ID 1033</div>
+                <div class="icons">
+                    <button><i id="btn1" class="fa-solid fa-circle-play"></i></button>
+                    <button><i id="btn2" class="fa-solid fa-circle-stop"></i></button>
+                    <button><i class="fa-solid fa-arrows-rotate"></i></button>
+                </div>
+            </div>
+        </div>
+        <img src="/flag.png" alt="" id="flag">
+    </div>
+    <div class="data">
+        <div class="flexbox-data">
+            <div class="d1">
+                <div class="card">PACKET_COUNT: 29</div>
+                <div class="card">MODE: F</div>
+                <div class="card">HS_DEPLOYED: P</div>
+                <div class="card">PC_DEPLOYED: C</div>
+                <div class="card">MAST_RAISED: M</div>
+                
+            </div>
+            <div class="d2">
+                <div class="card"><div>GPS_TIME:</div><div>00:00:00.00</div></div>
+                <div class="card"><div>GPS_ALTITUDE:</div><div>00.00</div></div>
+                <div class="card"><div>GPS_LATITUDE:</div><div>00.0000</div></div>
+                <div class="card"><div>GPS_LONGITUDE:</div><div>00.0000</div></div>
+                <div class="card">GPS_SATS: 09</div>
+            </div>
+        </div>
+        <div class="flexbox-c">
+            <div class="c1">
+                <!-- <form action="/index9.html">
+                    <input type="text" name="command" placeholder="Enter Command">
+                    <button><img src="/CSS/send (1).png" alt=""></button>
+                    <input type="text" placeholder="Enter the Command:" name="command">
+                    <button type="submit"><i class="fa fa-angle-right"></i></button>
+                </form> -->
+                <form class="example">
+                    <input type="text" placeholder="Enter the Command:" name="command">
+                    <button type="submit"><i class="fa fa-angle-right"></i></button>
+                </form>
+            </div>
+            <div class="c2">CMD_ECHO: CMD,1033,CX_ON</div>
+        </div>
+    </div>
+    <ul class="tabs">
+        <li data-tab-target="#GRAPH" class="active tab"><h2>GRAPHS</h2></li>
+        <li data-tab-target="#CSV" class="tab"><h2>CSV</h2></li>
+        <!-- <li data-tab-target="#MAP" class="tab"><h2>MAP</h2></li> -->
+    </ul>
+    <div class="tab-content">
+        <div id="CSV" data-tab-content>
+            <div class="display-csv">
+                <table>
+                    <thead id="thead">
+                        <tr>
+                            <th title="Field #1">TEAM ID</th>
+                            <th title="Field #2">MISSION_TIME</th>
+                            <th title="Field #3">PACKET_COUNT</th>
+                            <th title="Field #4">MODE</th>
+                            <th title="Field #5">STATE</th>
+                            <th title="Field #6">ALT</th>
+                            <th title="Field #7">HS_DEPLOYED</th>
+                            <th title="Field #8">PC_DEPLOYED</th>
+                            <th title="Field #9">MAST_RAISED</th>
+                            <th title="Field #10">TEMP</th>
+                            <th title="Field #11">VOLT</th>
+                            <th title="Field #12">GPS_TIME</th>
+                            <th title="Field #13">GPS_ALT</th>
+                            <th title="Field #14">GPS_LAT</th>
+                            <th title="Field #15">GPS_LONG</th>
+                            <th title="Field #16">GPS_SATS</th>
+                            <th title="Field #17">TILT X</th>
+                            <th title="Field #18">TILT Y</th>
+                            <th title="Field #19">CMD_ECHO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td title="Field #1">TEAM ID</td>
+                            <td title="Field #2">MISSION_TIME</td>
+                            <td title="Field #3">PACKET_COUNT</td>
+                            <td title="Field #4">MODE</td>
+                            <td title="Field #5">STATE</td>
+                            <td title="Field #6">ALT</td>
+                            <td title="Field #7">HS_DEPLOYED</td>
+                            <td title="Field #8">PC_DEPLOYED</td>
+                            <td title="Field #9">MAST_RAISED</td>
+                            <td title="Field #10">TEMP</td>
+                            <td title="Field #11">VOLT</td>
+                            <td title="Field #12">GPS_TIME</td>
+                            <td title="Field #13">GPS_ALT</td>
+                            <td title="Field #14">GPS_LAT</td>
+                            <td title="Field #15">GPS_LONG</td>
+                            <td title="Field #16">GPS_SATS</td>
+                            <td title="Field #17">TILT X</td>
+                            <td title="Field #18">TILT Y</td>
+                            <td title="Field #19">CMD_ECHO</td>
+                        </tr>
+                        <tr>
+                            <td title="Field #1">TEAM ID</td>
+                            <td title="Field #2">MISSION_TIME</td>
+                            <td title="Field #3">PACKET_COUNT</td>
+                            <td title="Field #4">MODE</td>
+                            <td title="Field #5">STATE</td>
+                            <td title="Field #6">ALT</td>
+                            <td title="Field #7">HS_DEPLOYED</td>
+                            <td title="Field #8">PC_DEPLOYED</td>
+                            <td title="Field #9">MAST_RAISED</td>
+                            <td title="Field #10">TEMP</td>
+                            <td title="Field #11">VOLT</td>
+                            <td title="Field #12">GPS_TIME</td>
+                            <td title="Field #13">GPS_ALT</td>
+                            <td title="Field #14">GPS_LAT</td>
+                            <td title="Field #15">GPS_LONG</td>
+                            <td title="Field #16">GPS_SATS</td>
+                            <td title="Field #17">TILT X</td>
+                            <td title="Field #18">TILT Y</td>
+                            <td title="Field #19">CMD_ECHO</td>
+                        </tr>
+                        <tr>
+                            <td title="Field #1">TEAM ID</td>
+                            <td title="Field #2">MISSION_TIME</td>
+                            <td title="Field #3">PACKET_COUNT</td>
+                            <td title="Field #4">MODE</td>
+                            <td title="Field #5">STATE</td>
+                            <td title="Field #6">ALT</td>
+                            <td title="Field #7">HS_DEPLOYED</td>
+                            <td title="Field #8">PC_DEPLOYED</td>
+                            <td title="Field #9">MAST_RAISED</td>
+                            <td title="Field #10">TEMP</td>
+                            <td title="Field #11">VOLT</td>
+                            <td title="Field #12">GPS_TIME</td>
+                            <td title="Field #13">GPS_ALT</td>
+                            <td title="Field #14">GPS_LAT</td>
+                            <td title="Field #15">GPS_LONG</td>
+                            <td title="Field #16">GPS_SATS</td>
+                            <td title="Field #17">TILT X</td>
+                            <td title="Field #18">TILT Y</td>
+                            <td title="Field #19">CMD_ECHO</td>
+                        </tr>
+                        <tr>
+                            <td title="Field #1">TEAM ID</td>
+                            <td title="Field #2">MISSION_TIME</td>
+                            <td title="Field #3">PACKET_COUNT</td>
+                            <td title="Field #4">MODE</td>
+                            <td title="Field #5">STATE</td>
+                            <td title="Field #6">ALT</td>
+                            <td title="Field #7">HS_DEPLOYED</td>
+                            <td title="Field #8">PC_DEPLOYED</td>
+                            <td title="Field #9">MAST_RAISED</td>
+                            <td title="Field #10">TEMP</td>
+                            <td title="Field #11">VOLT</td>
+                            <td title="Field #12">GPS_TIME</td>
+                            <td title="Field #13">GPS_ALT</td>
+                            <td title="Field #14">GPS_LAT</td>
+                            <td title="Field #15">GPS_LONG</td>
+                            <td title="Field #16">GPS_SATS</td>
+                            <td title="Field #17">TILT X</td>
+                            <td title="Field #18">TILT Y</td>
+                            <td title="Field #19">CMD_ECHO</td>
+                        </tr>
+                        <tr>
+                            <td title="Field #1">TEAM ID</td>
+                            <td title="Field #2">MISSION_TIME</td>
+                            <td title="Field #3">PACKET_COUNT</td>
+                            <td title="Field #4">MODE</td>
+                            <td title="Field #5">STATE</td>
+                            <td title="Field #6">ALT</td>
+                            <td title="Field #7">HS_DEPLOYED</td>
+                            <td title="Field #8">PC_DEPLOYED</td>
+                            <td title="Field #9">MAST_RAISED</td>
+                            <td title="Field #10">TEMP</td>
+                            <td title="Field #11">VOLT</td>
+                            <td title="Field #12">GPS_TIME</td>
+                            <td title="Field #13">GPS_ALT</td>
+                            <td title="Field #14">GPS_LAT</td>
+                            <td title="Field #15">GPS_LONG</td>
+                            <td title="Field #16">GPS_SATS</td>
+                            <td title="Field #17">TILT X</td>
+                            <td title="Field #18">TILT Y</td>
+                            <td title="Field #19">CMD_ECHO</td>
+                        </tr>
+                        <tr>
+                            <td title="Field #1">TEAM ID</td>
+                            <td title="Field #2">MISSION_TIME</td>
+                            <td title="Field #3">PACKET_COUNT</td>
+                            <td title="Field #4">MODE</td>
+                            <td title="Field #5">STATE</td>
+                            <td title="Field #6">ALT</td>
+                            <td title="Field #7">HS_DEPLOYED</td>
+                            <td title="Field #8">PC_DEPLOYED</td>
+                            <td title="Field #9">MAST_RAISED</td>
+                            <td title="Field #10">TEMP</td>
+                            <td title="Field #11">VOLT</td>
+                            <td title="Field #12">GPS_TIME</td>
+                            <td title="Field #13">GPS_ALT</td>
+                            <td title="Field #14">GPS_LAT</td>
+                            <td title="Field #15">GPS_LONG</td>
+                            <td title="Field #16">GPS_SATS</td>
+                            <td title="Field #17">TILT X</td>
+                            <td title="Field #18">TILT Y</td>
+                            <td title="Field #19">CMD_ECHO</td>
+                        </tr>
+                        <tr>
+                            <td title="Field #1">TEAM ID</td>
+                            <td title="Field #2">MISSION_TIME</td>
+                            <td title="Field #3">PACKET_COUNT</td>
+                            <td title="Field #4">MODE</td>
+                            <td title="Field #5">STATE</td>
+                            <td title="Field #6">ALT</td>
+                            <td title="Field #7">HS_DEPLOYED</td>
+                            <td title="Field #8">PC_DEPLOYED</td>
+                            <td title="Field #9">MAST_RAISED</td>
+                            <td title="Field #10">TEMP</td>
+                            <td title="Field #11">VOLT</td>
+                            <td title="Field #12">GPS_TIME</td>
+                            <td title="Field #13">GPS_ALT</td>
+                            <td title="Field #14">GPS_LAT</td>
+                            <td title="Field #15">GPS_LONG</td>
+                            <td title="Field #16">GPS_SATS</td>
+                            <td title="Field #17">TILT X</td>
+                            <td title="Field #18">TILT Y</td>
+                            <td title="Field #19">CMD_ECHO</td>
+                        </tr>
+                    </tbody>
+                </table>   
+            </div>
+        </div>
+        <div id="GRAPH" data-tab-content class="active">
+            <div class="display-content">
+                <div class="part-1">
+                    <div class="display-graph"><canvas id="TEMPERATURE"></canvas></div>
+                    <div class="display-graph"><canvas id="VOLTAGE"></canvas></div>
+                    <div class="display-graph"><canvas id="ALTITUDE"></canvas></div>
+                </div>
+                <div class="part-2">
+                    <div id="mygraph7"></div>
+                    <div id="myMap"></div>
+                </div>
+                <div class="part-3">
+                    <div class="states-heading">SOFTWARE STATES:</div>
+                    <div class="card-s">LAUNCH</div>
+                    <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
+                    <div class="card-s">ASCENT</div>
+                    <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
+                    <div class="card-s"><p>ROCKET</p><p>SEPARATION</p></div>
+                    <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
+                    <div class="card-s">DESCENT</div>
+                    <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
+                    <div class="card-s"><p>HEAT SHIELD</p><p>RELEASED</p></div>
+                    <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
+                    <div class="card-s">LANDED</div>
+                </div>
+            </div>
+        </div>
+        <!-- <div id="MAP" data-tab-content><div class="card-display-MAP">
+            <div class="display-map">
+                <div id="myMap"></div>
+            </div>
+        </div> -->
+    </div>
+    <script src="./app.js"></script>
+    <script src="./chart.js"></script>
+    <script src="back_connect.js"></script>
+</body>
+</html>
