@@ -3,11 +3,11 @@ const graph = document.getElementById('TEMPERATURE');
         new Chart(graph, {
           type: 'line',
           data: {
-            labels: ['0','10', '20', '30', '40', '50', '60'],
+            labels: temperatureData,
             datasets: [
                 {
               label: 'TEMPERATURE',
-              data: [0, 10, 50, 60, 70, 100, 40],
+              data: missionTimeData,
               borderWidth: 3,
               borderColor: '#0071c5',
                 }
@@ -28,11 +28,11 @@ const graph1 = document.getElementById('VOLTAGE');
         new Chart(graph1, {
           type: 'line',
           data: {
-            labels: ['0','10', '20', '30', '40', '50', '60'],
+            labels: voltageData,
             datasets: [
                 {
-              label: 'VOLTAGE',
-              data: [0, 10, 20, 30, 40, 50, 60],
+              label: "VOLTAGE",
+              data: missionTimeData,
               borderWidth: 3,
               borderColor: '#0071c5'
                 }
@@ -53,11 +53,11 @@ const graph3 = document.getElementById('ALTITUDE');
         new Chart(graph3, {
           type: 'line',
           data: {
-            labels: ['0','10', '20', '30', '40', '50', '60'],
+            labels: altitudeData,
             datasets: [
                 {
               label: 'ALTITUDE',
-              data: [40, 10, 50, 60, 70, 100, 80],
+              data: missionTimeData,
               borderWidth: 3,
               borderColor: '#0071c5'
                 }
