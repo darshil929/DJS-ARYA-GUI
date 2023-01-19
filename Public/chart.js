@@ -1,13 +1,13 @@
 const graph = document.getElementById('TEMPERATURE');
-      
-        new Chart(graph, {
+        
+        let dynamicChart1 = new Chart(graph, {
           type: 'line',
           data: {
-            labels: temperatureData,
+            labels: missionTimeData,
             datasets: [
                 {
               label: 'TEMPERATURE',
-              data: missionTimeData,
+              data: temperatureData,
               borderWidth: 3,
               borderColor: '#0071c5',
                 }
@@ -25,14 +25,14 @@ const graph = document.getElementById('TEMPERATURE');
 
 const graph1 = document.getElementById('VOLTAGE');
       
-        new Chart(graph1, {
+          let dynamicChart2 = new Chart(graph1, {
           type: 'line',
           data: {
-            labels: voltageData,
+            labels: missionTimeData,
             datasets: [
                 {
               label: "VOLTAGE",
-              data: missionTimeData,
+              data: voltageData,
               borderWidth: 3,
               borderColor: '#0071c5'
                 }
@@ -50,14 +50,14 @@ const graph1 = document.getElementById('VOLTAGE');
 
 const graph3 = document.getElementById('ALTITUDE');
       
-        new Chart(graph3, {
+          let dynamicChart3 = new Chart(graph3, {
           type: 'line',
           data: {
-            labels: altitudeData,
+            labels: missionTimeData,
             datasets: [
                 {
               label: 'ALTITUDE',
-              data: missionTimeData,
+              data: altitudeData,
               borderWidth: 3,
               borderColor: '#0071c5'
                 }

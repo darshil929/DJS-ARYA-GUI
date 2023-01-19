@@ -14,7 +14,7 @@ socket.on('trial.csv', (myData) => {
     temperatureData.push(myData.temperature);
     altitudeData.push(myData.altitude);
     missionTimeData.push(myData.missionTime);
-    graph.update();
-    graph1.update();
-    graph3.update();
+    dynamicChart1.update();
+    dynamicChart2.update();
+    dynamicChart3.update();
 })

@@ -447,6 +447,10 @@ button:hover {
     transform: scale(1.1);
 }
 
+#launch {
+    background-color: #0080804a;
+}
+
 /* .card-s:visited {
     color: #0071c5;
 } */
@@ -497,7 +501,7 @@ th {
     position: sticky;
     top : 0;
     border-top: 0px;
-    border: 2px solid #008080;
+    border: 1px solid #008080c4;
     padding: 5.4px;
     color: #fff;
     background-color: #008080;
@@ -506,7 +510,7 @@ th {
 }
 
 td {
-    border: 2px solid #008080;
+    border: 1px solid #008080c4;
     padding: 5.4px;
     color: #333;
     background-color: #E1EBEE;

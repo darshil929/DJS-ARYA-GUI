@@ -57,13 +57,25 @@ io.on('connection', (socket) => {
                 const rowConverter = myArray[i].split(',');
                 console.log(rowConverter);
                 var arr_To_Obj = {
-                        teamId : Number(rowConverter[0]),
-                        missionTime : rowConverter[1],
-                        packetCount : Number(rowConverter[2]),
-                        state : rowConverter[4],
-                        altitude : Number(rowConverter[5]),
-                        temperature : Number(rowConverter[9]),
-                        voltage : Number(rowConverter[10])
+                    teamId : rowConverter[0],
+                    missionTime : rowConverter[1],
+                    packetCount : Number(rowConverter[2]),
+                    mode : rowConverter[3],
+                    state : rowConverter[4],
+                    altitude : Number(rowConverter[5]),
+                    HS_deployed : rowConverter[6],
+                    PC_deployed : rowConverter[7],
+                    Mast_Raised : rowConverter[8],
+                    temperature : Number(rowConverter[9]),
+                    voltage : Number(rowConverter[10]),
+                    GPS_Time : rowConverter[11],
+                    GPS_Altitude : Number(rowConverter[12]),
+                    GPS_Latitude : Number(rowConverter[13]),
+                    GPS_Longitude : Number(rowConverter[14]),
+                    GPS_Sats : Number(rowConverter[15]),
+                    tilt_X : Number(rowConverter[16]),
+                    tilt_Y : Number(rowConverter[17]),
+                    CMD_ECHO : rowConverter[18]
                     }
                 rowCSV.push(arr_To_Obj);
                 console.log(rowCSV);
