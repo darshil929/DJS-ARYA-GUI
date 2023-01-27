@@ -1,0 +1,41 @@
+/* Graphs */
+.csv-contain {
+  max-width: 100%;
+  margin: 0 auto;
+  /* overflow: auto;   */
+  padding: 0px 0px 0px 5px !important;
+}
+
+.graph-bor {
+  padding: 20px 20px;
+  border: 2px solid rgb(86, 91, 100, 1);
+  margin: 5px 42px;
+}
+
+.graph-style {
+  /* padding:0 0 40px 0; */
+  width: 700px !important;
+  height: 310px !important;
+}
+
+.graph-border {
+  padding: 10px 5px 2px 5px;
+  /* border:2px solid rgb(187, 188, 190, 0.979); */
+  border: 2px solid #dedede;
+  margin: 15px 15px;
+}
+
+/* Map */
+.map {
+  margin: 10px 50px 5px;
+}
+
+#map-div {
+  height: 500px;
+  width: 500px;
+}
+
+.shift-map {
+  margin-top: 15px;
+  /* margin-left: 33px; */
+}
