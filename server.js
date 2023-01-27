@@ -1,16 +1,17 @@
 // Run the GUI on Server
 const fs = require('fs'); 
 const express = require('express');
-    const app = express();
-    const server = require('http').createServer(app);
-    const io = require('socket.io')(server, { cors: { origin: "*"} })
-    const path = require('path');
+const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server, { cors: { origin: "*"} })
+const path = require('path');
+const makeCSV = require('./utils/makeCSV.js');
 
-    app.use(express.static("public"));
+app.use(express.static("public"));
 
-    server.listen(3000,() => {
-        console.log(`Server is UP on port 3000`);
-    })
+server.listen(3000,() => {
+    console.log(`Server is UP on port 3000`);
+})
 
 
 io.on('connection', (socket) => {
@@ -42,43 +43,44 @@ io.on('connection', (socket) => {
 
     const rowCSV = [];
     var i = 0;
-    const csvToGUI = setInterval(emitCSV, 3000);
+    const csvToGUI = setInterval(emitCSV, 1000);
     function emitCSV() {
         if(i == myArray.length) {
             clearInterval(csvToGUI);
             console.log('CSV data ENDED!');
         } else {
             console.log(myArray[i]);
-            fs.appendFile('judges.csv', `${myArray[i]}\n`, (err) => {
-                if (err) throw err;
-                console.log(`Row ${i} sent to Judge`);
-            });
 
-                const rowConverter = myArray[i].split(',');
-                console.log(rowConverter);
-                var arr_To_Obj = {
-                    teamId : rowConverter[0],
-                    missionTime : rowConverter[1],
-                    packetCount : Number(rowConverter[2]),
-                    mode : rowConverter[3],
-                    state : rowConverter[4],
-                    altitude : Number(rowConverter[5]),
-                    HS_deployed : rowConverter[6],
-                    PC_deployed : rowConverter[7],
-                    Mast_Raised : rowConverter[8],
-                    temperature : Number(rowConverter[9]),
-                    voltage : Number(rowConverter[10]),
-                    GPS_Time : rowConverter[11],
-                    GPS_Altitude : Number(rowConverter[12]),
-                    GPS_Latitude : Number(rowConverter[13]),
-                    GPS_Longitude : Number(rowConverter[14]),
-                    GPS_Sats : Number(rowConverter[15]),
-                    tilt_X : Number(rowConverter[16]),
-                    tilt_Y : Number(rowConverter[17]),
-                    CMD_ECHO : rowConverter[18]
-                    }
-                rowCSV.push(arr_To_Obj);
-                console.log(rowCSV);
+            makeCSV(myArray[i]);
+
+            console.log(`Row ${i} sent to Judge`);
+
+            const rowConverter = myArray[i].split(',');
+            console.log(rowConverter);
+            var arr_To_Obj = {
+                teamId : Number(rowConverter[0]),
+                missionTime : rowConverter[1],
+                packetCount : Number(rowConverter[2]),
+                mode : rowConverter[3],
+                state : rowConverter[4],
+                altitude : Number(rowConverter[5]).toFixed(1),
+                hsDeployed : rowConverter[6],
+                pcDeployed : rowConverter[7],
+                mastRaised : rowConverter[8],
+                temperature : Number(rowConverter[9]).toFixed(1),
+                voltage : Number(rowConverter[10]).toFixed(1),
+                pressure : Number(rowConverter[11]).toFixed(1),
+                gpsTime : rowConverter[12],
+                gpsAltitude : Number(rowConverter[13]).toFixed(1),
+                gpsLatitude : Number(rowConverter[14]).toFixed(4),
+                gpsLongitude : Number(rowConverter[15]).toFixed(4),
+                gpsSats : Number(rowConverter[16]),
+                tiltX : Number(rowConverter[17]).toFixed(2),
+                tiltY : Number(rowConverter[18]).toFixed(2),        
+                cmdEcho : rowConverter[19]
+            }
+            rowCSV.push(arr_To_Obj);
+            console.log(rowCSV);
 
             socket.emit('trial.csv', rowCSV[i]);
             i++;

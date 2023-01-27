@@ -1,17 +1,22 @@
-const graph = document.getElementById('TEMPERATURE');
-        
-        let dynamicChart1 = new Chart(graph, {
+const graph1 = document.getElementById('TEMPERATURE').getContext('2d');
+      
+        let dynamicChart1 = new Chart(graph1, {
           type: 'line',
           data: {
             labels: missionTimeData,
-            datasets: [
-                {
+            datasets: [{
               label: 'TEMPERATURE',
               data: temperatureData,
-              borderWidth: 3,
-              borderColor: '#0071c5',
-                }
-            ]
+              pointBackgroundColor: 'rgb(54, 162, 235)',
+              pointBorderColor: 'rgb(54, 162, 235)',
+              pointBorderWidth: 5,
+              pointHoverBorderWidth: 10,
+              pointHoverBackgroundColor: '#808080',
+              backgroundColor: 'rgba(51,255,255,0.5)',
+              borderColor: 'rgb(0,0,151)',
+              borderWidth: 1,
+              tension: 0
+            }]
           },
           options: {
             scales: {
@@ -23,20 +28,25 @@ const graph = document.getElementById('TEMPERATURE');
           }
         });
 
-const graph1 = document.getElementById('VOLTAGE');
+const graph2 = document.getElementById('VOLTAGE').getContext('2d');
       
-          let dynamicChart2 = new Chart(graph1, {
+        let dynamicChart2 = new Chart(graph2, {
           type: 'line',
           data: {
             labels: missionTimeData,
-            datasets: [
-                {
+            datasets: [{
               label: "VOLTAGE",
               data: voltageData,
-              borderWidth: 3,
-              borderColor: '#0071c5'
-                }
-            ]
+              pointBackgroundColor: 'rgb(54, 162, 235)',
+              pointBorderColor: 'rgb(54, 162, 235)',
+              pointBorderWidth: 5,
+              pointHoverBorderWidth: 10,
+              pointHoverBackgroundColor: '#808080',
+              backgroundColor: 'rgba(51,255,255,0.5)',
+              borderColor: 'rgb(0,0,151)',
+              borderWidth: 1,
+              tension: 0
+            }]
           },
           options: {
             scales: {
@@ -48,20 +58,25 @@ const graph1 = document.getElementById('VOLTAGE');
           }
         });
 
-const graph3 = document.getElementById('ALTITUDE');
+const graph3 = document.getElementById('ALTITUDE').getContext('2d');
       
-          let dynamicChart3 = new Chart(graph3, {
+        let dynamicChart3 = new Chart(graph3, {
           type: 'line',
           data: {
             labels: missionTimeData,
-            datasets: [
-                {
+            datasets: [{
               label: 'ALTITUDE',
               data: altitudeData,
-              borderWidth: 3,
-              borderColor: '#0071c5'
-                }
-            ]
+              pointBackgroundColor: 'rgb(54, 162, 235)',
+              pointBorderColor: 'rgb(54, 162, 235)',
+              pointBorderWidth: 5,
+              pointHoverBorderWidth: 10,
+              pointHoverBackgroundColor: '#808080',
+              backgroundColor: 'rgba(51,255,255,0.5)',
+              borderColor: 'rgb(0,0,151)',
+              borderWidth: 1,
+              tension: 0
+            }]
           },
           options: {
             scales: {

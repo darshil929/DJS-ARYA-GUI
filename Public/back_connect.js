@@ -9,7 +9,7 @@ var altitudeData = [];
 var missionTimeData = [];
 
 socket.on('trial.csv', (myData) => {
-    console.log(myData.voltage);
+    console.log(myData.altitude); // to see if the data is being recieved
     voltageData.push(myData.voltage);
     temperatureData.push(myData.temperature);
     altitudeData.push(myData.altitude);
