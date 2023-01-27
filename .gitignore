@@ -1,3 +1,8 @@
 node_modules
-judges.csv
-/csv_files/Flight*.csv
+data.json
+container_csv.csv 
+payload_csv.csv
+csv_files/*.csv
+public/saveState/*.html
+.env
+.DS_Store

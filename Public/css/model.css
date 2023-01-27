@@ -1,0 +1,12 @@
+.model-bor{
+    padding: 20px 20px;
+    border:2px solid rgb(86, 91, 100, 1);
+    margin: 5px 42px;
+    /* height: 808px !important; */
+}
+
+#canvas-container{
+    padding: 0px;
+    border:2px solid rgb(187, 188, 190, 0.979);
+    margin: 30px 10px;
+}

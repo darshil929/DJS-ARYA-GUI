@@ -1,355 +1,677 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.socket.io/4.5.3/socket.io.min.js"></script>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-     crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-     crossorigin=""></script>
-    <title>DJS ARYA GUI</title>
-    <script type="text/javascript" src="https://unpkg.com/vis-graph3d@latest/dist/vis-graph3d.min.js"></script>
-</head>
-<body onload="drawVisualization();">
-    <div class="flexbox-head">
-        <img src="./logo.jpeg" alt="" id="logo">
-        <div id="heading">
-            <div id="name">TEAM DJS ARYA</div>
-            <div class="ID">
-                <div class="Item-1">MISSION_TIME: 00:00:00.00</div>
-                <div class="Item-2">TEAM_ID 1033</div>
-                <div class="icons">
-                    <button><i id="btn1" class="fa-solid fa-circle-play"></i></button>
-                    <button><i id="btn2" class="fa-solid fa-circle-stop"></i></button>
-                    <button><i class="fa-solid fa-arrows-rotate"></i></button>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--Links-->
+        <link rel="stylesheet" href="./css/utilities.css">
+        <link rel="stylesheet" href="./css/softwareState.css">
+        <link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/graph.css">
+        <link rel="stylesheet" href="./css/model.css">
+        <link rel="stylesheet" href="./css/csv.css">
+        <link rel="stylesheet" href="./css/style.css">
+
+        <!-- Leaflet -->
+        <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin=""/>    -->
+        <!-- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script> -->
+
+        <link rel="stylesheet" href="./lib/leaflet.css" />
+
+        <!-- socket.io -->
+        <!-- <script src="https://cdn.socket.io/4.4.0/socket.io.min.js" integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous"></script> -->
+        
+        <!-- p5js -->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"
+        integrity="sha512-N4kV7GkNv7QR7RX9YF/olywyIgIwNvfEe2nZtfyj73HdjCUkAfOBDbcuJ/cTaN04JKRnw1YG1wnUyNKMsNgg3g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+        
+        <!-- vis.js -->
+        <!-- <script src="https://unpkg.com/vis-graph3d@latest/dist/vis-graph3d.min.js"></script> -->
+
+        <!--Font Awesome-->
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+
+        <!--Charts-->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> -->
+
+        
+        <!-- js library -->
+        <script src="./lib/socket.io.min.js"></script>
+        <script src="./lib/chart.js"></script>
+        <script src="./lib/vis-graph3d.min.js"></script>
+        <script src="./lib/p5.js"></script>
+        <script src="./lib/leaflet.js"></script>
+
+        <title>GUI</title>
+    </head>
+
+    <body>
+        <!-- Main Header -->
+        <div class="container flex">
+            <!-- Arya Logo -->
+            <div>
+                <img src="./images/arya.png" alt="" width=160px>
+            </div>
+
+            <div class="header grid-header">
+                <!-- Team Name & India Flag -->
+                <div class="title center">
+                    <p>DJS ARYA</p>
+                </div>
+
+                <!-- Team ID & Mission Time -->
+                <div class="flex-model">
+                    <div class="card flex" style="width: 70%">
+                        <!-- Team ID -->
+                        <div>
+                            <p>TEAM ID: <span class="team-id">1234</span></p>
+                        </div>
+
+                        <!-- Mission Time -->
+                        <div style="width: 320px !important;">
+                            <p>MISSION TIME: <span class="m-time">00 : 00 : 00</span></p>
+                        </div>
+                    </div>
+                    <!-- Start, Stop, Calibrate and Save DOM -->
+                    <div class = "icons">
+                        <!-- <button id="start" class="btn-i"><i class="fas fa-play-circle"></i></button> -->
+                        <button id="start" class="btn-i"><svg class = "icon-glow" xmlns="http://www.w3.org/2000/svg" fill="rgb(123, 189, 222, 1)" viewBox="0 0 512 512"><path d="M512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM176 168V344C176 352.7 180.7 360.7 188.3 364.9C195.8 369.2 205.1 369 212.5 364.5L356.5 276.5C363.6 272.1 368 264.4 368 256C368 247.6 363.6 239.9 356.5 235.5L212.5 147.5C205.1 142.1 195.8 142.8 188.3 147.1C180.7 151.3 176 159.3 176 168V168z"/></svg></button>
+                        <!-- <button id="stop"class="btn-i"><i class="fas fa-stop-circle"></i></button> -->
+                        <button id="stop" class="btn-i"><svg class = "icon-glow" xmlns="http://www.w3.org/2000/svg" fill="rgb(123, 189, 222, 1)" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256c0 141.4 114.6 256 256 256s256-114.6 256-256C512 114.6 397.4 0 256 0zM352 328c0 13.2-10.8 24-24 24h-144C170.8 352 160 341.2 160 328v-144C160 170.8 170.8 160 184 160h144C341.2 160 352 170.8 352 184V328z"/></svg></button>
+                        <!-- <button class="btn-i"><i class="fas fa-refresh"></i></button> -->
+                        <button id="calibrate" class = "btn-i"><svg  xmlns="http://www.w3.org/2000/svg" fill="rgb(123, 189, 222, 1)" viewBox="0 0 512 512"><path d="M449.9 39.96l-48.5 48.53C362.5 53.19 311.4 32 256 32C161.5 32 78.59 92.34 49.58 182.2c-5.438 16.81 3.797 34.88 20.61 40.28c16.97 5.5 34.86-3.812 40.3-20.59C130.9 138.5 189.4 96 256 96c37.96 0 73 14.18 100.2 37.8L311.1 178C295.1 194.8 306.8 223.4 330.4 224h146.9C487.7 223.7 496 215.3 496 204.9V59.04C496 34.99 466.9 22.95 449.9 39.96zM441.8 289.6c-16.94-5.438-34.88 3.812-40.3 20.59C381.1 373.5 322.6 416 256 416c-37.96 0-73-14.18-100.2-37.8L200 334C216.9 317.2 205.2 288.6 181.6 288H34.66C24.32 288.3 16 296.7 16 307.1v145.9c0 24.04 29.07 36.08 46.07 19.07l48.5-48.53C149.5 458.8 200.6 480 255.1 480c94.45 0 177.4-60.34 206.4-150.2C467.9 313 458.6 294.1 441.8 289.6z"/></svg></button>
+                        <button id="downloadDOM" class="btn-i">
+                            <svg class = "icon-glow" xmlns="http://www.w3.org/2000/svg" fill="rgb(123, 189, 222, 1)" viewBox="0 0 512 512"><path d="M256 512c141.4 0 256-114.6 256-256s-114.6-256-256-256C114.6 0 0 114.6 0 256S114.6 512 256 512zM129.2 265.9C131.7 259.9 137.5 256 144 256h64V160c0-17.67 14.33-32 32-32h32c17.67 0 32 14.33 32 32v96h64c6.469 0 12.31 3.891 14.78 9.875c2.484 5.984 1.109 12.86-3.469 17.44l-112 112c-6.248 6.248-16.38 6.248-22.62 0l-112-112C128.1 278.7 126.7 271.9 129.2 265.9z"/></svg>                               
+                        </button>
+                    </div>    
+                </div>
+            </div>
+
+            <!-- India Flag -->
+            <div>
+                <img src="./images/india_flag.png" alt="" width=160px>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- Subheader -->
+        <div class="container flex">
+
+            <!-- Graphs, CSV, Model Buttons & Simulation Mode -->
+            <div class="grid-left">
+                <!-- Graphs, CSV & Model Buttons -->
+                <div class="flex-2">
+                    <!-- Graph Button -->
+                    <div>
+                        <button id="graphs" class="btn-gcm text graph_b" type="button">Graphs</button>
+                    </div>
+
+                    <!-- CSV Button -->
+                    <div>
+                        <button id="csv" class="btn-gcm text csv_b" type="button">CSV</button>
+                    </div>
+
+                    <!-- Model Button -->
+                    <div>
+                        <button id="model" class="btn-gcm text model_b" type="button">3D Model</button>
+                    </div>
+                </div>
+
+                <!-- Command & Send -->
+                <div class="flex-2" style="margin-bottom: 5px;">
+                    <!-- Command -->
+                    <div>
+                        <input type="text" id="command" class="text" name="command" placeholder="Write command">
+                    </div>
+
+                    <!-- Send -->
+                    <div>
+                        <button class="btn-send" id = "command-button" style="transform:translate(-8px,4px) rotate(45deg)">
+                            <!-- <i class="fa-solid fa-location-arrow fa-2x" style="transform:translate(-8px,2px) rotate(45deg)"></i> -->
+                            <svg fill="rgb(123, 189, 222, 1)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M285.6 444.1C279.8 458.3 264.8 466.3 249.8 463.4C234.8 460.4 223.1 447.3 223.1 432V256H47.1C32.71 256 19.55 245.2 16.6 230.2C13.65 215.2 21.73 200.2 35.88 194.4L387.9 50.38C399.8 45.5 413.5 48.26 422.6 57.37C431.7 66.49 434.5 80.19 429.6 92.12L285.6 444.1z"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Simulation Mode -->
+                <div class="flex">
+                    <!-- Header -->
+                    <div class="text" style="transform: translateX(36px)">
+                        <p style="font-size: 21px">SIMULATION MODE</p>
+                    </div>
+
+                    <!-- Toggle -->
+                    <div class="toggle-box" style="transform:translate(24px)">
+                        <label class="switch">
+                            <input type="checkbox" id ="sim-switch">
+                            <span class="slider round">
+                                <!-- <div class="chotu"></div> -->
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info -->
+            <div class="grid-final">
+                <!-- Packet Count, Packet Type & GPS Lat, Long -->
+                <div class="card-2 flex-packet">
+                    <!-- Packet Count -->
+                    <div style="width: 190px !important;">
+                        <div class="packet-text">
+                            <p>Packet count: <span class="packet-count">5</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Packet Type -->
+                    <div>
+                        <div class="packet-text">
+                            <p>Packet type:  <span class="packet-type">X</span></p>
+                        </div>
+                    </div>
+
+                    <!-- GPS Latitude & Longitude -->
+                    <div>
+                        <div class="packet-text">
+                            <p>GPS (Lat, Long) = (<span class="gps-lat">0000.0000</span>, <span class="gps-long">0000.0000</span>) </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="card-2 flex-packet">
+                    <ul class="no-bullets">
+                        <div class="grid-data packet-text">
+                            <!-- GPS Time, Sats & Altitude -->
+                            <div>
+                                <li>GPS Time: <span class="gps-time">00:15:43</span></li>
+                                <li>GPS Sats: <span class="gps-sats">5</span></li>
+                                <li style="width: 235px !important;">GPS Altitude: <span class="gps-alt">350</span> m</li>
+                            </div>
+
+                            <!-- TP Released, Pointing error & CMD_echo-->
+                            <div style="transform: translate(-20px)">
+                                <!-- <li>TP_Software state: <span>Descent</span></li> -->
+                                <li>TP Released: <span class="tp-released">R</span></li>
+                                <li style="width: 340px !important;">Pointing Error: <span class="pointing-error">12</span>°</li>
+                                <li>CMD_echo: <span class="cmd-echo">CMD,1004,SIM,ACTIVATE</span></li>
+                            </div>
+
+                            <!-- Mode & Baudrate-->
+                            <div style="width:180px; transform: translate(-10px);">
+                                <li>Mode: <span class="mode">S</span></li>
+                                <li>Baudrate: <span><select id="baudRate" name="baudRate">
+                                    <option value="300">300</option>
+                                    <option value="1200">1200</option>
+                                    <option value="2400">2400</option>
+                                    <option value="4800">4800</option>
+                                    <option value="9600" selected>9600</option>
+                                    <option value="19200">19200</option>
+                                    <option value="38400">38400</option>
+                                    <option value="57600">57600</option>
+                                    <option value="115200">115200</option>
+                                </select></span></li>
+                                <li>COM: <span><select id="com" name="com">
+                                </select></span></li>
+
+                            </div>
+                        </div>
+                    </ul>
                 </div>
             </div>
         </div>
-        <img src="./flag.png" alt="" id="flag">
-    </div>
-    <div class="data">
-        <div class="flexbox-data">
-            <div class="d1">
-                <div class="card">PACKET_COUNT: 29</div>
-                <div class="card">MODE: F</div>
-                <div class="card">HS_DEPLOYED: P</div>
-                <div class="card">PC_DEPLOYED: C</div>
-                <div class="card">MAST_RAISED: M</div>
+
+        <br>
+
+        <!--Graphs-->
+        <div id="graph-container" class="graph_b">
+            <div class="flex-main  graph-bor">
+                <div class="grid-1 g">
+                    <!-- Altitude -->
+                    <div class="graph-border">
+                        <div class="text-center" style="font-size:18px; color:#dedede">
+                            <p>Altitude</p>
+                        </div>
+                        <div class="m-3 graph-style">
+                            <canvas id="altitude" ></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Temperature -->
+                    <div class="graph-border">
+                        <div class="text-center" style="font-size:18px; color:#dedede">
+                            <p>Temperature</p>
+                        </div>
+                        <div class="m-3 graph-style">
+                            <canvas id="temperature" ></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Voltage -->
+                    <div class="graph-border">
+                        <div class="text-center" style="font-size:18px; color:#dedede">
+                            <p>Voltage</p>
+                        </div>
+                        <div class="m-3 graph-style">
+                            <canvas id="voltage" ></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Gyrometer -->
+                    <div class="graph-border">
+                        <div class="text-center" style="font-size:18px; color:#dedede">
+                            <p>Gyrometer</p>
+                        </div>
+                        <div class="m-3 graph-style">
+                            <canvas id="gyro" ></canvas>                     
+                        </div>
+                    </div>
+
+                    <!-- Accelerometer -->
+                    <div class="graph-border">
+                        <div class="text-center" style="font-size:18px; color:#dedede">
+                            <p>Accelerometer</p>
+                        </div>
+                        <div class="m-3 graph-style">
+                            <canvas id="accelerometer"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Magnetometer -->
+                    <div class="graph-border">
+                        <div class="text-center" style="font-size:18px; color:#dedede">
+                            <p>Magnetometer</p>
+                        </div>
+                        <div class="m-3 graph-style">
+                            <canvas id="magnetometer"></canvas>
+                        </div>
+                    </div>
+                </div>
                 
-            </div>
-            <div class="d2">
-                <div class="card"><div>GPS_TIME:</div><div>00:00:00.00</div></div>
-                <div class="card"><div>GPS_ALTITUDE:</div><div>00.00</div></div>
-                <div class="card"><div>GPS_LATITUDE:</div><div>00.0000</div></div>
-                <div class="card"><div>GPS_LONGITUDE:</div><div>00.0000</div></div>
-                <div class="card">GPS_SATS: 09</div>
-            </div>
-        </div>
-        <div class="flexbox-c">
-            <div class="c1">
-                <!-- <form action="/index9.html">
-                    <input type="text" name="command" placeholder="Enter Command">
-                    <button><img src="/CSS/send (1).png" alt=""></button>
-                    <input type="text" placeholder="Enter the Command:" name="command">
-                    <button type="submit"><i class="fa fa-angle-right"></i></button>
-                </form> -->
-                <form class="example">
-                    <input type="text" placeholder="Enter the Command:" name="command">
-                    <button type="submit"><i class="fa fa-angle-right"></i></button>
-                </form>
-            </div>
-            <div class="c2">CMD_ECHO: CMD,1033,CX_ON</div>
-        </div>
-    </div>
-    <ul class="tabs">
-        <li data-tab-target="#GRAPH" class="active tab"><h2>GRAPHS</h2></li>
-        <li data-tab-target="#CSV" class="tab"><h2>CSV</h2></li>
-        <!-- <li data-tab-target="#MAP" class="tab"><h2>MAP</h2></li> -->
-    </ul>
-    <div class="tab-content">
-        <div id="CSV" data-tab-content>
-            <div class="display-csv">
-                <table>
-                    <thead id="thead">
-                        <tr>
-                            <th title="Field #1">TEAM_ID</th>
-                            <th title="Field #2">MISSION_TIME</th>
-                            <th title="Field #3">PACKET_COUNT</th>
-                            <th title="Field #4">MODE</th>
-                            <th title="Field #5">STATE</th>
-                            <th title="Field #6">ALT</th>
-                            <th title="Field #7">HS_DEPLOYED</th>
-                            <th title="Field #8">PC_DEPLOYED</th>
-                            <th title="Field #9">MAST_RAISED</th>
-                            <th title="Field #10">TEMP</th>
-                            <th title="Field #11">VOLT</th>
-                            <th title="Field #12">GPS_TIME</th>
-                            <th title="Field #13">GPS_ALT</th>
-                            <th title="Field #14">GPS_LAT</th>
-                            <th title="Field #15">GPS_LONG</th>
-                            <th title="Field #16">GPS_SATS</th>
-                            <th title="Field #17">TILT X</th>
-                            <th title="Field #18">TILT Y</th>
-                            <th title="Field #19">CMD_ECHO</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:14:02.22</td>
-                            <td title="Field #3">01</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">LAUNCH_WAIT</td>
-                            <td title="Field #6">0</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">32.5</td>
-                            <td title="Field #11">20.0</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">0</td>
-                            <td title="Field #14">47.2031</td>
-                            <td title="Field #15">47.2031</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr>
-                        <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:15:02.22</td>
-                            <td title="Field #3">02</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">ASCENT</td>
-                            <td title="Field #6">111.3</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">35.6</td>
-                            <td title="Field #11">21.5</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">111.3</td>
-                            <td title="Field #14">53.4314</td>
-                            <td title="Field #15">53.4314</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr>
-                        <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:16:02.22</td>
-                            <td title="Field #3">03</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">ASCENT</td>
-                            <td title="Field #6">274.8</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">38.5</td>
-                            <td title="Field #11">20.9</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">274.8</td>
-                            <td title="Field #14">65.2781</td>
-                            <td title="Field #15">65.2781</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr>
-                        <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:17:02.22</td>
-                            <td title="Field #3">04</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">ASCENT</td>
-                            <td title="Field #6">503.5</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">40.9</td>
-                            <td title="Field #11">20.5</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">503.5</td>
-                            <td title="Field #14">79.2457</td>
-                            <td title="Field #15">79.2457</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr>
-                        <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:15:02.22</td>
-                            <td title="Field #3">05</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">ASCENT</td>
-                            <td title="Field #6">725.0</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">39.4</td>
-                            <td title="Field #11">20.4</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">725.0</td>
-                            <td title="Field #14">75.9521</td>
-                            <td title="Field #15">75.9521</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr>
-                        <!-- <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:15:02.22</td>
-                            <td title="Field #3">06</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">ROCKET <br> SEPARATION</td>
-                            <td title="Field #6">678.9</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">40.5</td>
-                            <td title="Field #11">20.1</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">678.9</td>
-                            <td title="Field #14">74.2031</td>
-                            <td title="Field #15">74.2031</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr>
-                        <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:15:02.22</td>
-                            <td title="Field #3">07</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">ROCKET <br> SEPARATION</td>
-                            <td title="Field #6">670.0</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">36.5</td>
-                            <td title="Field #11">22.5</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">670.0</td>
-                            <td title="Field #14">75.4510</td>
-                            <td title="Field #15">75.4510</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr>
-                        <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:15:02.22</td>
-                            <td title="Field #3">08</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">DESCENT</td>
-                            <td title="Field #6">628.3</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">37.2</td>
-                            <td title="Field #11">20.0</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">628.3</td>
-                            <td title="Field #14">72.3500</td>
-                            <td title="Field #15">72.3500</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr>
-                        <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:15:02.22</td>
-                            <td title="Field #3">09</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">DESCENT</td>
-                            <td title="Field #6">510.5</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">38.9</td>
-                            <td title="Field #11">20.1</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">510.5</td>
-                            <td title="Field #14">69.3560</td>
-                            <td title="Field #15">69.3560</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr>
-                        <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:15:02.22</td>
-                            <td title="Field #3">10</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">DESCENT</td>
-                            <td title="Field #6">515.5</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">39.9</td>
-                            <td title="Field #11">28.1</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">515.5</td>
-                            <td title="Field #14">70.3560</td>
-                            <td title="Field #15">70.3560</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr> -->
-                    </tbody>
-                </table>   
-            </div>
-        </div>
-        <div id="GRAPH" data-tab-content class="active">
-            <div class="display-content">
-                <div class="part-1">
-                    <div class="display-graph"><canvas id="TEMPERATURE"></canvas></div>
-                    <div class="display-graph"><canvas id="VOLTAGE"></canvas></div>
-                    <div class="display-graph"><canvas id="ALTITUDE"></canvas></div>
-                </div>
-                <div class="part-2">
-                    <div id="mygraph7"></div>
-                    <div id="myMap"></div>
-                </div>
-                <div class="part-3">
-                    <div class="states-heading">SOFTWARE STATES:</div>
-                    <div class="card-s" id="launch">LAUNCH</div>
-                    <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
-                    <div class="card-s" id="launch">ASCENT</div>
-                    <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
-                    <div class="card-s" id="launch"><p>ROCKET</p><p>SEPARATION</p></div>
-                    <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
-                    <div class="card-s">DESCENT</div>
-                    <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
-                    <div class="card-s"><p>HEAT SHIELD</p><p>RELEASED</p></div>
-                    <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
-                    <div class="card-s">LANDED</div>
+                <div class="grid-1" style="gap: 30px !important">
+                    <!-- Software States -->
+                    <div>
+                        <div id="SS" class="text-center flex-ss">
+                            <!-- Container Software States -->
+                            <div class="software-state">
+                                <!-- Heading -->
+                                <div class="m-nl size flex-ss-arrow" style="padding: 0px 0px 10px 20px !important;">
+                                    <div class="center-block">
+                                        <p>SOFTWARE STATE</p>
+                                    </div>
+                                    <div class="center-block">
+                                        <div class="space">
+                                            <div class="circle">
+                                                <div class="icon">
+                                                    <svg width="30" height="11" viewBox="0 0 74 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <line x1="2.82843" y1="3.17157" x2="39.7394" y2="40.0825" stroke="white" stroke-width="8"/>
+                                                        <line x1="39.1716" y1="34.9914" x2="70.9914" y2="3.17158" stroke="white" stroke-width="8"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <!-- Flowchart of Software States -->
+                                <div>
+                                    <div id="transition-ss" class="m-1 grid-transition">
+                                        <!-- Landed -->
+                                        <div class="ss_arrow close">
+                                            <div class="state-border transition">
+                                                <p>Landed</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="ss_arrow close">
+                                            <!-- Arrow -->
+                                            <div class="arrow">
+                                                <svg width="30" height="40" viewBox="0 0 30 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M12.5607 0.935304C11.9749 0.349517 11.0251 0.349517 10.4393 0.935304L0.893398 10.4812C0.307612 11.067 0.307612 12.0168 0.893398 12.6026C1.47918 13.1884 2.42893 13.1884 3.01472 12.6026L11.5 4.11728L19.9853 12.6026C20.5711 13.1884 21.5208 13.1884 22.1066 12.6026C22.6924 12.0168 22.6924 11.067 22.1066 10.4812L12.5607 0.935304ZM13 64.004V1.99596H10V64.004H13Z" fill="#D9D9D9"/>
+                                                </svg>
+                                            </div>
+                
+                                            <!-- TP Release -->
+                                            <div class="state-border transition ">
+                                                <p>TP Release</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="ss_arrow close">
+                                            <!-- Arrow -->
+                                            <div class="arrow">
+                                                <svg width="30" height="40" viewBox="0 0 30 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M12.5607 0.935304C11.9749 0.349517 11.0251 0.349517 10.4393 0.935304L0.893398 10.4812C0.307612 11.067 0.307612 12.0168 0.893398 12.6026C1.47918 13.1884 2.42893 13.1884 3.01472 12.6026L11.5 4.11728L19.9853 12.6026C20.5711 13.1884 21.5208 13.1884 22.1066 12.6026C22.6924 12.0168 22.6924 11.067 22.1066 10.4812L12.5607 0.935304ZM13 64.004V1.99596H10V64.004H13Z" fill="#D9D9D9"/>
+                                                </svg>
+                                            </div>
+                
+                                            <!-- Second Parachute Release -->
+                                            <div class="state-border transition ">
+                                                <p>Second Parachute Release</p>
+                                            </div>
+                                        </div>
+                
+                                        <div class="ss_arrow close">
+                                            <!-- Arrow -->
+                                            <div class="arrow">
+                                                <svg width="30" height="40" viewBox="0 0 30 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M12.5607 0.935304C11.9749 0.349517 11.0251 0.349517 10.4393 0.935304L0.893398 10.4812C0.307612 11.067 0.307612 12.0168 0.893398 12.6026C1.47918 13.1884 2.42893 13.1884 3.01472 12.6026L11.5 4.11728L19.9853 12.6026C20.5711 13.1884 21.5208 13.1884 22.1066 12.6026C22.6924 12.0168 22.6924 11.067 22.1066 10.4812L12.5607 0.935304ZM13 64.004V1.99596H10V64.004H13Z" fill="#D9D9D9"/>
+                                                </svg>
+                                            </div>
+                
+                                            <!-- Descent -->
+                                            <div class="state-border transition ">
+                                                <p>Descent</p>
+                                            </div>
+                                        </div>
+                
+                                        <div class="ss_arrow close">
+                                            <!-- Arrow -->
+                                            <div class="arrow">
+                                                <svg width="30" height="40" viewBox="0 0 30 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M12.5607 0.935304C11.9749 0.349517 11.0251 0.349517 10.4393 0.935304L0.893398 10.4812C0.307612 11.067 0.307612 12.0168 0.893398 12.6026C1.47918 13.1884 2.42893 13.1884 3.01472 12.6026L11.5 4.11728L19.9853 12.6026C20.5711 13.1884 21.5208 13.1884 22.1066 12.6026C22.6924 12.0168 22.6924 11.067 22.1066 10.4812L12.5607 0.935304ZM13 64.004V1.99596H10V64.004H13Z" fill="#D9D9D9"/>
+                                                </svg>
+                                            </div>
+                
+                                            <!-- Rocket Separation -->
+                                            <div class="state-border transition ">
+                                                <p>Rocket Separation</p>
+                                            </div>
+                                        </div>
+                
+                                        <div class="ss_arrow open">
+                                            <!-- Arrow -->
+                                            <div class="arrow">
+                                                <svg width="30" height="40" viewBox="0 0 30 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M12.5607 0.935304C11.9749 0.349517 11.0251 0.349517 10.4393 0.935304L0.893398 10.4812C0.307612 11.067 0.307612 12.0168 0.893398 12.6026C1.47918 13.1884 2.42893 13.1884 3.01472 12.6026L11.5 4.11728L19.9853 12.6026C20.5711 13.1884 21.5208 13.1884 22.1066 12.6026C22.6924 12.0168 22.6924 11.067 22.1066 10.4812L12.5607 0.935304ZM13 64.004V1.99596H10V64.004H13Z" fill="#D9D9D9"/>
+                                                </svg>
+                                            </div>
+                
+                                            <!-- Ascent -->
+                                            <div class="state-border transition ">
+                                                <p>Ascent</p>
+                                            </div>
+                                        </div>
+                
+                                        <div class="ss_arrow open">
+                                            <!-- Arrow -->
+                                            <div class="arrow">
+                                                <svg width="30" height="40" viewBox="0 0 30 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M12.5607 0.935304C11.9749 0.349517 11.0251 0.349517 10.4393 0.935304L0.893398 10.4812C0.307612 11.067 0.307612 12.0168 0.893398 12.6026C1.47918 13.1884 2.42893 13.1884 3.01472 12.6026L11.5 4.11728L19.9853 12.6026C20.5711 13.1884 21.5208 13.1884 22.1066 12.6026C22.6924 12.0168 22.6924 11.067 22.1066 10.4812L12.5607 0.935304ZM13 64.004V1.99596H10V64.004H13Z" fill="#D9D9D9"/>
+                                                </svg>
+                                            </div>
+                
+                                            <!-- Launch Wait -->
+                                            <div class="state-border transition ">
+                                                <p>Launch Wait</p>
+                                            </div>
+                                        </div>
+                
+                                        <div class="ss_arrow open">
+                                            <!-- Arrow -->
+                                            <div class=" arrow">
+                                                <div>
+                                                    <svg width="30" height="40" viewBox="0 0 30 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M12.5607 0.935304C11.9749 0.349517 11.0251 0.349517 10.4393 0.935304L0.893398 10.4812C0.307612 11.067 0.307612 12.0168 0.893398 12.6026C1.47918 13.1884 2.42893 13.1884 3.01472 12.6026L11.5 4.11728L19.9853 12.6026C20.5711 13.1884 21.5208 13.1884 22.1066 12.6026C22.6924 12.0168 22.6924 11.067 22.1066 10.4812L12.5607 0.935304ZM13 64.004V1.99596H10V64.004H13Z" fill="#D9D9D9"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                
+                                            <!-- Boot -->
+                                            <div class="state-border start transition ">
+                                                <p>Boot</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <!-- Tethered Payload Software States -->
+                            <div class="tp-software-state">
+                                <!-- Heading -->
+                                <div class="m-1 size tp-ss-width" style="padding: 3.5px 0px 14.25px 0px !important">
+                                    <p>TP SOFTWARE STATE</p>
+                                </div>
+                
+                                <!-- Flowchart of Software States -->
+                                <div>
+                                    <div id="tp-transition-ss" class="m-1 grid-transition">
+                                        <!-- Landed -->
+                                        <div class="state-border tp-transition">
+                                            <p>End</p>
+                                        </div>
+                
+                                        <!-- Arrow -->
+                                        <div class="arrow">
+                                            <svg width="30" height="40" viewBox="0 0 30 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12.5607 0.935304C11.9749 0.349517 11.0251 0.349517 10.4393 0.935304L0.893398 10.4812C0.307612 11.067 0.307612 12.0168 0.893398 12.6026C1.47918 13.1884 2.42893 13.1884 3.01472 12.6026L11.5 4.11728L19.9853 12.6026C20.5711 13.1884 21.5208 13.1884 22.1066 12.6026C22.6924 12.0168 22.6924 11.067 22.1066 10.4812L12.5607 0.935304ZM13 64.004V1.99596H10V64.004H13Z" fill="#D9D9D9"/>
+                                            </svg>
+                                        </div>
+                
+                                        <!-- TP Release -->
+                                        <div class="state-border tp-transition">
+                                            <p>Payload Release</p>
+                                        </div>
+                
+                                        <!-- Arrow -->
+                                        <div class="arrow">
+                                            <svg width="30" height="40" viewBox="0 0 30 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12.5607 0.935304C11.9749 0.349517 11.0251 0.349517 10.4393 0.935304L0.893398 10.4812C0.307612 11.067 0.307612 12.0168 0.893398 12.6026C1.47918 13.1884 2.42893 13.1884 3.01472 12.6026L11.5 4.11728L19.9853 12.6026C20.5711 13.1884 21.5208 13.1884 22.1066 12.6026C22.6924 12.0168 22.6924 11.067 22.1066 10.4812L12.5607 0.935304ZM13 64.004V1.99596H10V64.004H13Z" fill="#D9D9D9"/>
+                                            </svg>
+                                        </div>
+                
+                                        <!-- Boot -->
+                                        <div class="state-border start tp-transition">
+                                            <p>Boot</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Map -->
+                    <div class="shift-map">
+                        <div id="map-div">
+                        </div>
+                    </div>
+
+                    <!-- 3D Plot -->
+                    <div class="shift-map graph-border">
+                        <div id="threeD-plot"></div>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- <div id="MAP" data-tab-content><div class="card-display-MAP">
-            <div class="display-map">
-                <div id="myMap"></div>
+
+        <!-- CSV -->
+        <div id="csv-container" class="csv_b container" style="display:none;"> 
+
+            <br>
+            
+            <!-- Buttons -->
+            <div>
+                <button id="con_csv" class="btn-gcmd text csv_b" type="button">Container</button>
+                <button id="tp_csv" class="btn-gcm  text csv_b" type="button">Payload</button>
+            </div> 
+
+            <br>
+
+            <!-- Container Table -->
+            <div id="container_table" class="csv-contain" style="display: block">
+                <table id="con"> <!-- style="width: 1359px;" -->
+                    <tr>
+                        <th>
+                            TEAM ID
+                        </th>
+                        <th>
+                            MISSION TIME
+                        </th>
+                        <th>
+                            PACKET COUNT
+                        </th>
+                        <th>
+                            PACKET TYPE
+                        </th>
+                        <th>
+                            MODE
+                        </th>
+                        <th>
+                            TP RELEASED
+                        </th>
+                        <th>
+                            ALTITUDE
+                        </th>
+                        <th>
+                            TEMPERATURE
+                        </th>
+                        <th>
+                            VOLTAGE
+                        </th>
+                        <th>
+                            GPS TIME
+                        </th>
+                        <th>
+                            GPS LATITUDE
+                        </th>
+                        <th>
+                            GPS LONGITUDE
+                        </th>
+                        <th>
+                            GPS ALTITUDE
+                        </th>
+                        <th>
+                            GPS SATS
+                        </th>
+                        <th>
+                            SOFTWARE STATE
+                        </th>
+                        <th>
+                            CMD ECHO
+                        </th>
+                    </tr>
+                </table>
             </div>
-        </div> -->
-    </div>
-    <script src="back_connect.js"></script>
-    <script src="./app.js"></script>
-    <script src="./chart.js"></script>
-</body>
+            
+            <!-- Payload Table -->
+            <div id="tp_table" class="csv-contain" style="display: none;">
+                <table id="pl"> <!-- style="width: 1359px;" -->
+                    <tr>
+                        <th>
+                            TEAM ID
+                        </th>
+                        <th>
+                            MISSION TIME
+                        </th>
+                        <th>
+                            PACKET COUNT
+                        </th>
+                        <th>
+                            PACKET TYPE
+                        </th>
+                        <th>
+                            TP ALTITUDE
+                        </th>
+                        <th>
+                            TP TEMP
+                        </th>
+                        <th>
+                            TP VOLTAGE
+                        </th>
+                        <th>
+                            GYRO ROLL
+                        </th>
+                        <th>
+                            GYRO PITCH
+                        </th>
+                        <th>
+                            GYRO YAW
+                        </th>
+                        <th>
+                            ACCEL ROLL
+                        </th>
+                        <th>
+                            ACCEL PITCH
+                        </th>
+                        <th>
+                            ACCEL YAW
+                        </th>
+                        <th>
+                            MAG ROLL
+                        </th>
+                        <th>
+                            MAG PITCH
+                        </th>
+                        <th>
+                            MAG YAW
+                        </th>
+                        <th>
+                            POINTING ERROR
+                        </th>
+                        <th>
+                            TP_SOFTWARE STATE
+                        </th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Model -->
+        <div id="model-container" class="model_b model-bor" style="display: none;">
+            <div class="flex-model">
+                <!-- Model -->
+                <div id = "canvas-container">
+
+                </div>
+
+                <!-- Model Table -->
+                <div id="model-table-container">
+                    <table id = "model-table">
+                        <tr>
+                            <th style = "position: static; background-color: rgba(110, 153, 255, 0.8);"></th>
+                            <th style = "position: static; background-color: rgba(110, 153, 255, 0.8); color: black;">Angular Velocity</th>
+                            <th style = "position: static; background-color: rgba(110, 153, 255, 0.8); color: black;">Angular Acceleration</th>
+                        </tr>
+                        <tr>
+                            <td style = "background-color: rgba(110, 153, 255, 0.8); color:black;">Roll</td>
+                            <td id = "roll-gyro"></td>
+                            <td id = "roll-accel"></td>
+                        </tr>
+                        <tr>
+                            <td style = "background-color: rgba(110, 153, 255, 0.8); color:black;">Pitch</td>
+                            <td id = "pitch-gyro"></td>
+                            <td id = "pitch-accel"></td>
+                        </tr>
+                        <tr>
+                            <td style = "background-color: rgba(110, 153, 255, 0.8); color:black;">Yaw</td>
+                            <td id = "yaw-gyro"></td>
+                            <td id = "yaw-accel"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 50px"></div>
+        <div style="display:none" id="saved_data"></div>
+
+
+        <!-- Scipt Links -->
+        <script src="./js/socket_connect.js"></script>
+        <script src="./js/commands.js"></script>
+        <script src="./js/app.js"></script>
+        <script src="./js/map.js"></script>
+        <script src="./js/graphs.js"></script>
+        <script src="./js/software-state.js"></script>
+        <script src="./js/table.js"></script>
+        <script src="./js/3d-chart.js"></script>
+        <script src="./js/3d-model.js"></script>
+    </body>
 </html>
