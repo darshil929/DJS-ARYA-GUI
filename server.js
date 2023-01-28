@@ -79,6 +79,9 @@ io.on('connection', (socket) => {
                 tiltY : Number(rowConverter[18]).toFixed(2),        
                 cmdEcho : rowConverter[19]
             }
+            
+
+
             rowCSV.push(arr_To_Obj);
             console.log(rowCSV);
 

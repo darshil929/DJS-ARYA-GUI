@@ -45,7 +45,7 @@ button:hover {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 100%;
+    width: 25%;
     height: 45%;
 }
 
@@ -56,7 +56,7 @@ button:hover {
     font-style: italic;
     float: left;
     height: 70%;
-    width: 100%;
+    width: 70%;
     background: #E1EBEE;
     border-radius: 10px;
     font-family: Trebuchet MS;
@@ -64,9 +64,10 @@ button:hover {
   
 .example button {
     /* float: right; */
-    width: 19%;
-    padding: 1px;
+    width: 9%;
+    padding: 0px 1px ;
     background: #008080;
+    height:5%;
     color: #E1EBEE;
     border: 1px solid #008080;
     border-left: none;
@@ -229,7 +230,7 @@ button:hover {
     /* padding: 15px; */
     /* border: 3px solid #008080;
     border-radius: 15px; */
-    width: 71%;
+    width: 100%;
     height: 160px;
 }
 
@@ -258,7 +259,7 @@ button:hover {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 19%;
+    width: 13%;
     height: 100%;
     border: 3px solid #008080;
     border-radius: 15px;
@@ -268,6 +269,7 @@ button:hover {
     font-size: 1.5rem;
     font-weight: 600;
     line-height: 1.3em;
+    padding: 0px 4px;
 }
 
 .flexbox-c {
@@ -309,15 +311,20 @@ button:hover {
     margin-right: 5px;
     /* padding: 3px 0px; */
 }
-
+.tabs-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .tabs {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     margin: 0px;
     color: #fff;
     cursor: pointer;
     list-style-type: none;
+    margin-left: 25px;
 }
 
 .tab {
@@ -325,7 +332,7 @@ button:hover {
     justify-content: center;
     align-items: center;
     border: 3px solid #333;
-    width: 110px;
+    width: 160px;
     background-color: #333;
     border-radius: 10px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
@@ -343,6 +350,75 @@ button:hover {
     box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.25); 
 }
 
+.toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin: 10px;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 37px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+    
+  }
+
+  
 .tab-content {
     display: flex;
     justify-content: center;
@@ -399,7 +475,7 @@ button:hover {
     flex-direction: column;
     height: 100%;
     width: 38%;
-    margin: 10px;
+    margin: 0px 10px;
     /* border: 3px solid #008080;
     border-radius: 15px; */
 }
@@ -409,7 +485,7 @@ button:hover {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 75%;
+    height: 85%;
     width: 20%;
     /* border: 3px solid #008080;
     border-radius: 15px; */
@@ -447,9 +523,9 @@ button:hover {
     transform: scale(1.1);
 }
 
-#launch {
+/* #launch {
     background-color: #0080804a;
-}
+} */
 
 /* .card-s:visited {
     color: #0071c5;
@@ -474,15 +550,15 @@ button:hover {
     width: 500px;
     border-radius: 15px;
     border: 3px solid #008080;
-    margin-top: 10px;
+    margin-top: 30px;
 }
 
 #myMap {
-    height: 430px;
+    height: 500px;
     width: 500px;
     border-radius: 15px;
     border: 3px solid #008080;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .display-csv {
@@ -525,6 +601,35 @@ td {
 table {
     border-collapse: collapse;
     width: 100%;
+}
+
+.display-coordinates {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    height: 1000px;
+    width: 1486px;
+    /* border: 3px solid #008080;
+    border-radius: 15px; */
+    padding: 5px;
+    margin-left: 5px;
+}
+
+select {
+    width: 100%;
+    background-color: #008080;
+    color: #E1EBEE;
+    font-size: 1.4rem;
+    font-weight: 600;
+    border:0  #008080;
+}
+.flex-cards-text{
+    display: flex;
+    flex-direction: row;
+}
+
+option{
+    color: #E1EBEE;
 }
 
 

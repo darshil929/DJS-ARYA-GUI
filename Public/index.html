@@ -1,30 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+
+    <script src="./lib/chart.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.socket.io/4.5.3/socket.io.min.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-     crossorigin=""/>
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-     crossorigin=""></script>
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
     <title>DJS ARYA GUI</title>
     <script type="text/javascript" src="https://unpkg.com/vis-graph3d@latest/dist/vis-graph3d.min.js"></script>
 </head>
+
 <body onload="drawVisualization();">
     <div class="flexbox-head">
         <img src="./logo.jpeg" alt="" id="logo">
         <div id="heading">
             <div id="name">TEAM DJS ARYA</div>
             <div class="ID">
-                <div class="Item-1">MISSION_TIME: 00:00:00.00</div>
-                <div class="Item-2">TEAM_ID 1033</div>
+                <div class="Item-1">MISSION TIME: <div class="m-time" style="margin: 0px 5px;"></div>
+                </div>
+                <div class="Item-2">TEAM ID 1033</div>
                 <div class="icons">
                     <button><i id="btn1" class="fa-solid fa-circle-play"></i></button>
                     <button><i id="btn2" class="fa-solid fa-circle-stop"></i></button>
@@ -37,294 +43,142 @@
     <div class="data">
         <div class="flexbox-data">
             <div class="d1">
-                <div class="card">PACKET_COUNT: 29</div>
-                <div class="card">MODE: F</div>
-                <div class="card">HS_DEPLOYED: P</div>
-                <div class="card">PC_DEPLOYED: C</div>
-                <div class="card">MAST_RAISED: M</div>
-                
+                <div class="card">PACKET_COUNT: <div class="packetCount"></div>
+                </div>
+                <div class="card">MODE: <div class="mode"></div>
+                </div>
+                <div class="card">HS_DEPLOYED: <div class="hsDeployed"></div>
+                </div>
+                <div class="card">PC_DEPLOYED: <div class="pcDeployed"></div>
+                </div>
+                <div class="card">MAST_RAISED: <div class="mastRaised"></div>
+                </div>
+                <div class="card">PRESSURE: <div class="pressure"></div>
+                </div>
+                <div class="card">CMD_ECHO: <div class="CMDecho"></div>
+                </div>
+
             </div>
             <div class="d2">
-                <div class="card"><div>GPS_TIME:</div><div>00:00:00.00</div></div>
-                <div class="card"><div>GPS_ALTITUDE:</div><div>00.00</div></div>
-                <div class="card"><div>GPS_LATITUDE:</div><div>00.0000</div></div>
-                <div class="card"><div>GPS_LONGITUDE:</div><div>00.0000</div></div>
-                <div class="card">GPS_SATS: 09</div>
+                <div class="card">GPS_TIME: <div class="gpsTime"></div>
+                </div>
+                <div class="card">GPS_ALTITUDE: <div class="gpsAlt"></div>
+                </div>
+                <div class="card">GPS_LATITUDE: <div class="gpsLat"></div>
+                </div>
+                <div class="card">GPS_LONGITUDE: <div class="gpsLong"></div>
+                </div>
+                <div class="card">GPS_SATS:<div class="gpsSats"></div>
+                </div>
+                <div class="card">
+                    <div class="flex-cards-text">
+                        <select name="COM">
+                            <option value="COM1">COM1</option>
+                            <option value="COM2">COM2</option>
+                            <option value="COM3">COM3</option>
+                            <option value="COM4" selected>COM4</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="flex-cards-text"> BAUDRATE:
+                        <select name="BAUDRATE">
+                            <option value="1">300</option>
+                            <option value="2">600</option>
+                            <option value="3">1200</option>
+                            <option value="4">2400</option>
+                            <option value="5">4800</option>
+                            <option value="6" selected>9600</option>
+                            <option value="7">14400</option>
+                            <option value="8">19200</option>
+                            <option value="9">28800</option>
+                            <option value="10">31250</option>
+                            <option value="11">38400</option>
+                            <option value="12">57600</option>
+                            <option value="13">115200</option>
+                        </select>
+                    </div>
+                </div>
+
             </div>
+
         </div>
-        <div class="flexbox-c">
+        <!-- <div class="flexbox-c">
             <div class="c1">
-                <!-- <form action="/index9.html">
-                    <input type="text" name="command" placeholder="Enter Command">
-                    <button><img src="/CSS/send (1).png" alt=""></button>
-                    <input type="text" placeholder="Enter the Command:" name="command">
-                    <button type="submit"><i class="fa fa-angle-right"></i></button>
-                </form> -->
                 <form class="example">
                     <input type="text" placeholder="Enter the Command:" name="command">
                     <button type="submit"><i class="fa fa-angle-right"></i></button>
                 </form>
             </div>
             <div class="c2">CMD_ECHO: CMD,1033,CX_ON</div>
-        </div>
+        </div> -->
     </div>
-    <ul class="tabs">
-        <li data-tab-target="#GRAPH" class="active tab"><h2>GRAPHS</h2></li>
-        <li data-tab-target="#CSV" class="tab"><h2>CSV</h2></li>
-        <!-- <li data-tab-target="#MAP" class="tab"><h2>MAP</h2></li> -->
-    </ul>
+    <div class="tabs-container">
+        <ul class="tabs">
+            <li data-tab-target="#graph" class="active tab">
+                <h2>GRAPHS</h2>
+            </li>
+            <li data-tab-target="#CSV" class="tab">
+                <h2>CSV</h2>
+            </li>
+            <li data-tab-target="#Coordinates" class="tab">
+                <h2>COORDINATES</h2>
+            </li>
+        </ul>
+        <div class="example">
+            <input type="text" placeholder="Enter the Command:" name="command">
+            <button type="submit"><i class="fa fa-angle-right"></i></button>
+        </div>
+        <div class="toggle">
+            <h2>SIMULATION MODE</h2>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <!-- <input type="checkbox" id="switch" /><label for="switch">Toggle</label> -->
+        </div>
+    </div> 
     <div class="tab-content">
         <div id="CSV" data-tab-content>
             <div class="display-csv">
-                <table>
-                    <thead id="thead">
-                        <tr>
-                            <th title="Field #1">TEAM_ID</th>
-                            <th title="Field #2">MISSION_TIME</th>
-                            <th title="Field #3">PACKET_COUNT</th>
-                            <th title="Field #4">MODE</th>
-                            <th title="Field #5">STATE</th>
-                            <th title="Field #6">ALT</th>
-                            <th title="Field #7">HS_DEPLOYED</th>
-                            <th title="Field #8">PC_DEPLOYED</th>
-                            <th title="Field #9">MAST_RAISED</th>
-                            <th title="Field #10">TEMP</th>
-                            <th title="Field #11">VOLT</th>
-                            <th title="Field #12">GPS_TIME</th>
-                            <th title="Field #13">GPS_ALT</th>
-                            <th title="Field #14">GPS_LAT</th>
-                            <th title="Field #15">GPS_LONG</th>
-                            <th title="Field #16">GPS_SATS</th>
-                            <th title="Field #17">TILT X</th>
-                            <th title="Field #18">TILT Y</th>
-                            <th title="Field #19">CMD_ECHO</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:14:02.22</td>
-                            <td title="Field #3">01</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">LAUNCH_WAIT</td>
-                            <td title="Field #6">0</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">32.5</td>
-                            <td title="Field #11">20.0</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">0</td>
-                            <td title="Field #14">47.2031</td>
-                            <td title="Field #15">47.2031</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr>
-                        <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:15:02.22</td>
-                            <td title="Field #3">02</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">ASCENT</td>
-                            <td title="Field #6">111.3</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">35.6</td>
-                            <td title="Field #11">21.5</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">111.3</td>
-                            <td title="Field #14">53.4314</td>
-                            <td title="Field #15">53.4314</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr>
-                        <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:16:02.22</td>
-                            <td title="Field #3">03</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">ASCENT</td>
-                            <td title="Field #6">274.8</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">38.5</td>
-                            <td title="Field #11">20.9</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">274.8</td>
-                            <td title="Field #14">65.2781</td>
-                            <td title="Field #15">65.2781</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr>
-                        <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:17:02.22</td>
-                            <td title="Field #3">04</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">ASCENT</td>
-                            <td title="Field #6">503.5</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">40.9</td>
-                            <td title="Field #11">20.5</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">503.5</td>
-                            <td title="Field #14">79.2457</td>
-                            <td title="Field #15">79.2457</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr>
-                        <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:15:02.22</td>
-                            <td title="Field #3">05</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">ASCENT</td>
-                            <td title="Field #6">725.0</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">39.4</td>
-                            <td title="Field #11">20.4</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">725.0</td>
-                            <td title="Field #14">75.9521</td>
-                            <td title="Field #15">75.9521</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr>
-                        <!-- <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:15:02.22</td>
-                            <td title="Field #3">06</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">ROCKET <br> SEPARATION</td>
-                            <td title="Field #6">678.9</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">40.5</td>
-                            <td title="Field #11">20.1</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">678.9</td>
-                            <td title="Field #14">74.2031</td>
-                            <td title="Field #15">74.2031</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr>
-                        <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:15:02.22</td>
-                            <td title="Field #3">07</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">ROCKET <br> SEPARATION</td>
-                            <td title="Field #6">670.0</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">36.5</td>
-                            <td title="Field #11">22.5</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">670.0</td>
-                            <td title="Field #14">75.4510</td>
-                            <td title="Field #15">75.4510</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr>
-                        <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:15:02.22</td>
-                            <td title="Field #3">08</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">DESCENT</td>
-                            <td title="Field #6">628.3</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">37.2</td>
-                            <td title="Field #11">20.0</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">628.3</td>
-                            <td title="Field #14">72.3500</td>
-                            <td title="Field #15">72.3500</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr>
-                        <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:15:02.22</td>
-                            <td title="Field #3">09</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">DESCENT</td>
-                            <td title="Field #6">510.5</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">38.9</td>
-                            <td title="Field #11">20.1</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">510.5</td>
-                            <td title="Field #14">69.3560</td>
-                            <td title="Field #15">69.3560</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr>
-                        <tr>
-                            <td title="Field #1">1033</td>
-                            <td title="Field #2">13:15:02.22</td>
-                            <td title="Field #3">10</td>
-                            <td title="Field #4">F</td>
-                            <td title="Field #5">DESCENT</td>
-                            <td title="Field #6">515.5</td>
-                            <td title="Field #7">N</td>
-                            <td title="Field #8">N</td>
-                            <td title="Field #9">N</td>
-                            <td title="Field #10">39.9</td>
-                            <td title="Field #11">28.1</td>
-                            <td title="Field #12">00:20:31</td>
-                            <td title="Field #13">515.5</td>
-                            <td title="Field #14">70.3560</td>
-                            <td title="Field #15">70.3560</td>
-                            <td title="Field #16">7</td>
-                            <td title="Field #17">40.50</td>
-                            <td title="Field #18">40.50</td>
-                            <td title="Field #19">CXON</td>
-                        </tr> -->
-                    </tbody>
-                </table>   
+                <table id="csv">
+                    <tr>
+                        <th title="Field #1">TEAM_ID</th>
+                        <th title="Field #2">MISSION_TIME</th>
+                        <th title="Field #3">PACKET_COUNT</th>
+                        <th title="Field #4">MODE</th>
+                        <th title="Field #5">STATE</th>
+                        <th title="Field #6">ALT</th>
+                        <th title="Field #7">HS_DEPLOYED</th>
+                        <th title="Field #8">PC_DEPLOYED</th>
+                        <th title="Field #9">MAST_RAISED</th>
+                        <th title="Field #10">TEMP</th>
+                        <th title="Field #11">VOLT</th>
+                        <th title="Field #12">GPS_TIME</th>
+                        <th title="Field #13">GPS_ALT</th>
+                        <th title="Field #14">GPS_LAT</th>
+                        <th title="Field #15">GPS_LONG</th>
+                        <th title="Field #16">GPS_SATS</th>
+                        <th title="Field #17">TILT X</th>
+                        <th title="Field #18">TILT Y</th>
+                        <th title="Field #19">CMD_ECHO</th>
+                    </tr>
+                </table>
             </div>
         </div>
-        <div id="GRAPH" data-tab-content class="active">
+        <div id="graph" data-tab-content class="active">
             <div class="display-content">
                 <div class="part-1">
                     <div class="display-graph"><canvas id="TEMPERATURE"></canvas></div>
                     <div class="display-graph"><canvas id="VOLTAGE"></canvas></div>
                     <div class="display-graph"><canvas id="ALTITUDE"></canvas></div>
+
                 </div>
                 <div class="part-2">
-                    <div id="mygraph7"></div>
-                    <div id="myMap"></div>
+                    <!-- <div id="mygraph7"></div> -->
+                    <div class="display-graph"><canvas id="TILT"></canvas></div>
+                    <div class="display-graph"><canvas id="PRESSURE"></canvas></div>
+                    <!-- <div id="myMap"></div> -->
                 </div>
                 <div class="part-3">
                     <div class="states-heading">SOFTWARE STATES:</div>
@@ -332,13 +186,50 @@
                     <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
                     <div class="card-s" id="launch">ASCENT</div>
                     <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
-                    <div class="card-s" id="launch"><p>ROCKET</p><p>SEPARATION</p></div>
+                    <div class="card-s" id="launch">
+                        <p>ROCKET</p>
+                        <p>SEPARATION</p>
+                    </div>
                     <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
                     <div class="card-s">DESCENT</div>
                     <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
-                    <div class="card-s"><p>HEAT SHIELD</p><p>RELEASED</p></div>
+                    <div class="card-s">
+                        <p>PROBE</p>
+                        <p>RELEASED</p>
+                    </div>
                     <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
                     <div class="card-s">LANDED</div>
+                    <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
+                    <div class="card-s">END</div>
+                </div>
+            </div>
+        
+        </div>
+        <div id="Coordinates" data-tab-content>
+            <div class="display-coordinates">
+                <div id="mygraph7"></div>
+                <div id="myMap"></div>
+                <div class="part-3">
+                    <div class="states-heading">SOFTWARE STATES:</div>
+                    <div class="card-s" id="launch">LAUNCH</div>
+                    <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
+                    <div class="card-s" id="launch">ASCENT</div>
+                    <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
+                    <div class="card-s" id="launch">
+                        <p>ROCKET</p>
+                        <p>SEPARATION</p>
+                    </div>
+                    <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
+                    <div class="card-s">DESCENT</div>
+                    <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
+                    <div class="card-s">
+                        <p>PROBE</p>
+                        <p>RELEASED</p>
+                    </div>
+                    <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
+                    <div class="card-s">LANDED</div>
+                    <h1><i class="fa-solid fa-arrow-down-long"></i></h1>
+                    <div class="card-s">END</div>
                 </div>
             </div>
         </div>
@@ -350,6 +241,10 @@
     </div>
     <script src="back_connect.js"></script>
     <script src="./app.js"></script>
+    <script src="./table.js"></script>
+    <script src="./data.js"></script>
     <script src="./chart.js"></script>
+
 </body>
+
 </html>
