@@ -7,10 +7,16 @@ var voltageData = [];
 var temperatureData = [];
 var altitudeData = [];
 var missionTimeData = [];
-var tiltData = [];
+var tiltxData = [];
+var tiltyData = [];
 var pressureData = [];
+var gpsAltitudeData = [];
+var gpsLatitudeData = [];
+var gpsLongitudeData = [];
+
 
 const Time = document.querySelector('.m-time');
+const State = document.querySelector('.state');
 const packet_count = document.querySelector('.packetCount');
 const mode = document.querySelector('.mode');
 const hs_deployed = document.querySelector('.hsDeployed');
@@ -30,8 +36,12 @@ socket.on('trial.csv', (myData) => {
     temperatureData.push(myData.temperature);
     altitudeData.push(myData.altitude);
     missionTimeData.push(myData.missionTime);
-    tiltData.push(myData.tiltX);
+    tiltxData.push(myData.tiltX);
+    tiltyData.push(myData.tiltY);
     pressureData.push(myData.pressure);
+    gpsAltitudeData.push(myData.gpsAltitude);
+    gpsLatitudeData.push(myData.gpsLatitude);
+    gpsLongitudeData.push(myData.gpsLongitude);
     dynamicChart1.update();
     dynamicChart2.update();
     dynamicChart3.update();
@@ -40,6 +50,7 @@ socket.on('trial.csv', (myData) => {
 
     
     Time.innerHTML = `${myData.missionTime}`;
+    State.innerHTML = `${myData.state}`;
     packet_count.innerHTML = `${myData.packetCount}`;
     mode.innerHTML = `${myData.mode}`;
     hs_deployed.innerHTML = `${myData.hsDeployed}`;

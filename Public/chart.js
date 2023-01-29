@@ -40,9 +40,9 @@ let dynamicChart1 = new Chart(graph, {
     align: 'start',
     spanGaps: true,
     scales: {
-      y: {
-        beginAtZero: false,
-      },
+      // y: {
+      //   beginAtZero: false,
+      // },
       xAxes: [{
         scaleLabel: {
           display: true,
@@ -77,9 +77,11 @@ let dynamicChart1 = new Chart(graph, {
         //     zeroLineColor: '#333'     // Color of the axis
         // },
         ticks: {
+          beginAtZero: false,
           fontColor: "#333",
           fontSize: 14,
-          suggestedMin: 0,
+          // suggestedMin: 0,
+  
         },
       }],
     },
@@ -156,9 +158,9 @@ let dynamicChart2 = new Chart(graph1, {
     align: 'start',
     spanGaps: true,
     scales: {
-      y: {
-        beginAtZero: false,
-      },
+      // y: {
+      //   beginAtZero: false,
+      // },
       xAxes: [{
         scaleLabel: {
           display: true,
@@ -193,9 +195,10 @@ let dynamicChart2 = new Chart(graph1, {
         //     zeroLineColor: '#333'     // Color of the axis
         // },
         ticks: {
+beginAtZero: false,
           fontColor: "#333",
           fontSize: 14,
-          suggestedMin: 0,
+          // suggestedMin: 0,
         },
       }],
     },
@@ -245,9 +248,9 @@ let dynamicChart3 = new Chart(graph3, {
     align: 'start',
     spanGaps: true,
     scales: {
-      y: {
-        beginAtZero: false,
-      },
+      // y: {
+      //   beginAtZero: false,
+      // },
       xAxes: [{
         scaleLabel: {
           display: true,
@@ -282,9 +285,10 @@ let dynamicChart3 = new Chart(graph3, {
         //     zeroLineColor: '#333'     // Color of the axis
         // },
         ticks: {
+beginAtZero: false,
           fontColor: "#333",
           fontSize: 14,
-          suggestedMin: 0,
+          // suggestedMin: 0,
         },
       }],
     },
@@ -307,7 +311,20 @@ let dynamicChart4 = new Chart(graph4, {
       borderColor: '#0071c5',
       pointBackgroundColor: '#0071c5',
       // radius: 0,
-      data: tiltData,
+      data: tiltxData,
+      // borderWidth:2,
+      // pointRadius:1,
+    },
+    {
+      fill: false,
+      label: 'Tilt-Y',
+      lineTension: 0,
+      // backgroundColor: "rgb(228, 68, 150, 0.8)", 
+      // backgroundColor : tpAltitudeColor,   
+      borderColor: '#f25278',
+      pointBackgroundColor: '#f25278',
+      // radius: 0,
+      data: tiltyData,
       // borderWidth:2,
       // pointRadius:1,
     }]
@@ -334,9 +351,9 @@ let dynamicChart4 = new Chart(graph4, {
     align: 'start',
     spanGaps: true,
     scales: {
-      y: {
-        beginAtZero: false,
-      },
+      // y: {
+      //   beginAtZero: false,
+      // },
       xAxes: [{
         scaleLabel: {
           display: true,
@@ -371,9 +388,10 @@ let dynamicChart4 = new Chart(graph4, {
         //     zeroLineColor: '#333'     // Color of the axis
         // },
         ticks: {
+beginAtZero: false,
           fontColor: "#333",
           fontSize: 14,
-          suggestedMin: 0,
+          // suggestedMin: 0,
         },
       }],
     },
@@ -424,9 +442,9 @@ let dynamicChart5 = new Chart(graph5, {
     align: 'start',
     spanGaps: true,
     scales: {
-      y: {
-        beginAtZero: false,
-      },
+      // y: {
+      //   beginAtZero: false,
+      // },
       xAxes: [{
         scaleLabel: {
           display: true,
@@ -461,9 +479,10 @@ let dynamicChart5 = new Chart(graph5, {
         //     zeroLineColor: '#333'     // Color of the axis
         // },
         ticks: {
+beginAtZero: false,
           fontColor: "#333",
           fontSize: 14,
-          suggestedMin: 0,
+          // suggestedMin: 0,
         },
       }],
     },

@@ -56,10 +56,10 @@ function createContainerTable(myData) {
     tr.appendChild(td);
     document.querySelector('#csv').appendChild(tr);
 
-    // td = document.createElement('td');
-    // td.textContent = myData.pressure;
-    // tr.appendChild(td);
-    // document.querySelector('#csv').appendChild(tr);
+    td = document.createElement('td');
+    td.textContent = myData.pressure;
+    tr.appendChild(td);
+    document.querySelector('#csv').appendChild(tr);
 
     td = document.createElement('td');
     td.textContent = myData.gpsTime;

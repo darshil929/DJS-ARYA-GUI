@@ -28,7 +28,7 @@
         <div id="heading">
             <div id="name">TEAM DJS ARYA</div>
             <div class="ID">
-                <div class="Item-1">MISSION TIME: <div class="m-time" style="margin: 0px 5px;"></div>
+                <div class="Item-1">MISSION TIME:<div class="m-time" style="margin: 0px 5px;"></div>
                 </div>
                 <div class="Item-2">TEAM ID 1033</div>
                 <div class="icons">
@@ -40,80 +40,8 @@
         </div>
         <img src="./flag.png" alt="" id="flag">
     </div>
-    <div class="data">
-        <div class="flexbox-data">
-            <div class="d1">
-                <div class="card">PACKET_COUNT: <div class="packetCount"></div>
-                </div>
-                <div class="card">MODE: <div class="mode"></div>
-                </div>
-                <div class="card">HS_DEPLOYED: <div class="hsDeployed"></div>
-                </div>
-                <div class="card">PC_DEPLOYED: <div class="pcDeployed"></div>
-                </div>
-                <div class="card">MAST_RAISED: <div class="mastRaised"></div>
-                </div>
-                <div class="card">PRESSURE: <div class="pressure"></div>
-                </div>
-                <div class="card">CMD_ECHO: <div class="CMDecho"></div>
-                </div>
 
-            </div>
-            <div class="d2">
-                <div class="card">GPS_TIME: <div class="gpsTime"></div>
-                </div>
-                <div class="card">GPS_ALTITUDE: <div class="gpsAlt"></div>
-                </div>
-                <div class="card">GPS_LATITUDE: <div class="gpsLat"></div>
-                </div>
-                <div class="card">GPS_LONGITUDE: <div class="gpsLong"></div>
-                </div>
-                <div class="card">GPS_SATS:<div class="gpsSats"></div>
-                </div>
-                <div class="card">
-                    <div class="flex-cards-text">
-                        <select name="COM">
-                            <option value="COM1">COM1</option>
-                            <option value="COM2">COM2</option>
-                            <option value="COM3">COM3</option>
-                            <option value="COM4" selected>COM4</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="flex-cards-text"> BAUDRATE:
-                        <select name="BAUDRATE">
-                            <option value="1">300</option>
-                            <option value="2">600</option>
-                            <option value="3">1200</option>
-                            <option value="4">2400</option>
-                            <option value="5">4800</option>
-                            <option value="6" selected>9600</option>
-                            <option value="7">14400</option>
-                            <option value="8">19200</option>
-                            <option value="9">28800</option>
-                            <option value="10">31250</option>
-                            <option value="11">38400</option>
-                            <option value="12">57600</option>
-                            <option value="13">115200</option>
-                        </select>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-        <!-- <div class="flexbox-c">
-            <div class="c1">
-                <form class="example">
-                    <input type="text" placeholder="Enter the Command:" name="command">
-                    <button type="submit"><i class="fa fa-angle-right"></i></button>
-                </form>
-            </div>
-            <div class="c2">CMD_ECHO: CMD,1033,CX_ON</div>
-        </div> -->
-    </div>
-    <div class="tabs-container">
+    <div class="flexbox-data">
         <ul class="tabs">
             <li data-tab-target="#graph" class="active tab">
                 <h2>GRAPHS</h2>
@@ -122,22 +50,102 @@
                 <h2>CSV</h2>
             </li>
             <li data-tab-target="#Coordinates" class="tab">
-                <h2>COORDINATES</h2>
+                <h2>CO-ORDINATES</h2>
             </li>
         </ul>
-        <div class="example">
-            <input type="text" placeholder="Enter the Command:" name="command">
-            <button type="submit"><i class="fa fa-angle-right"></i></button>
+        <div class="flex-stats">
+            <div class="d1">
+                <div class="card">PACKET_COUNT: <div class="packetCount"></div>
+                </div>
+                <div class="card">PRESSURE: <div class="pressure"></div>
+                </div>
+                <div class="card">STATE: <div class="state"></div>
+                </div>
+                <div class="card">CMD_ECHO: <div class="CMDecho"></div>
+                </div>
+
+            </div>
+            <div class="d2">
+                <div class="card">GPS TIME: <div class="gpsTime"></div>
+                </div>
+                <div class="card">GPS ALTITUDE: <div class="gpsAlt"></div>
+                </div>
+                <div class="card">GPS LAT, LONG: <div style="display: flex;">
+                        <div class="gpsLat"></div>,<div class="gpsLong" style="margin-left:5px;"></div>
+                    </div>
+                </div>
+                <div class="card">GPS SATS:<div class="gpsSats"></div>
+                </div>
+
+            </div>
+            <div class="d3">
+                <div class="card">MODE: <div class="mode"></div>
+                </div>
+                <div class="card">HS_DEPLOYED: <div class="hsDeployed"></div>
+                </div>
+                <div class="card">PC_DEPLOYED: <div class="pcDeployed"></div>
+                </div>
+                <div class="card">MAST_RAISED: <div class="mastRaised"></div>
+                </div>
+            </div>
         </div>
-        <div class="toggle">
-            <h2>SIMULATION MODE</h2>
+        <div class="flex-3">
+            <div class="toggle">
+                <div style="color: #333;font-size: 1.5rem;font-weight: 600;">SIMULATION MODE</div>
                 <label class="switch">
-                    <input type="checkbox" checked>
+                    <input type="checkbox">
                     <span class="slider round"></span>
                 </label>
                 <!-- <input type="checkbox" id="switch" /><label for="switch">Toggle</label> -->
+            </div>
+            <div class="card-drop">
+                <div class="flex-cards-text">
+                    <select name="COM">
+                        <option value="COM1">COM1</option>
+                        <option value="COM2">COM2</option>
+                        <option value="COM3">COM3</option>
+                        <option value="COM4" selected>COM4</option>
+                    </select>
+                </div>
+            </div>
+            <div class="card-drop">
+                <div class="flex-cards-text"> BAUDRATE:
+                    <select name="BAUDRATE">
+                        <option value="1">300</option>
+                        <option value="2">600</option>
+                        <option value="3">1200</option>
+                        <option value="4">2400</option>
+                        <option value="5">4800</option>
+                        <option value="6" selected>9600</option>
+                        <option value="7">14400</option>
+                        <option value="8">19200</option>
+                        <option value="9">28800</option>
+                        <option value="10">31250</option>
+                        <option value="11">38400</option>
+                        <option value="12">57600</option>
+                        <option value="13">115200</option>
+                    </select>
+                </div>
+            </div>
+            <div class="example">
+                <input type="text" placeholder="Enter the Command:" name="command">
+                <button type="submit"><i class="fa fa-angle-right"></i></button>
+            </div>
         </div>
-    </div> 
+
+
+    </div>
+    <!-- <div class="flexbox-c">
+        <div class="c1">
+            <form class="example">
+                <input type="text" placeholder="Enter the Command:" name="command">
+                <button type="submit"><i class="fa fa-angle-right"></i></button>
+            </form>
+        </div>
+        <div class="c2">CMD_ECHO: CMD,1033,CX_ON</div>
+    </div> -->
+    </div>
+
     <div class="tab-content">
         <div id="CSV" data-tab-content>
             <div class="display-csv">
@@ -145,23 +153,24 @@
                     <tr>
                         <th title="Field #1">TEAM_ID</th>
                         <th title="Field #2">MISSION_TIME</th>
-                        <th title="Field #3">PACKET_COUNT</th>
+                        <th title="Field #3">PACKET<br>COUNT</th>
                         <th title="Field #4">MODE</th>
                         <th title="Field #5">STATE</th>
                         <th title="Field #6">ALT</th>
-                        <th title="Field #7">HS_DEPLOYED</th>
-                        <th title="Field #8">PC_DEPLOYED</th>
-                        <th title="Field #9">MAST_RAISED</th>
+                        <th title="Field #7">HS<br>DEPLOYED</th>
+                        <th title="Field #8">PC<br>DEPLOYED</th>
+                        <th title="Field #9">MAST<br>RAISED</th>
                         <th title="Field #10">TEMP</th>
                         <th title="Field #11">VOLT</th>
-                        <th title="Field #12">GPS_TIME</th>
-                        <th title="Field #13">GPS_ALT</th>
-                        <th title="Field #14">GPS_LAT</th>
-                        <th title="Field #15">GPS_LONG</th>
-                        <th title="Field #16">GPS_SATS</th>
+                        <th title="Field #20">PRESSURE</th>
+                        <th title="Field #12">GPS<br>TIME</th>
+                        <th title="Field #13">GPS<br>ALT</th>
+                        <th title="Field #14">GPS<br>LAT</th>
+                        <th title="Field #15">GPS<br>LONG</th>
+                        <th title="Field #16">GPS<br>SATS</th>
                         <th title="Field #17">TILT X</th>
                         <th title="Field #18">TILT Y</th>
-                        <th title="Field #19">CMD_ECHO</th>
+                        <th title="Field #19">CMD<br>ECHO</th>
                     </tr>
                 </table>
             </div>
@@ -203,7 +212,7 @@
                     <div class="card-s">END</div>
                 </div>
             </div>
-        
+
         </div>
         <div id="Coordinates" data-tab-content>
             <div class="display-coordinates">
@@ -233,6 +242,8 @@
                 </div>
             </div>
         </div>
+
+
         <!-- <div id="MAP" data-tab-content><div class="card-display-MAP">
             <div class="display-map">
                 <div id="myMap"></div>
