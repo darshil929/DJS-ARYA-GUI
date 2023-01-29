@@ -67,7 +67,7 @@ let dynamicChart1 = new Chart(graph, {
       yAxes: [{
         scaleLabel: {
           display: true,
-          labelString: 'Celcious',
+          labelString: '°Celcius',
           fontColor: '#333',
           fontSize: 14
         },

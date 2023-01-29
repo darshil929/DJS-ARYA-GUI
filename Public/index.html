@@ -10,6 +10,7 @@
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="tabs_style.css"> -->
     <script src="https://cdn.socket.io/4.5.3/socket.io.min.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,6 +43,26 @@
     </div>
 
     <div class="flexbox-data">
+        <!-- <div class="content">
+            <input type="radio" name="slider" checked id="home">
+            <input type="radio" name="slider" id="blog">
+            <input type="radio" name="slider" id="help">
+            <input type="radio" name="slider" id="code">
+            <div class="list">
+                <label for="home" class="home">
+                <i class="fa fa-line-chart"></i>
+                <span class="title">GRAPHS</span>
+            </label>
+            <label for="blog" class="blog">
+                <span class="icon"><i class="fa fa-file-excel-o"></i></span>
+                <span class="title">CSV</span>
+            </label>
+            <label for="help" class="help">
+                <span class="icon"><i class="fa fa-codepen"></i></span>
+                <span class="title">CO-ORDINATES</span>
+            </label>
+        </div> -->
+
         <ul class="tabs">
             <li data-tab-target="#graph" class="active tab">
                 <h2>GRAPHS</h2>
@@ -93,18 +114,18 @@
             <div class="toggle">
                 <div style="color: #333;font-size: 1.5rem;font-weight: 600;">SIMULATION MODE</div>
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" selected>
                     <span class="slider round"></span>
                 </label>
                 <!-- <input type="checkbox" id="switch" /><label for="switch">Toggle</label> -->
             </div>
             <div class="card-drop">
-                <div class="flex-cards-text">
+                <div class="flex-cards-text">COM:
                     <select name="COM">
-                        <option value="COM1">COM1</option>
-                        <option value="COM2">COM2</option>
-                        <option value="COM3">COM3</option>
-                        <option value="COM4" selected>COM4</option>
+                        <option value="COM1">1</option>
+                        <option value="COM2">2</option>
+                        <option value="COM3">3</option>
+                        <option value="COM4" selected>4</option>
                     </select>
                 </div>
             </div>
@@ -178,15 +199,15 @@
         <div id="graph" data-tab-content class="active">
             <div class="display-content">
                 <div class="part-1">
-                    <div class="display-graph"><canvas id="TEMPERATURE"></canvas></div>
-                    <div class="display-graph"><canvas id="VOLTAGE"></canvas></div>
                     <div class="display-graph"><canvas id="ALTITUDE"></canvas></div>
+                    <div class="display-graph"><canvas id="VOLTAGE"></canvas></div>
+                    <div class="display-graph"><canvas id="TEMPERATURE"></canvas></div>
 
                 </div>
                 <div class="part-2">
                     <!-- <div id="mygraph7"></div> -->
-                    <div class="display-graph"><canvas id="TILT"></canvas></div>
                     <div class="display-graph"><canvas id="PRESSURE"></canvas></div>
+                    <div class="display-graph"><canvas id="TILT"></canvas></div>
                     <!-- <div id="myMap"></div> -->
                 </div>
                 <div class="part-3">

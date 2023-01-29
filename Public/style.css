@@ -161,6 +161,7 @@ button:hover {
     font-weight: 600;
     height: 70px;
     margin-top: 10px;
+    letter-spacing: 7px;
     
 }
 
@@ -187,6 +188,7 @@ button:hover {
     font-size: 1.4rem;
     background-color: #008080;
     color: #E1EBEE;
+    
 }
 
 .Item-2 {
@@ -196,6 +198,7 @@ button:hover {
 
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 2.2rem;
+    letter-spacing: 1.5px;
 }
 
 .icons {
@@ -355,18 +358,21 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 3px solid #333;
+    border: 1px solid #0080804a;
+    color: #1e293b;
     width: 160px;
     height: 55px;
-    background-color: #333;
+    background-color: #0080804a;
     border-radius: 10px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 20%);
     margin: 10px 0px;
 }
 
 .tab.active {
-    background-color: #0071c5;
-    border: 3px solid #0071c5;
+    background: #525150;
+    border: 3px solid #525150;
+    transform: scale(1.1);
+    color: #fafafa;
 }
 
 .tab:hover {
@@ -420,11 +426,13 @@ button:hover {
 }
 
 input:checked+.slider {
-    background-color: #2196F3;
+    background-color: #525150;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+
 }
 
 input:focus+.slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 1px 1px 1px #525150;
 }
 
 input:checked+.slider:before {
@@ -638,7 +646,7 @@ table {
 
 select {
     width: 100%;
-    background-color: #333;;
+    background-color: #525150;
     color: #E1EBEE;
     font-size: 1.4rem;
     font-weight: 600;
@@ -654,12 +662,15 @@ select {
 
 option {
     background-color: #333;    color: #E1EBEE;
+    font-size: 1.4rem;
+    font-weight: 600;
 }
 .card-drop{
-    border: 3px solid #333;
+    border: 3px solid #525150
+    ;
     border-radius: 15px;
     box-shadow: 6px 6px 12px rgb(0 0 0 / 20%);
-    background-color: #333;
+    background-color: #525150;
     color: white;
     font-size: 1.5rem;
     font-weight: 600;
