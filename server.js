@@ -49,14 +49,14 @@ io.on('connection', (socket) => {
             clearInterval(csvToGUI);
             console.log('CSV data ENDED!');
         } else {
-            console.log(myArray[i]);
+            // console.log(myArray[i]);
 
             makeCSV(myArray[i]);
 
-            console.log(`Row ${i} sent to Judge`);
+            // console.log(`Row ${i} sent to Judge`);
 
             const rowConverter = myArray[i].split(',');
-            console.log(rowConverter);
+            // console.log(rowConverter);
             var arr_To_Obj = {
                 teamId : Number(rowConverter[0]),
                 missionTime : rowConverter[1],
@@ -83,7 +83,7 @@ io.on('connection', (socket) => {
 
 
             rowCSV.push(arr_To_Obj);
-            console.log(rowCSV);
+            // console.log(rowCSV);
 
             socket.emit('trial.csv', rowCSV[i]);
             i++;

@@ -469,7 +469,7 @@ let dynamicChart5 = new Chart(graph5, {
       yAxes: [{
         scaleLabel: {
           display: true,
-          labelString: 'Pascal',
+          labelString: 'kPa',
           fontColor: '#333',
           fontSize: 14
         },
