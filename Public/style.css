@@ -24,7 +24,7 @@ button {
     width: 45px;
     border-radius: 100%;
     border: none;
-    color: #008080;
+    color: #525150;
     /* find some good color for buttons */
     background-color: #E1EBEE;
     font-size: 115%;
@@ -36,11 +36,20 @@ button:hover {
     /* box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.25); */
 }
 
-/* button:active {
-    background-color: #059669;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
+button:active{
+    color: #008080;
+    transform: scale(1.3);
+}
+
+input:checked+.button {
+    background-color: #008080;
+    color: #008080;}
+
+/* .button:after {
+    color: #008080;
+    transform: scale(1.2);
 } */
+
 
 .example {
     display: flex;
@@ -48,7 +57,7 @@ button:hover {
     align-items: center;
     width: 110%;
     height: 45%;
-    margin: 10px 0px;
+    margin-bottom: 10px;
 }
 
 .example input[type=text] {
@@ -68,10 +77,10 @@ button:hover {
     /* float: right; */
     width: 12%;
     padding: 0px 1px;
-    background: #008080;
+    background: #525150;
     height: 5%;
     color: #E1EBEE;
-    border: 1px solid #008080;
+    border: 1px solid #525150;
     border-left: none;
     cursor: pointer;
     border-radius: 100%;
@@ -181,12 +190,12 @@ button:hover {
     display: flex;
     justify-content:center;
     width: 30%;
-    border: 3px solid #008080;
+    border: 3px solid #525150;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     padding: 5px;
     font-size: 1.4rem;
-    background-color: #008080;
+    background-color: #525150;
     color: #E1EBEE;
     
 }
@@ -199,6 +208,7 @@ button:hover {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 2.2rem;
     letter-spacing: 1.5px;
+    
 }
 
 .icons {
@@ -209,6 +219,7 @@ button:hover {
     margin: 25px;
     justify-content: space-between;
     align-items: center;
+
 }
 
 #flag {
@@ -358,25 +369,25 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #0080804a;
-    color: #1e293b;
+    border: 1px solid #525150;
+    color: white;
     width: 160px;
     height: 55px;
-    background-color: #0080804a;
+    background-color: #525150;
     border-radius: 10px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 20%);
     margin: 10px 0px;
 }
 
 .tab.active {
-    background: #525150;
+    background: #00808015;
     border: 3px solid #525150;
     transform: scale(1.1);
-    color: #fafafa;
+    color: black;
 }
 
 .tab:hover {
-    transform: scale(1.1);
+    transform: scale(1.14);
     box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.25);
 }
 
@@ -384,7 +395,7 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
 }
 
 .switch {
@@ -394,6 +405,12 @@ button:hover {
     height: 34px;
     margin: 10px;
 }
+
+
+
+
+
+
 
 .switch input {
     opacity: 0;
@@ -426,19 +443,24 @@ button:hover {
 }
 
 input:checked+.slider {
-    background-color: #525150;
+    background-color: #008080;
+    /* box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px; */
+    box-shadow: 1px 1px 1px #008080;
     box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 
 }
 
 input:focus+.slider {
-    box-shadow: 1px 1px 1px #525150;
+    box-shadow: 1px 1px 1px #008080;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+
 }
 
 input:checked+.slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
+    
 }
 
 /* Rounded sliders */
@@ -650,9 +672,11 @@ select {
     color: #E1EBEE;
     font-size: 1.4rem;
     font-weight: 600;
-    border: 0 #333;
+    /* border: 0 #525150e5; */
     border-radius: 15px;
+    margin-left: 5px;
     padding: 2px 2px;
+    border: 0.5px solid #7b7b7a;
 }
 
 .flex-cards-text {
@@ -661,16 +685,17 @@ select {
 }
 
 option {
-    background-color: #333;    color: #E1EBEE;
+    background-color: #525150e5;    
+    color: #E1EBEE;
     font-size: 1.4rem;
     font-weight: 600;
+    /* border: 3px solid #E1EBEE; */
 }
 .card-drop{
-    border: 3px solid #525150
-    ;
+    border: 0px solid #525150e5;
     border-radius: 15px;
     box-shadow: 6px 6px 12px rgb(0 0 0 / 20%);
-    background-color: #525150;
+    background-color: #525150e5;
     color: white;
     font-size: 1.5rem;
     font-weight: 600;

@@ -29,6 +29,9 @@ const GPSlong = document.querySelector('.gpsLong');
 const GPSsats = document.querySelector('.gpsSats');
 const CMDecho = document.querySelector('.CMDecho');
 const pressure = document.querySelector('.pressure');
+let threeD;
+const threeData= new vis.DataSet();
+let visFlag = 0;
 
 socket.on('trial.csv', (myData) => {
     console.log(myData.altitude); // to see if the data is being recieved
@@ -65,4 +68,5 @@ socket.on('trial.csv', (myData) => {
     pressure.innerHTML = `${myData.pressure}`;
 
     createContainerTable(myData);
+    create3dChart(myData);
 })
