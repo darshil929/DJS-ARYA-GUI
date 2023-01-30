@@ -20,8 +20,8 @@ body {
 }
 
 button {
-    height: 50px;
-    width: 50px;
+    height: 45px;
+    width: 45px;
     border-radius: 100%;
     border: none;
     color: #525150;
@@ -29,12 +29,10 @@ button {
     background-color: #E1EBEE;
     font-size: 115%;
     cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 button:hover {
     transform: scale(1.1);
-    box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.25);
     /* box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.25); */
 }
 
@@ -45,8 +43,7 @@ button:active{
 
 input:checked+.button {
     background-color: #008080;
-    color: #008080;}
-
+    color: #008080;}
 /* .button:after {
     color: #008080;
     transform: scale(1.2);
@@ -669,9 +666,9 @@ table {
 }
 
 select {
-    width: 100%;
-    background-color: #f3f4f6;
-    color: #3f3f46;
+    width: 100px;
+    background-color: #525150e5;
+    color: #E1EBEE;
     font-size: 1.4rem;
     font-weight: 600;
     /* border: 0 #525150e5; */

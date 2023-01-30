@@ -516,57 +516,42 @@ beginAtZero: false,
 //         });
 
 
-var data = null;
-var graph3d = null;
+// var data = null;
+// var graph3d = null;
 
-function customx(x) {
-  return (x + 10);
-}
+// // Called when the Visualization API is loaded.
+// function drawVisualization() {
+//   // Create and populate a data table.
+//   var data = new vis.DataSet();
+//   // create some nice looking data with sin/cos
+//   // number of datapoints will be steps*steps
+//   var x = gpsLatitudeData;
+//   var y = gpsLongitudeData;
+//   var z = gpsAltitudeData;
+//   data.add({
+//     x: x,
+//     y: y,
+//     z: z,
+//     style: z
+// })
 
-function customy(y) {
-  return (y * y);
-}
+//   // specify options
+//   var options = {
+//     width: '700px',
+//     height: '500px',
+//     style: 'line',
+//     dataColor: { strokeWidth: 4 },
+//     showPerspective: true,
+//     showGrid: true,
+//     showShadow: false,
+//     keepAspectRatio: true,
+//     verticalRatio: 0.5
+//   };
 
-
-
-// Called when the Visualization API is loaded.
-function drawVisualization() {
-  // Create and populate a data table.
-  var data = new vis.DataSet();
-  // create some nice looking data with sin/cos
-  // number of datapoints will be steps*steps
-  var axisMax = 10;
-  for (var x = 0; x < axisMax; x++) {
-    for (var y = 0; y < axisMax; y++) {
-      var x = customx(x);
-      var y = customy(y);
-      var z = x + y + 10;
-      data.add({
-        x: x,
-        y: y,
-        z: z,
-        style: z
-      });
-    }
-  }
-
-  // specify options
-  var options = {
-    width: '700px',
-    height: '500px',
-    style: 'line',
-    dataColor: { strokeWidth: 4 },
-    showPerspective: true,
-    showGrid: true,
-    showShadow: false,
-    keepAspectRatio: true,
-    verticalRatio: 0.5
-  };
-
-  // create a graph3d
-  var container = document.getElementById('mygraph7');
-  graph3d = new vis.Graph3d(container, data, options);
-}
+//   // create a graph3d
+//   var container = document.getElementById('mygraph7');
+//   graph3d = new vis.Graph3d(container, data, options);
+// }
 
 
 

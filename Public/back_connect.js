@@ -34,9 +34,14 @@ const pressure = document.querySelector('.pressure');
 // let visFlag = 0;
 
 //3D Chart
-    let threeD;
-    const threeData = new vis.DataSet();
-    let visFlag = 0;
+    // let threeD;
+    // const threeData = new vis.DataSet();
+    // let visFlag = 0;
+
+// 3d chart
+let threeD;
+const threeData = new vis.DataSet();
+let visFlag = 0;
 
 socket.on('trial.csv', (myData) => {
     console.log(myData.altitude); // to see if the data is being recieved
@@ -50,6 +55,7 @@ socket.on('trial.csv', (myData) => {
     gpsAltitudeData.push(myData.gpsAltitude);
     gpsLatitudeData.push(myData.gpsLatitude);
     gpsLongitudeData.push(myData.gpsLongitude);
+
     dynamicChart1.update();
     dynamicChart2.update();
     dynamicChart3.update();
@@ -75,4 +81,24 @@ socket.on('trial.csv', (myData) => {
     createContainerTable(myData);
     softwareState (myData.state);
     create3dChart(myData);
+
+    // MAP
+        // // marker.setLatLng([dataObj.gpslat, dataObj.gpslong]);
+        // let r1 = myData.gpsLatitude;
+        // let r2 = myData.gpsLongitude;
+        // r1 = r1.toString();
+        // r2 = r2.toString();
+        // r1 = parseFloat( '0.0' + r1.substring(5,8));
+        // r2 = parseFloat('0.0' + r2.substring(5,8));
+        // // marker.setLatLng([19.076 + r1, 72.877 + r2]);
+        marker.setLatLng([myData.gpsLatitude, myData.gpsLongitude]);
+
+        // const circle = L.circle([dataObj.gpslat, dataObj.gpslong], {   // marking the past Lat Long
+        // const circle = L.circle([19.076 + r1, 72.877 + r2], {   // marking the past Lat Long
+        const circle = L.circle([myData.gpsLatitude, myData.gpsLongitude], {   // marking the past Lat Long
+            color: "blue",
+            fillColor: "blue",
+            fillOpacity: 1,
+            radius: 1.0
+        }).addTo(map);
 })
