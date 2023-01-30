@@ -285,7 +285,8 @@ input:checked+.button {
     align-items: center;
     flex-direction: column;
     width: 230px;
-    height: 125%;
+    /* height: 200%; */
+    height: 70px;
     border: 3px solid #008080;
     border-radius: 15px;
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2);
