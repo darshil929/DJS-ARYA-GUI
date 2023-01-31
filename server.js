@@ -47,7 +47,7 @@ io.on('connection', (socket) => {
     function emitCSV() {
         if(i == myArray.length) {
             clearInterval(csvToGUI);
-            console.log('CSV data ENDED!');
+            // console.log('CSV data ENDED!');
         } else {
             // console.log(myArray[i]);
 
