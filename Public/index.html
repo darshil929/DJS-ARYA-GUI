@@ -74,40 +74,43 @@
             <li data-tab-target="#Coordinates" class="tab">
                 <h2>CO-ORDINATES</h2>
             </li>
+            <li data-tab-target="#3D" class="tab">
+                <h2>3D MODEL</h2>
+            </li>
         </ul>
         <div class="flex-stats">
             <div class="d1">
-                <div class="card">PACKET_COUNT: <div class="packetCount"></div>
+                <div class="card">PACKET_COUNT <div class="packetCount"></div>
                 </div>
-                <div class="card">PRESSURE: <div class="pressure"></div>
+                <div class="card">PRESSURE<div class="pressure"></div>
                 </div>
-                <div class="card">STATE: <div class="state"></div>
+                <div class="card">STATE<div class="state"></div>
                 </div>
-                <div class="card">CMD_ECHO: <div class="CMDecho"></div>
+                <div class="card">CMD_ECHO<div class="CMDecho"></div>
                 </div>
 
             </div>
             <div class="d2">
-                <div class="card">GPS TIME: <div class="gpsTime"></div>
+                <div class="card">GPS TIME<div class="gpsTime"></div>
                 </div>
-                <div class="card">GPS ALTITUDE: <div class="gpsAlt"></div>
+                <div class="card">GPS ALTITUDE<div class="gpsAlt"></div>
                 </div>
-                <div class="card">GPS LAT, LONG: <div style="display: flex;">
+                <div class="card">GPS LAT, LONG<div style="display: flex;">
                         <div class="gpsLat"></div>,<div class="gpsLong" style="margin-left:5px;"></div>
                     </div>
                 </div>
-                <div class="card">GPS SATS:<div class="gpsSats"></div>
+                <div class="card">GPS SATS<div class="gpsSats"></div>
                 </div>
 
             </div>
             <div class="d3">
-                <div class="card">MODE: <div class="mode"></div>
+                <div class="card">MODE<div class="mode"></div>
                 </div>
-                <div class="card">HS_DEPLOYED: <div class="hsDeployed"></div>
+                <div class="card">HS_DEPLOYED<div class="hsDeployed"></div>
                 </div>
-                <div class="card">PC_DEPLOYED: <div class="pcDeployed"></div>
+                <div class="card">PC_DEPLOYED<div class="pcDeployed"></div>
                 </div>
-                <div class="card">MAST_RAISED: <div class="mastRaised"></div>
+                <div class="card">MAST_RAISED<div class="mastRaised"></div>
                 </div>
             </div>
         </div>
@@ -121,8 +124,8 @@
                 <!-- <input type="checkbox" id="switch" /><label for="switch">Toggle</label> -->
             </div>
             <div class="example">
-                <input type="text" placeholder="Enter the Command:" name="command">
-                <button type="submit"><i class="fa fa-angle-right"></i></button>
+                <input  id="command" class="text" type="text" placeholder="Enter the Command:" name="command">
+                <button class="btn-send" id = "command-button" type="submit"><i class="fa fa-angle-right"></i></button>
             </div>
             <div class="card-drop">
                 <div class="flex-cards-text">COM:
@@ -279,6 +282,7 @@
         </div> -->
         </div>
         <script src="./js/app.js"></script>
+        <script src="./js/commands.js"></script>
         <script src="./js/map.js"></script>
         <script src="./js/table.js"></script>
         <script src="./js/chart.js"></script>

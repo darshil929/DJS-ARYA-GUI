@@ -1,4 +1,5 @@
 // Run the GUI on Server
+
 const fs = require('fs'); 
 const express = require('express');
 const app = express();
@@ -80,11 +81,8 @@ io.on('connection', (socket) => {
                 cmdEcho : rowConverter[19]
             }
             
-
-
             rowCSV.push(arr_To_Obj);
             // console.log(rowCSV);
-
             socket.emit('trial.csv', rowCSV[i]);
             i++;
         }

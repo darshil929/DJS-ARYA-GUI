@@ -120,3 +120,17 @@ socket.on('trial.csv', (myData) => {
             target.classList.add('active')
         })
     })
+
+//BUTTON INTEGRATION
+// let startFlag=0;
+// let stopFlag=0;
+document.querySelector('#btn1').addEventListener('click', async () => {
+    socket.connect()
+        //// await socket.emit('start');
+        //// writeOnSerial('1');
+      //startFlag = 1;  
+})
+document.querySelector('#btn2').addEventListener('click', async () => {
+        socket.disconnect();
+    }
+)
