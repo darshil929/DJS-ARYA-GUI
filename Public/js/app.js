@@ -78,7 +78,8 @@ socket.on('trial.csv', (myData) => {
     pressure.innerHTML = `${myData.pressure}`;
 
     createContainerTable(myData);
-    softwareState (myData.state);
+    transition_ss(myData.state);
+    displayStates(myData.state);
     create3dChart(myData);
 
     // MAP
