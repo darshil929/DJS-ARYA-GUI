@@ -590,6 +590,32 @@ input:checked+.slider:before {
     line-height: 1.2em;
 }
 
+.fa-arrow-down-long {
+    display: flex;
+    justify-content: center;
+    margin: 4px;
+}
+
+.currentSS{
+    border-style: 3px solid #008080;
+    background-color: #008080;
+    color: #f1f5f9;
+}
+
+.prevSS{
+    border-style: 1px solid #0080804a;
+    background-color: #0080804a;
+    color: #334155;
+}
+
+/* .open {
+    display: block;
+}
+
+.close {
+    display: none;  
+} */
+
 /* .card-s:hover {
     color: #E1EBEE;
     background-color: #008080;
