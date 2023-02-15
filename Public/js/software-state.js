@@ -217,7 +217,6 @@ const transition_ss = (x) => {
 };
 
 const ssDivs = document.querySelectorAll(".ss-arrow");
-
 const displayStates = (x) => {
     for (let i = 0; i < ssDivs.length; i++) {
       if (i >= x-3 && i < x) {
