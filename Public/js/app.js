@@ -1,5 +1,5 @@
 const socket = io('http://localhost:3000')
-socket.on('connection',() => {
+ socket.on('connection',() => {
 
 })
 
@@ -127,8 +127,8 @@ socket.on('trial.csv', (myData) => {
 document.querySelector('#btn1').addEventListener('click', async () => {
     socket.connect()
         //// await socket.emit('start');
-        //// writeOnSerial('1');
-      //startFlag = 1;  
+        //// writeOnSerial('1');  
+        //startFlag = 1;  
 })
 document.querySelector('#btn2').addEventListener('click', async () => {
         socket.disconnect();
