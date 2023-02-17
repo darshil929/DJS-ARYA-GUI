@@ -7,25 +7,31 @@ const commandButtonCB = (e) => {
     if(ch !== undefined) {
         if(ch === 'CMD,1033,CX,ON') {
             command = '1';
-            // console.log(command);
         } else if (ch === 'CMD,1033,CX,OFF') {
             command = '2';
-            // console.log(command);
         }  else if (ch === 'CMD,1033,SIM,ENABLE') {
             sim_enable = true;
-            command = '3';
-            // console.log(command);
+            command = '4';
         } else if (ch === 'CMD,1033,SIM,ACTIVATE') {
             if(sim_enable) {
                 sim_activate = true;
-                command = '4';
-                // console.log(command);
-            }
-        } else if (ch === 'CMD,1033,SIM,DISABLE') {
-            sim_enable = false;
-            sim_activate = false;
-            command = '5';
-            // console.log(command);
+                command = '5';}
+        // } else if (ch === 'CMD,1033,SIM,DISABLE') {
+        //     sim_enable = false;
+        //     sim_activate = false;
+        //     command = '5';
+        } else if (ch === 'CAL') {
+            command = '0';
+        } else if (ch === 'Packet Count Reset') {
+            command = '7';
+        } else if (ch === 'Heat Shield Start') {
+            command = 'a';
+        } else if (ch === 'Heat Shield Stop') {
+            command = 'A';
+        } else if (ch === 'Flag Servo') {
+            command = 'c';
+        } else if (ch === 'Parachute Servo') {
+            command = 'b';
         } else {
             console.log("Wrong Command");
         }
