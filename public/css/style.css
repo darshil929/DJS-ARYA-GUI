@@ -559,7 +559,8 @@ input:checked+.slider:before {
 
 .part-3 {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
+    text-align: center;
     align-items: center;
     flex-direction: column;
     height: 100%;
@@ -606,6 +607,10 @@ input:checked+.slider:before {
     border-style: 1px solid #0080804a;
     background-color: #0080804a;
     color: #334155;
+}
+
+.transparent {
+    background-color: #E1EBEE;
 }
 
 /* .open {
