@@ -89,11 +89,11 @@
   } */
   
   .open {
-    display: block;
+    display: block !important;
   }
   
   .close {
-    display: none;
+    display: none !important;
   }
   
   

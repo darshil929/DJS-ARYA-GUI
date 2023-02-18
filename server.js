@@ -15,7 +15,7 @@ server.listen(3000,() => {
 })
 let data;
 try {
-    const bufferData = fs.readFileSync('./good.csv')
+    const bufferData = fs.readFileSync('./test.csv')
     data = bufferData.toString();
 } catch (error) {
     console.log(error)
@@ -49,7 +49,7 @@ io.on('connection', (socket) => {
                     missionTime : row[1],
                     packetCount : Number(row[2]),
                     mode : row[3],
-                    state : row[4],
+                    state : Number(row[4]),
                     altitude : Number(row[5]).toFixed(1),
                     hsDeployed : row[6],
                     pcDeployed : row[7],
