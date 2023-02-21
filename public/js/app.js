@@ -79,7 +79,8 @@ socket.on('data', (myData) => {
 
     createContainerTable(myData);
     transition_ss(myData.state);
-    randomState(myData.state);
+    // randomState(myData.state);
+    // ssDisplay(myData.state);
     // displayStates(myData.state);
     create3dChart(myData);
 
@@ -128,7 +129,7 @@ socket.on('data', (myData) => {
 // let stopFlag=0;
 document.querySelector('#btn1').addEventListener('click', async () => {
     socket.emit('click', 'start');
-    console.log()
+    // console.log()
     // socket.connect()
         //// await socket.emit('start');
         //// writeOnSerial('1');  

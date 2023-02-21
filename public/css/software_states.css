@@ -1,3 +1,51 @@
+  .size {
+    font-size: 18px;
+  }
+  
+  .states-heading {
+    /* margin-bottom: 20px; */
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+
+.ss-arrow {
+  width: 220px;
+  margin: auto;
+}
+
+.card-s {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* width: 198px; */
+    height: 65px;
+    border: 3px solid #008080;
+    border-radius: 15px;
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2);
+    background-color: #E1EBEE;
+    color: #334155;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.2em;
+}
+
+.currentSS{
+    border-style: 3px solid #008080;
+    background-color: #008080;
+    color: #f1f5f9;
+}
+
+.prevSS{
+    border-style: 1px solid #0080804a;
+    background-color: #0080804a;
+    color: #334155;
+}
+
+.transparent {
+    background-color: #E1EBEE;
+}
+
 #SS {
     /* width: 460px !important; */
     height: 420px;
@@ -6,7 +54,7 @@
     /* font-family: Georgia, 'Times New Roman', Times, serif; */
     font-weight: normal;
     transform: translate(5px);
-  }
+}
   
   .m-nl {
     margin: 1rem 1rem 1rem 0rem;
@@ -18,15 +66,14 @@
     justify-content: center;
   }
   
-  .flex-ss-arrow {
+  .arrow {
     display: flex;
     justify-content: center;
-    /* gap: 0.75rem; */
+    font-size: 36px;
+    padding: 10px 0px;
   }
   
   .icon {
-    /* padding: 0px 10px 0px 10px; */
-    /* transform: rotate(180deg); */
     cursor: pointer;
   }
   
@@ -55,17 +102,15 @@
     border: 2px solid white;
     padding: 15px 5px;
     margin: 5px 10px 5px 10px;
-    /* border-radius: 20px; */
-    /* box-shadow: 0 3px 10px rgba(255,255,255,0.3); */
   }
   
-  .ss_arrow {
+  /* .ss_arrow {
     display: flex;
     text-align: center;
     justify-content: center;
     align-items: center;
     margin: 0.75rem 0 0 0;
-  }
+  } */
   
   .start {
     /* background-color: rgb(50, 186, 140); */
@@ -75,17 +120,8 @@
     box-shadow: 0 0px 20px rgba(255, 255, 255, 0.4);
   }
   
-  .transition {
+  /* .transition {
     width: 195px !important;
-  }
-  
-  /* .tp-transition {
-    width: 180px !important;
-  }
-  
-  .tp-ss-width {
-    width: 187px !important;
-    transform: translate(5px);
   } */
   
   .open {
