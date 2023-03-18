@@ -43,7 +43,7 @@ let threeD;
 const threeData = new vis.DataSet();
 let visFlag = 0;
 
-socket.on('data', (myData) => {
+socket.on('trial.csv', (myData) => {
     voltageData.push(myData.voltage);
     temperatureData.push(myData.temperature);
     altitudeData.push(myData.altitude);
@@ -78,9 +78,7 @@ socket.on('data', (myData) => {
     pressure.innerHTML = `${myData.pressure}`;
 
     createContainerTable(myData);
-    transition_ss(myData.state);
-    // randomState(myData.state);
-    // ssDisplay(myData.state);
+    // transition_ss(myData.state);
     // displayStates(myData.state);
     create3dChart(myData);
 
@@ -128,15 +126,12 @@ socket.on('data', (myData) => {
 // let startFlag=0;
 // let stopFlag=0;
 document.querySelector('#btn1').addEventListener('click', async () => {
-    socket.emit('click', 'start');
-    // console.log()
-    // socket.connect()
+    socket.connect()
         //// await socket.emit('start');
         //// writeOnSerial('1');  
         //startFlag = 1;  
 })
 document.querySelector('#btn2').addEventListener('click', async () => {
-    socket.emit('click', 'stop');
-        // socket.disconnect();
+        socket.disconnect();
     }
 )

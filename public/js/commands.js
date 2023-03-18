@@ -1,48 +1,30 @@
+const obj =Object.freeze({
+    "CMD,1033,CX,ON":"1",
+    "CMD,1033,CX,OFF": "2",
+    "CMD,1033,SET Time": "3-Value-",
+    "CMD,1033,SIM,DISABLE": "7",
+    "CMD,1033,SIM,ENABLE": "4",
+    "CMD,1033,SIM,ACTIVATE": "5",
+    "CMD,1033,SIMP": "6-Value-",
+    "CMD,1033,CAL": "0",
+    "CMD,1033,Packet Count Reset": "8",
+    "CMD,1033,Heat Shield Start": "a",
+    "CMD,1033,Heat Shield Stop": "A",
+    "CMD,1033,Parachute Servo": "b",
+    "CMD,1033,Flag Servo": "c"
+})
+
 let sim_enable;
 let sim_activate;
+const commandButton = document.querySelector('#command-button');
+
 const commandButtonCB = (e) => {
     e.preventDefault();
-    let command = '0';
+    // let command = '0';
     const ch = document.querySelector('#command').value.trim();
-    if(ch !== undefined) {
-        if(ch === 'CMD,1033,CX,ON') {
-            command = '1';
-        } else if (ch === 'CMD,1033,CX,OFF') {
-            command = '2';
-        }  else if (ch === 'CMD,1033,SIM,ENABLE') {
-            sim_enable = true;
-            command = '4';
-        } else if (ch === 'CMD,1033,SIM,ACTIVATE') {
-            if(sim_enable) {
-                sim_activate = true;
-                command = '5';}
-        // } else if (ch === 'CMD,1033,SIM,DISABLE') {
-        //     sim_enable = false;
-        //     sim_activate = false;
-        //     command = '5';
-        } else if (ch === 'CAL') {
-            command = '0';
-        } else if (ch === 'Packet Count Reset') {
-            command = '7';
-        } else if (ch === 'Heat Shield Start') {
-            command = 'a';
-        } else if (ch === 'Heat Shield Stop') {
-            command = 'A';
-        } else if (ch === 'Flag Servo') {
-            command = 'c';
-        } else if (ch === 'Parachute Servo') {
-            command = 'b';
-        } else {
-            console.log("Wrong Command");
-        }
-        console.log(command);
-    }
+    
+    let command= obj[ch]
+    console.log(command)
 }
-var el = document.getElementById('command-button');
-document.querySelector('#command-button').addEventListener('click',(e)=>commandButtonCB(e));
 
-document.querySelector('#command').addEventListener("keyup",(e)=>{
-    if(e.code === "Enter") {
-        commandButtonCB(e)
-    }
-})
+commandButton.addEventListener('click', commandButtonCB)
