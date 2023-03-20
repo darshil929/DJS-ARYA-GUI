@@ -13,17 +13,6 @@ server.listen(3000,() => {
     console.log(`Server is UP on port 3000`);
 })
 
-let data;
-
-try {
-    const bufferData = fs.readFileSync('./test.csv')
-    data = bufferData.toString();
-} catch (error) {
-    console.log(error)
-}
-
-data = data.split('\r\n');
-data.shift();
 
 io.on('connection', (socket) => {
     console.log(`Connected: ${socket.id}`);
@@ -31,19 +20,13 @@ io.on('connection', (socket) => {
     socket.on('click', (command) => {
         if(command === 'start') {
             console.log(command)
-            let cntr = -1;
-            interval = setInterval(() => {
-                cntr++;
-                if(cntr >= data.length-1) {
-                    clearInterval(interval);
-                }
+        
+                // makeCSV(data[cntr]);
+                // const row = data[cntr].split(',');
+                // const obj = parse(row);
 
-                makeCSV(data[cntr]);
-                const row = data[cntr].split(',');
-                const obj = parse(row);
-
-                socket.emit('data', obj);
-            }, 1000);
+                // socket.emit('data', obj);
+           
         } else if(command === 'stop') {
             clearInterval(interval);
         }
