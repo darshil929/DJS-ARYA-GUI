@@ -1,17 +1,43 @@
-const obj =Object.freeze({
-    "CMD,1033,CX,ON":"1",
-    "CMD,1033,CX,OFF": "2",
-    "CMD,1033,SET Time": "3-Value-",
-    "CMD,1033,SIM,DISABLE": "7",
-    "CMD,1033,SIM,ENABLE": "4",
-    "CMD,1033,SIM,ACTIVATE": "5",
-    "CMD,1033,SIMP": "6-Value-",
-    "CMD,1033,CAL": "0",
-    "CMD,1033,Packet Count Reset": "8",
-    "CMD,1033,Heat Shield Start": "a",
-    "CMD,1033,Heat Shield Stop": "A",
-    "CMD,1033,Parachute Servo": "b",
-    "CMD,1033,Flag Servo": "c"
+const obj = Object.freeze({
+    "CMD,1033,CX,ON": () => {
+        socket.emit('start')
+    },
+    "CMD,1033,CX,OFF": () => {
+        socket.emit('stop');
+    },
+    "CMD,1033,SET Time": (data) => {
+        socket.emit('set-time', data);
+    },
+    "CMD,1033,SIM,DISABLE": () => {
+        socket.emit('sim-disable');
+    },
+    "CMD,1033,SIM,ENABLE": () => {
+        socket.emit('sim-enable');
+    },
+    "CMD,1033,SIM,ACTIVATE": () => {
+        socket.emit('sim-activate');
+    },
+    "CMD,1033,SIMP": (data) => {
+        socket.emit('simp', data);
+    },
+    "CMD,1033,CAL": () => {
+        socket.emit('cal')
+    },
+    "CMD,1033,Packet Count Reset": () => {
+        socket.emit('pcr')
+    },
+    "CMD,1033,Heat Shield Start":  () => {
+        socket.emit('hs-start')
+    },
+    "CMD,1033,Heat Shield Stop":  () => {
+        socket.emit('hs-stop')
+    },
+    "CMD,1033,Parachute Servo":  () => {
+        socket.emit('ps')
+    },
+    "CMD,1033,Flag Servo":  () => {
+        socket.emit('fs')
+    },
 })
 
 let sim_enable;
@@ -20,11 +46,15 @@ const commandButton = document.querySelector('#command-button');
 
 const commandButtonCB = (e) => {
     e.preventDefault();
-    // let command = '0';
     const ch = document.querySelector('#command').value.trim();
+    const cmd = ch.split(',');
+    if(cmd[2] === 'SIMP' || cmd[2] === 'SET Time') {
+        const str = cmd[0] + "," + cmd[1] + "," + cmd[2];
+        obj[str](cmd[3]);
+        return;
+    }
     
-    let command= obj[ch]
-    console.log(command)
+    obj[ch]();
 }
 
 commandButton.addEventListener('click', commandButtonCB)

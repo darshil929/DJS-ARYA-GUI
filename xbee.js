@@ -7,7 +7,6 @@ require('dotenv').config()
 const { SerialPort }  = require('serialport');
 const xbee_api = require('xbee-api');
 const xbee = require('xbee')
-console.log(SerialPort)
 
 // HTTP Server
 const express = require('express')

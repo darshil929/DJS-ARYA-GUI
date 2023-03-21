@@ -1,4 +1,4 @@
-const socket = io('http://localhost:3000')
+const socket = io('http://localhost:5000')
 socket.on('connection', () => {
 })
 var voltageData = [];
@@ -119,15 +119,14 @@ socket.on('data', (myData) => {
     // let stopFlag=0;
     document.querySelector('#btn1').addEventListener('click', async () => {
         // socket.connect()
-        socket.emit('click', 'start');
-        console.log()
+        socket.emit('start');
         // socket.connect()
         //// await socket.emit('start');
         //// writeOnSerial('1');  
         //startFlag = 1;  
     })
     document.querySelector('#btn2').addEventListener('click', async () => {
-        socket.disconnect();
-        socket.emit('click', 'stop');
+        // socket.disconnect();
+        socket.emit('stop');
         // socket.disconnect();
     })
