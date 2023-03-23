@@ -6,7 +6,7 @@
     <script type="text/javascript" src="https://unpkg.com/vis-graph3d@latest/dist/vis-graph3d.min.js"></script>
     <script src="./lib/chart.js"></script>
     <!-- <script src="./lib/vis-graph3d.min.js"></script> -->
-
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -76,7 +76,7 @@
             <li data-tab-target="#Coordinates" class="tab">
                 <h2>CO-ORDINATES</h2>
             </li>
-            <li data-tab-target="#3D" class="tab">
+            <li data-tab-target="#threeD" class="tab">
                 <h2>3D MODEL</h2>
             </li>
         </ul>
@@ -172,7 +172,7 @@
         </div>
         <div class="c2">CMD_ECHO: CMD,1033,CX_ON</div>
     </div> -->
-    </div>
+
 
     <div class="tab-content">
         <div id="CSV" data-tab-content>
@@ -221,159 +221,108 @@
                     </div>
                 </div>
                 <div class="grid-1 part-3" style="gap: 30px !important">
-                    
+
                     <div class="part-3">
-                    <!-- <div class="states-heading">
-                            <p>SOFTWARE STATES</p>
-                        <div class="center-block">
-                            <div class="space">
-                                <div class="circle">
-                                    <div class="ssIcon" onclick="changeIcon()">
-                                        <i id="upDown" class="fa-solid fa-chevron-down"></i>
+
+                        <main style="display: flex; justify-content: center; align-items: center;">
+                            <div>
+                                <div style="display: flex; align-items: center;">
+                                    <div class="states-heading">SOFTWARE STATES</div>
+                                    <div class="icon" style="margin-left: 10px;">
+                                        <div id="iconDown">
+                                            <svg width="30" height="11" viewBox="0 0 74 43" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <line x1="2.82843" y1="3.17157" x2="39.7394" y2="40.0825" stroke="black"
+                                                    stroke-width="8" />
+                                                <line x1="39.1716" y1="34.9914" x2="70.9914" y2="3.17158" stroke="black"
+                                                    stroke-width="8" />
+                                            </svg>
+                                        </div>
+                                        <div id="iconUp" class="close">
+                                            <svg width="30" height="11" viewBox="0 0 75 44" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <line x1="3.13713" y1="40.206" x2="34.9569" y2="8.38621" stroke="black"
+                                                    stroke-width="8" />
+                                                <line x1="71.5269" y1="40.1838" x2="34.5452" y2="3.20208" stroke="black"
+                                                    stroke-width="8" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ss">
+                                    <div class="ss-arrow open">
+                                        <div class="card-s transition currentSS">BOOT</div>
+                                        <div class="arrow">
+                                            <i class="fa-solid fa-arrow-down-long"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="ss-arrow open">
+                                        <div class="card-s transition">LAUNCH</div>
+                                        <div class="arrow">
+                                            <i class="fa-solid fa-arrow-down-long"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="ss-arrow open">
+                                        <div class="card-s transition">ASCENT</div>
+                                        <div class="arrow">
+                                            <i class="fa-solid fa-arrow-down-long"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="ss-arrow close">
+                                        <div class="card-s transition">
+                                            <p>ROCKET</p>
+                                            <p>SEPARATION</p>
+                                        </div>
+                                        <div class="arrow">
+                                            <i class="fa-solid fa-arrow-down-long"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="ss-arrow close">
+                                        <div class="card-s transition">DESCENT</div>
+                                        <div class="arrow">
+                                            <i class="fa-solid fa-arrow-down-long"></i>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="ss-arrow close">
+                                        <div class="card-s transition">
+                                            <p>PROBE</p>
+                                            <p>RELEASED</p>
+                                        </div>
+                                        <div class="arrow">
+                                            <i class="fa-solid fa-arrow-down-long"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="ss-arrow close">
+                                        <div class="card-s transition">LANDED</div>
+                                        <div class="arrow">
+                                            <i class="fa-solid fa-arrow-down-long"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="ss-arrow close">
+                                        <div class="card-s transition">END</div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </main>
                     </div>
-                    <div class="ss">
-                        <div class="ss-arrow open">
-                            <div class="card-s stateName currentSS">BOOT</div>
-                            <h1><i class="fa-solid fa-arrow-down-long ss_arrow"></i></h1>
-                        </div>
-
-                        <div class="ss-arrow open">
-                            <div class="card-s stateName">LAUNCH</div>
-                            <h1><i class="fa-solid fa-arrow-down-long ss_arrow"></i></h1>
-                        </div>
-
-                        <div class="ss-arrow open">
-                            <div class="card-s stateName">ASCENT</div>
-                            <h1><i class="fa-solid fa-arrow-down-long ss_arrow"></i></h1>
-                        </div>
-
-                        <div class="ss-arrow close">
-                            <div class="card-s stateName">
-                                <p>ROCKET</p>
-                                <p>SEPARATION</p>
-                            </div>
-                            <h1><i class="fa-solid fa-arrow-down-long ss_arrow"></i></h1>
-                        </div>
-                        
-                        <div class="ss-arrow close">
-                            <div class="card-s stateName">DESCENT</div>
-                            <h1><i class="fa-solid fa-arrow-down-long ss_arrow"></i></h1>  
-                        </div>
-
-                        <div class="ss-arrow close">
-                            <div class="card-s stateName">
-                                <p>PROBE</p>
-                                <p>RELEASED</p>
-                            </div>
-                            <h1><i class="fa-solid fa-arrow-down-long ss_arrow"></i></h1>
-                        </div>
-
-                        <div class="ss-arrow close">
-                            <div class="card-s stateName">LANDED</div>
-                            <h1><i class="fa-solid fa-arrow-down-long ss_arrow"></i></h1>
-                        </div>
-
-                        <div class="ss-arrow close">
-                            <div class="card-s stateName">END</div>
-                        </div>
-                    </div> -->
-
-                    <main style="display: flex; justify-content: center; align-items: center;">
-                        <div>
-                            <div style="display: flex; align-items: center;">
-                                <div class="states-heading">SOFTWARE STATES</div>
-                                <div class="icon" style="margin-left: 10px;">
-                                    <div id="iconDown">
-                                        <svg width="30" height="11" viewBox="0 0 74 43" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <line x1="2.82843" y1="3.17157" x2="39.7394" y2="40.0825" stroke="black" stroke-width="8"/>
-                                            <line x1="39.1716" y1="34.9914" x2="70.9914" y2="3.17158" stroke="black" stroke-width="8"/>
-                                        </svg>
-                                    </div>
-                                    <div id="iconUp" class="close">
-                                        <svg width="30" height="11" viewBox="0 0 75 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <line x1="3.13713" y1="40.206" x2="34.9569" y2="8.38621" stroke="black" stroke-width="8"/>
-                                            <line x1="71.5269" y1="40.1838" x2="34.5452" y2="3.20208" stroke="black" stroke-width="8"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ss">
-                                <div class="ss-arrow open">
-                                    <div class="card-s transition currentSS">BOOT</div>
-                                    <div class="arrow">
-                                        <i class="fa-solid fa-arrow-down-long"></i>
-                                    </div>
-                                </div>
-                
-                                <div class="ss-arrow open">
-                                    <div class="card-s transition">LAUNCH</div>
-                                    <div class="arrow">
-                                        <i class="fa-solid fa-arrow-down-long"></i>
-                                    </div>
-                                </div>
-
-                                <div class="ss-arrow open">
-                                    <div class="card-s transition">ASCENT</div>
-                                    <div class="arrow">
-                                        <i class="fa-solid fa-arrow-down-long"></i>
-                                    </div>
-                                </div>
-                
-                                <div class="ss-arrow close">
-                                    <div class="card-s transition">
-                                        <p>ROCKET</p>
-                                        <p>SEPARATION</p>
-                                    </div>
-                                    <div class="arrow">
-                                        <i class="fa-solid fa-arrow-down-long"></i>
-                                    </div>
-                                </div>
-                
-                                <div class="ss-arrow close">
-                                    <div class="card-s transition">DESCENT</div>
-                                    <div class="arrow">
-                                        <i class="fa-solid fa-arrow-down-long"></i>
-                                    </div>
-                                </div>
-                                
-
-                                <div class="ss-arrow close">
-                                    <div class="card-s transition">
-                                        <p>PROBE</p>
-                                        <p>RELEASED</p>
-                                    </div>
-                                    <div class="arrow">
-                                        <i class="fa-solid fa-arrow-down-long"></i>
-                                    </div>
-                                </div>
-
-                                <div class="ss-arrow close">
-                                    <div class="card-s transition">LANDED</div>
-                                    <div class="arrow">
-                                        <i class="fa-solid fa-arrow-down-long"></i>
-                                    </div>
-                                </div>
-
-                                <div class="ss-arrow close">
-                                    <div class="card-s transition">END</div>
-                                </div>
-                            </div>
-                        </div>
-                    </main>
                 </div>
+
+
             </div>
-
-
         </div>
         <div id="Coordinates" data-tab-content>
-            <!-- <div class="display-coordinates">
+            <div class="display-coordinates">
                 <div id="mygraph7"></div>
                 <div id="myMap"></div>
-                <div class="part-3">
+                <!-- <div class="part-3">
                     <div class="states-heading">SOFTWARE STATES</div>
                     <div class="card-s transition">LAUNCH</div>
                     <h1><i class="fa-solid fa-arrow-down-long ss_arrow"></i></h1>
@@ -394,24 +343,24 @@
                     <div class="card-s transition">LANDED</div>
                     <h1><i class="fa-solid fa-arrow-down-long ss_arrow"></i></h1>
                     <div class="card-s transition">END</div>
-                </div>
-            </div> -->
+                </div> -->
+            </div>
+        </div>
+        <div id="threeD" data-tab-content>
+            <div class="model-container">
+                <div id="model"></div>
+            </div>
         </div>
 
-
-        <!-- <div id="MAP" data-tab-content><div class="card-display-MAP">
-            <div class="display-map">
-                <div id="myMap"></div>
-            </div>
-        </div> -->
+        
     </div>
     <script src="./js/app.js"></script>
-    <!-- <script src="./js/index.js"></script> -->
     <script src="./js/commands.js"></script>
-    <!-- <script src="./js/map.js"></script> -->
+    <script src="./js/map.js"></script>
     <script src="./js/table.js"></script>
     <script src="./js/chart.js"></script>
-    <!-- <script src="./js/3dgraph.js"></script> -->
+    <script src="./js/3dgraph.js"></script>
+    <script src="./js/3d-model.js"></script>
     <script src="./js/software-state.js"></script>
 </body>
 

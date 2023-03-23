@@ -38,7 +38,6 @@ const threeData = new vis.DataSet();
 let visFlag = 0;
 
 socket.on('data', (myData) => {
-    console.log(myData)
     voltageData.push(myData.voltage);
     temperatureData.push(myData.temperature);
     altitudeData.push(myData.altitude);
@@ -71,11 +70,12 @@ socket.on('data', (myData) => {
     pressure.innerHTML = `${myData.pressure}`;
 
     createContainerTable(myData);
-    transition_ss(myData.state);
-    displayStates(myData.state);
-    randomState(myData.state);
-    displayStates(myData.state);
+    // transition_ss(myData.state);
+    // displayStates(myData.state);
+    // randomState(myData.state);
+    // displayStates(myData.state);
     create3dChart(myData);
+    create3dModel(myData);
 
     // MAP
     // // marker.setLatLng([myData.gpsLatitude, myData.gpsLongitude]);
