@@ -1,7 +1,11 @@
 
 /* LIBRARIES */
+<<<<<<< HEAD
 const fs = require('fs');
 const { SerialPort }  = require('serialport');
+=======
+const { SerialPort } = require('serialport');
+>>>>>>> 320c98edbc0dc7ee706e3ef4148927e7173fe538
 const xbee_api = require('xbee-api');
 const xbee = require('xbee');
 // const fs = require('fs'); 
@@ -82,18 +86,23 @@ server.listen(HTTP_PORT, () => {
 // })
 
 /* Socket Setup */
-const io = require('socket.io')(server, { 
-    cors: { 
+const io = require('socket.io')(server, {
+    cors: {
         origin: "*",
         methods: ["GET", "POST"],
         credentials: true,
-    } 
+    }
 });
 
+let simFlag = 0;
 io.on('connection', (socket) => {
     console.log(`Connected: ${socket.id}`);
+<<<<<<< HEAD
     let socketIsAlive = true;
     
+=======
+
+>>>>>>> 320c98edbc0dc7ee706e3ef4148927e7173fe538
     socket.on('disconnect', () => {
         console.log(`Disconnected: ${socket.id}`);
         socketIsAlive = false;
@@ -159,7 +168,7 @@ io.on('connection', (socket) => {
 
     socket.on('sim-enable', () => {
         console.log('sim-enable');
-
+        simFlag = 1;
         const frame_obj = {
             type: C.FRAME_TYPE.AT_COMMAND,
             command: "4",
@@ -172,7 +181,7 @@ io.on('connection', (socket) => {
 
     socket.on('sim-disable', () => {
         console.log("sim-disable");
-
+        simFlag = 0;
         const frame_obj = {
             type: C.FRAME_TYPE.AT_COMMAND,
             command: "7",
@@ -184,6 +193,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on('sim-activate', () => {
+<<<<<<< HEAD
         console.log("sim-activate");
         fs.readFile('./simp/sample_pressure.txt', (err, data) => {
             let simpArray = [];
@@ -220,6 +230,57 @@ io.on('connection', (socket) => {
         // port.write(test);
     })
     
+=======
+        if (simFlag == 1) {
+            console.log("sim-activate");
+            const fs = require('fs');
+            fs.readFile('simp.txt', async (error, data) => {
+                let simp = [];
+                data = data.toString().split("\r\n");
+                // console.log(data);
+                data.forEach(elem => {
+                    if (elem[0] != '#' && elem != '')
+                        simp.push(elem);
+                        // console.log(elem);
+                });
+                const pressure = [];
+                simp.forEach((elem) => {
+                    pressure.push("6" + '-' + elem.split(",")[3]);
+                });
+
+                let i = 0;
+                const id = setInterval(() => {
+                    // if (pressure.length > i ) console.log(pressure[i]);
+                    if (simFlag == 1) {
+                        if (pressure.length > i) {
+                            console.log(pressure[i]);
+                            // port.write(pressure[i]);
+                        }
+                    } else {
+                        // console.log('exiting');
+                        clearInterval(id);
+                    }
+                    i++;
+                }, 1000);
+            })
+
+            const frame_obj = {
+                type: C.FRAME_TYPE.AT_COMMAND,
+                command: "5",
+                commandParameter: [],
+            }
+
+            const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
+            port.write(test);
+        }
+        else {
+            console.log('SIM DISABLED!');
+        }
+    }
+    );
+
+
+>>>>>>> 320c98edbc0dc7ee706e3ef4148927e7173fe538
     socket.on('simp', (data) => {
         console.log(`simp: ${data}`);
 
@@ -233,7 +294,7 @@ io.on('connection', (socket) => {
         console.log(test.length);
         port.write(test);
     });
-    
+
     socket.on('cal', () => {
         console.log("cal");
 
@@ -246,7 +307,7 @@ io.on('connection', (socket) => {
         const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
         port.write(test);
     })
-    
+
     socket.on('pcr', () => {
         console.log("packet count reset");
 
@@ -284,7 +345,7 @@ io.on('connection', (socket) => {
         const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
         port.write(test);
     });
-    
+
     socket.on('ps', () => {
         console.log("parachute servo");
 
@@ -297,7 +358,7 @@ io.on('connection', (socket) => {
         const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
         port.write(test);
     });
-    
+
     socket.on('fs', () => {
         console.log("flag servo");
 
@@ -344,10 +405,10 @@ io.on('connection', (socket) => {
 //     //         socketIsAlive = false;
 //     //     })
 
-//     // s.on('cmd', (cmd) => {
-//     //     const arrCmd = cmd.split(',');
-//     //     cmd_echo = arrCmd[2] + "_" + arrCmd[3];
-//     //     port.write(cmd_echo);
+//     // s.on('command', (command) => {
+//     //     const arrcommand = command.split(',');
+//     //     command_echo = arrcommand[2] + "_" + arrcommand[3];
+//     //     port.write(command_echo);
 //     // });
 
 //     s.on('start', async ({ com, baud }) => {
@@ -393,8 +454,8 @@ io.on('connection', (socket) => {
 //                 console.log(`Port baudrate changed to ${port.settings.baudRate}`);
 //             })
 
-//             s.on('cmd', (cmd) => {
-//                 if (cmd === '9') {
+//             s.on('command', (command) => {
+//                 if (command === '9') {
 //                     fs.readFile('./test_pressure.txt', async (error, data) => {
 //                         let simp = [];
 //                         data = data.toString().split("\n");
@@ -404,7 +465,7 @@ io.on('connection', (socket) => {
 //                         });
 //                         const pressure = [];
 //                         simp.forEach((elem) => {
-//                             pressure.push(cmd + '-' + elem.split(",")[3]);
+//                             pressure.push(command + '-' + elem.split(",")[3]);
 //                         });
 
 //                         let i = 0;
@@ -421,12 +482,12 @@ io.on('connection', (socket) => {
 //                         }, 1000);
 //                     })
 //                 } else {
-//                     // port.write(cmd);
-//                     // frame_obj.command = cmd
+//                     // port.write(command);
+//                     // frame_obj.command = command
 //                     // Something we might want to send to an XBee...
 //                     const frame_obj = {
 //                         type: C.FRAME_TYPE.AT_COMMAND,
-//                         command: cmd,
+//                         command: command,
 //                         commandParameter: [],
 //                     }
 //                     const cleanFrame = xbeeAPI.buildFrame(frame_obj).slice(5, -1)
@@ -446,7 +507,7 @@ io.on('connection', (socket) => {
 //     })
 
 //     s.on('save-state', async (data) => {
-//         // console.log(data)  
+//         // console.log(data)
 //         const newData = data.replaceAll("./js", "../js").replaceAll('./css', "../css").replaceAll('./lib', "../lib").replaceAll("./images", "../images")
 //         // console.log(newData)
 //         await saveState(`<!DOCTYPE html><html lang="en">${newData}</html>`)
@@ -460,46 +521,46 @@ io.on('connection', (socket) => {
 //     });
 // }
 
-// const cmdMap = (cmd, data) => {
-//     switch (cmd) {
+// const commandMap = (command, data) => {
+//     switch (command) {
 //         case '0':
-//             cmd_echo = 'CAL'
+//             command_echo = 'CAL'
 //             break;
 //         case '1':
-//             cmd_echo = 'CXON'
+//             command_echo = 'CXON'
 //             break;
 //         case '2':
-//             cmd_echo = 'CXOFF'
+//             command_echo = 'CXOFF'
 //             break;
 //         case '3':
-//             cmd_echo = `ST${data}`
+//             command_echo = `ST${data}`
 //             break;
 //         case '4':
-//             cmd_echo = 'SIMP-ENABLE'
+//             command_echo = 'SIMP-ENABLE'
 //             break;
 //         case '5':
-//             cmd_echo = 'SIMP-ACTIVATE'
+//             command_echo = 'SIMP-ACTIVATE'
 //             break;
 //         case '6':
-//             cmd_echo = `SIMP${data}`
+//             command_echo = `SIMP${data}`
 //             break;
 //         case '7':
-//             cmd_echo = 'SIM DISABLE'
+//             command_echo = 'SIM DISABLE'
 //             break;
 //         case '8':
-//             cmd_echo = 'Packet Count Reset'
+//             command_echo = 'Packet Count Reset'
 //             break;
 //         case 'a':
-//             cmd_echo = 'Heat Shield Start'
+//             command_echo = 'Heat Shield Start'
 //             break;
 //         case 'A':
-//             cmd_echo = 'Heat Shield Stop'
+//             command_echo = 'Heat Shield Stop'
 //             break;
 //         case 'b':
-//             cmd_echo = 'Parachute Servo'
+//             command_echo = 'Parachute Servo'
 //             break;
 //         case 'c':
-//             cmd_echo = 'Flag Servo'
+//             command_echo = 'Flag Servo'
 //             break;
 
 //         default:
