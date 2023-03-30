@@ -1,6 +1,6 @@
 
 /* LIBRARIES */
-const { SerialPort }  = require('serialport');
+const { SerialPort } = require('serialport');
 const xbee_api = require('xbee-api');
 const xbee = require('xbee');
 // const fs = require('fs'); 
@@ -55,17 +55,18 @@ server.listen(HTTP_PORT, () => {
 });
 
 /* Socket Setup */
-const io = require('socket.io')(server, { 
-    cors: { 
+const io = require('socket.io')(server, {
+    cors: {
         origin: "*",
         methods: ["GET", "POST"],
         credentials: true,
-    } 
+    }
 });
 
+let simFlag = 0;
 io.on('connection', (socket) => {
     console.log(`Connected: ${socket.id}`);
-    
+
     socket.on('disconnect', () => {
         console.log(`Disconnected: ${socket.id}`)
     });
@@ -128,7 +129,7 @@ io.on('connection', (socket) => {
 
     socket.on('sim-enable', () => {
         console.log('sim-enable');
-
+        simFlag = 1;
         const frame_obj = {
             type: C.FRAME_TYPE.AT_COMMAND,
             command: "4",
@@ -141,7 +142,7 @@ io.on('connection', (socket) => {
 
     socket.on('sim-disable', () => {
         console.log("sim-disable");
-
+        simFlag = 0;
         const frame_obj = {
             type: C.FRAME_TYPE.AT_COMMAND,
             command: "7",
@@ -153,46 +154,55 @@ io.on('connection', (socket) => {
     })
 
     socket.on('sim-activate', () => {
-        console.log("sim-activate");
-        const fs = require('fs');
-                fs.readFile('simp.txt', async (error, data) => {
-                    let simp = [];
-                    data = data.toString().split("\n");
-                    data.forEach(elem => {
-                        if (elem[0] != '#' && elem != "")
-                            simp.push(elem);
-                    });
-                    const pressure = [];
-                    simp.forEach((elem) => {
-                        pressure.push("6" + '-' + elem.split(",")[3]);
-                    });
+        if (simFlag == 1) {
+            console.log("sim-activate");
+            const fs = require('fs');
+            fs.readFile('simp.txt', async (error, data) => {
+                let simp = [];
+                data = data.toString().split("\r\n");
+                // console.log(data);
+                data.forEach(elem => {
+                    if (elem[0] != '#' && elem != '')
+                        simp.push(elem);
+                        // console.log(elem);
+                });
+                const pressure = [];
+                simp.forEach((elem) => {
+                    pressure.push("6" + '-' + elem.split(",")[3]);
+                });
 
-                    let i = 0;
-                    const id = setInterval(() => {
-                        // if (pressure.length > i ) console.log(pressure[i]);
+                let i = 0;
+                const id = setInterval(() => {
+                    // if (pressure.length > i ) console.log(pressure[i]);
+                    if (simFlag == 1) {
                         if (pressure.length > i) {
                             console.log(pressure[i]);
                             // port.write(pressure[i]);
-                        } else {
-                            console.log('exiting');
-                            clearInterval(id);
                         }
-                        i++;
-                    }, 1000);
-                })
-            
-                const frame_obj = {
-                    type: C.FRAME_TYPE.AT_COMMAND,
-                    command: "5",
-                    commandParameter: [],
-                }
-        
-                const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
-                port.write(test);
-            }
-        );
+                    } else {
+                        // console.log('exiting');
+                        clearInterval(id);
+                    }
+                    i++;
+                }, 1000);
+            })
 
-    
+            const frame_obj = {
+                type: C.FRAME_TYPE.AT_COMMAND,
+                command: "5",
+                commandParameter: [],
+            }
+
+            const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
+            port.write(test);
+        }
+        else {
+            console.log('SIM DISABLED!');
+        }
+    }
+    );
+
+
     socket.on('simp', (data) => {
         console.log(`simp: ${data}`);
 
@@ -205,7 +215,7 @@ io.on('connection', (socket) => {
         const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
         port.write(test);
     });
-    
+
     socket.on('cal', () => {
         console.log("cal");
 
@@ -218,7 +228,7 @@ io.on('connection', (socket) => {
         const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
         port.write(test);
     })
-    
+
     socket.on('pcr', () => {
         console.log("packet count reset");
 
@@ -256,7 +266,7 @@ io.on('connection', (socket) => {
         const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
         port.write(test);
     });
-    
+
     socket.on('ps', () => {
         console.log("parachute servo");
 
@@ -269,7 +279,7 @@ io.on('connection', (socket) => {
         const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
         port.write(test);
     });
-    
+
     socket.on('fs', () => {
         console.log("flag servo");
 
@@ -418,7 +428,7 @@ io.on('connection', (socket) => {
 //     })
 
 //     s.on('save-state', async (data) => {
-//         // console.log(data)  
+//         // console.log(data)
 //         const newData = data.replaceAll("./js", "../js").replaceAll('./css', "../css").replaceAll('./lib', "../lib").replaceAll("./images", "../images")
 //         // console.log(newData)
 //         await saveState(`<!DOCTYPE html><html lang="en">${newData}</html>`)
