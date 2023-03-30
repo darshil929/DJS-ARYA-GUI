@@ -72,9 +72,9 @@ socket.on('data', (myData) => {
 
     createContainerTable(myData);
     transition_ss(myData.state);
-    displayStates(myData.state);
-    randomState(myData.state);
-    displayStates(myData.state);
+    // displayStates(myData.state);
+    // randomState(myData.state);
+    // displayStates(myData.state);
     create3dChart(myData);
 
     // MAP

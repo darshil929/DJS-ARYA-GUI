@@ -1,5 +1,6 @@
 
 /* LIBRARIES */
+const fs = require('fs');
 const { SerialPort }  = require('serialport');
 const xbee_api = require('xbee-api');
 const xbee = require('xbee');
@@ -16,7 +17,7 @@ const parse = require('./utils/parse.js');
 const C = xbee_api.constants
 
 const BAUDRATE = Number(process.env.BAUDRATE) || 9600
-const SERIAL_PORT = process.env.SERIAL_PORT || "COM6"
+const SERIAL_PORT = process.env.SERIAL_PORT || "COM5"
 
 // const serialport = new SerialPort({ path: SERIAL_PORT, baudRate: 9600 })
 // serialport.write('ROBOT POWER ON')
@@ -54,6 +55,32 @@ server.listen(HTTP_PORT, () => {
     console.log(`Server is UP on port ${HTTP_PORT}`);
 });
 
+// fs.readFile('./simp/sample_pressure.txt', async (error, data) => {
+//     let simp = [];
+//     data = String(data).split("\n");
+//     data.forEach(elem => {
+//         if (elem[0] != '#' && elem != "")
+//             simp.push(elem);
+//     });
+//     const pressure = [];
+//     simp.forEach((elem) => {
+//         pressure.push("6" + '-' + elem.split(",")[3]);
+//     });
+
+//     let i = 0;
+//     const id = setInterval(() => {
+//         // if (pressure.length > i ) console.log(pressure[i]);
+//         if (pressure.length > i) {
+//             console.log(pressure[i]);
+//             port.write(pressure[i]);
+//         } else {
+//             console.log('exiting');
+//             clearInterval(id);
+//         }
+//         i++;
+//     }, 1000);
+// })
+
 /* Socket Setup */
 const io = require('socket.io')(server, { 
     cors: { 
@@ -65,25 +92,29 @@ const io = require('socket.io')(server, {
 
 io.on('connection', (socket) => {
     console.log(`Connected: ${socket.id}`);
+    let socketIsAlive = true;
     
     socket.on('disconnect', () => {
-        console.log(`Disconnected: ${socket.id}`)
+        console.log(`Disconnected: ${socket.id}`);
+        socketIsAlive = false;
     });
 
     let packet = "";
 
     port.on("data", (data) => {
-        if (data.toString() === '\n') {
-            console.log(packet);
+        if (socketIsAlive) {
+            if (data.toString() === '\n') {
+                console.log(packet);
 
-            makeCSV(packet + "\n");
-            const dataArr = packet.split(",");
-            const dataObj = new parse(dataArr);
-            socket.emit('packet', dataObj);
-            packet = "";
-        }
-        else {
-            packet += data.toString();
+                makeCSV(packet + "\n");
+                const dataArr = packet.split(",");
+                const dataObj = parse(dataArr);
+                socket.emit('packet', dataObj);
+                packet = "";
+            }
+            else {
+                packet += data.toString();
+            }
         }
     });
 
@@ -154,15 +185,39 @@ io.on('connection', (socket) => {
 
     socket.on('sim-activate', () => {
         console.log("sim-activate");
+        fs.readFile('./simp/sample_pressure.txt', (err, data) => {
+            let simpArray = [];
+            eachLine = String(data).split("\n");
+            eachLine.forEach(item => {
+                if (item[0] != '#' && item != "")
+                    simpArray.push(item);
+            });
+            let pressure = [];
+            simpArray.forEach((item) => {
+                pressure.push("6" + '-' + item.split(",")[3]);
+            });
+        
+            let i = 0;
+            const id = setInterval(() => {
+                if (pressure.length > i) {
+                    console.log(pressure[i]);
+                    port.write(pressure[i]);
+                } else {
+                    console.log('exiting');
+                    clearInterval(id);
+                }
+                i++;
+            }, 1000);
+        })
+        // const frame_obj = {
+        //     type: C.FRAME_TYPE.AT_COMMAND,
+        //     command: "5",
+        //     commandParameter: [],
+        // }
 
-        const frame_obj = {
-            type: C.FRAME_TYPE.AT_COMMAND,
-            command: "5",
-            commandParameter: [],
-        }
-
-        const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
-        port.write(test);
+        // const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
+        
+        // port.write(test);
     })
     
     socket.on('simp', (data) => {
@@ -175,6 +230,7 @@ io.on('connection', (socket) => {
         }
 
         const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
+        console.log(test.length);
         port.write(test);
     });
     

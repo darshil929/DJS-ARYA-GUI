@@ -34,7 +34,7 @@ const { log } = require('console');
 const C = xbee_api.constants
 
 const BAUDRATE = Number(process.env.BAUDRATE) || 9600
-const SERIAL_PORT = process.env.SERIAL_PORT || "COM6"
+const SERIAL_PORT = process.env.SERIAL_PORT || "COM3"
 
 // const serialport = new SerialPort({ path: SERIAL_PORT, baudRate: 9600 })
 // serialport.write('ROBOT POWER ON')
