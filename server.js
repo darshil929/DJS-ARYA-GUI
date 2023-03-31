@@ -306,6 +306,19 @@ io.on('connection', (socket) => {
         const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
         port.write(test);
     });
+
+    socket.on('custom', (data) => {
+        console.log("custom-" + data);
+
+        const frame_obj = {
+            type: C.FRAME_TYPE.AT_COMMAND,
+            command: data,
+            commandParameter: [],
+        }
+
+        const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
+        port.write(test);
+    });
 })
 
 // // Something we might want to send to an XBee...

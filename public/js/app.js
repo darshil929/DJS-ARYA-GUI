@@ -130,3 +130,8 @@ socket.on('data', (myData) => {
         socket.emit('stop');
         // socket.disconnect();
     })
+
+    document.querySelector('#input-cmd').addEventListener('submit', (e) => {
+        e.preventDefault();
+        commandButtonCB();
+    })

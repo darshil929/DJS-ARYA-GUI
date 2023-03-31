@@ -48,13 +48,19 @@ const commandButtonCB = (e) => {
     e.preventDefault();
     const ch = document.querySelector('#command').value.trim();
     const cmd = ch.split(',');
-    if(cmd[2] === 'SIMP' || cmd[2] === 'SET Time') {
-        const str = cmd[0] + "," + cmd[1] + "," + cmd[2];
-        obj[str](cmd[3]);
-        return;
+    if (Object.keys(obj).includes(cmd))
+    {
+        if(cmd[2] === 'SIMP' || cmd[2] === 'SET Time') {
+            const str = cmd[0] + "," + cmd[1] + "," + cmd[2];
+            obj[str](cmd[3]);
+            return;
+        }
+        obj[ch]();
     }
-    
-    obj[ch]();
+    else
+    {
+        socket.emit('custom', cmd)
+    }
 }
 
 commandButton.addEventListener('click', commandButtonCB)
