@@ -2,7 +2,7 @@
 const { SerialPort } = require('serialport');
 const xbee_api = require('xbee-api');
 const xbee = require('xbee');
-// const fs = require('fs'); 
+const fs = require('fs'); 
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
@@ -15,7 +15,7 @@ const parse = require('./utils/parse.js');
 const C = xbee_api.constants
 
 const BAUDRATE = Number(process.env.BAUDRATE) || 9600
-const SERIAL_PORT = process.env.SERIAL_PORT || "COM6"
+const SERIAL_PORT = process.env.SERIAL_PORT || "COM3"
 
 // const serialport = new SerialPort({ path: SERIAL_PORT, baudRate: 9600 })
 // serialport.write('ROBOT POWER ON')
@@ -65,25 +65,40 @@ const io = require('socket.io')(server, {
 let simFlag = 0;
 io.on('connection', (socket) => {
     console.log(`Connected: ${socket.id}`);
+    let socketIsAlive = true;
 
     socket.on('disconnect', () => {
-        console.log(`Disconnected: ${socket.id}`)
+        console.log(`Disconnected: ${socket.id}`);
+        socketIsAlive = false;
     });
 
     let packet = "";
 
     port.on("data", (data) => {
-        if (data.toString() === '\n') {
-            console.log(packet);
+        // if (data.toString() === '\n') {
+        //     console.log(packet);
 
-            makeCSV(packet + "\n");
-            const dataArr = packet.split(",");
-            const dataObj = new parse(dataArr);
-            socket.emit('packet', dataObj);
-            packet = "";
-        }
-        else {
-            packet += data.toString();
+        //     makeCSV(packet + "\n");
+        //     const dataArr = packet.split(",");
+        //     const dataObj = new parse(dataArr);
+        //     socket.emit('packet', dataObj);
+        //     packet = "";
+        // }
+        // else {
+        //     packet += data.toString();
+        if (socketIsAlive) {
+            if (data.toString() === '\n') {
+                console.log(packet);
+
+                makeCSV(packet + "\n");
+                const dataArr = packet.split(",");
+                const dataObj = parse(dataArr);
+                socket.emit('data', dataObj);
+                packet = "";
+            }
+            else {
+                packet += data.toString();
+            }
         }
     });
 
@@ -118,7 +133,7 @@ io.on('connection', (socket) => {
 
         const frame_obj = {
             type: C.FRAME_TYPE.AT_COMMAND,
-            command: `3-${data}`,
+            command: `3-${data}-`,
             commandParameter: [],
         }
 
@@ -155,7 +170,7 @@ io.on('connection', (socket) => {
     socket.on('sim-activate', () => {
         if (simFlag == 1) {
             console.log("sim-activate");
-            const fs = require('fs');
+            // const fs = require('fs');
             fs.readFile('simp.txt', async (error, data) => {
                 let simp = [];
                 data = data.toString().split("\r\n");
@@ -167,7 +182,7 @@ io.on('connection', (socket) => {
                 });
                 const pressure = [];
                 simp.forEach((elem) => {
-                    pressure.push("6" + '-' + elem.split(",")[3]);
+                    pressure.push("6" + '-' + elem.split(",")[3] + '-');
                 });
 
                 let i = 0;
@@ -207,7 +222,7 @@ io.on('connection', (socket) => {
 
         const frame_obj = {
             type: C.FRAME_TYPE.AT_COMMAND,
-            command: `6-${data}`,
+            command: `6-${data}-`,
             commandParameter: [],
         }
 
@@ -220,7 +235,7 @@ io.on('connection', (socket) => {
 
         const frame_obj = {
             type: C.FRAME_TYPE.AT_COMMAND,
-            command: "0",
+            command: "9",
             commandParameter: [],
         }
 
