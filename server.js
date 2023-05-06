@@ -308,6 +308,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('custom', (data) => {
+        data = data.join("");
         console.log("custom-" + data);
 
         const frame_obj = {
