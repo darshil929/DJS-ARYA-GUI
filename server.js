@@ -128,12 +128,75 @@ io.on('connection', (socket) => {
         port.write(test);
     });
 
+    socket.on('hs-start', () => {
+        console.log("heat shield start");
+
+        const frame_obj = {
+            type: C.FRAME_TYPE.AT_COMMAND,
+            command: "3",
+            commandParameter: [],
+        }
+
+        const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
+        port.write(test);
+    });
+
+    socket.on('hs-stop', () => {
+        console.log("heat shield stop");
+        const frame_obj = {
+            type: C.FRAME_TYPE.AT_COMMAND,
+            command: "4",
+            commandParameter: [],
+        }
+
+        const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
+        port.write(test);
+    });
+
+    socket.on('hs-close', () => {
+        console.log("heat shield close");
+        const frame_obj = {
+            type: C.FRAME_TYPE.AT_COMMAND,
+            command: "5",
+            commandParameter: [],
+        }
+
+        const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
+        port.write(test);
+    });
+
+    socket.on('ps', () => {
+        console.log("parachute in stowed");
+
+        const frame_obj = {
+            type: C.FRAME_TYPE.AT_COMMAND,
+            command: "6",
+            commandParameter: [],
+        }
+
+        const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
+        port.write(test);
+    });
+
+    socket.on('po', () => {
+        console.log("parachute opens");
+
+        const frame_obj = {
+            type: C.FRAME_TYPE.AT_COMMAND,
+            command: "7",
+            commandParameter: [],
+        }
+
+        const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
+        port.write(test);
+    });
+
     socket.on('set-time', (data) => {
         console.log(`set-time: ${data}`);
 
         const frame_obj = {
             type: C.FRAME_TYPE.AT_COMMAND,
-            command: `3-${data}-`,
+            command: `b-${data}-`,
             commandParameter: [],
         }
 
@@ -146,7 +209,7 @@ io.on('connection', (socket) => {
         simFlag = 1;
         const frame_obj = {
             type: C.FRAME_TYPE.AT_COMMAND,
-            command: "4",
+            command: "e",
             commandParameter: [],
         }
 
@@ -159,7 +222,7 @@ io.on('connection', (socket) => {
         simFlag = 0;
         const frame_obj = {
             type: C.FRAME_TYPE.AT_COMMAND,
-            command: "7",
+            command: "d",
             commandParameter: [],
         }
 
@@ -203,7 +266,7 @@ io.on('connection', (socket) => {
 
             const frame_obj = {
                 type: C.FRAME_TYPE.AT_COMMAND,
-                command: "5",
+                command: "6",
                 commandParameter: [],
             }
 
@@ -235,7 +298,7 @@ io.on('connection', (socket) => {
 
         const frame_obj = {
             type: C.FRAME_TYPE.AT_COMMAND,
-            command: "9",
+            command: "a",
             commandParameter: [],
         }
 
@@ -248,45 +311,7 @@ io.on('connection', (socket) => {
 
         const frame_obj = {
             type: C.FRAME_TYPE.AT_COMMAND,
-            command: "8",
-            commandParameter: [],
-        }
-
-        const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
-        port.write(test);
-    });
-
-    socket.on('hs-start', () => {
-        console.log("heat shield start");
-
-        const frame_obj = {
-            type: C.FRAME_TYPE.AT_COMMAND,
-            command: "a",
-            commandParameter: [],
-        }
-
-        const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
-        port.write(test);
-    });
-
-    socket.on('hs-stop', () => {
-        console.log("heat shield stop");
-        const frame_obj = {
-            type: C.FRAME_TYPE.AT_COMMAND,
-            command: "A",
-            commandParameter: [],
-        }
-
-        const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
-        port.write(test);
-    });
-
-    socket.on('ps', () => {
-        console.log("parachute servo");
-
-        const frame_obj = {
-            type: C.FRAME_TYPE.AT_COMMAND,
-            command: "b",
+            command: "p",
             commandParameter: [],
         }
 
@@ -295,11 +320,24 @@ io.on('connection', (socket) => {
     });
 
     socket.on('fs', () => {
-        console.log("flag servo");
+        console.log("flag in stowed");
 
         const frame_obj = {
             type: C.FRAME_TYPE.AT_COMMAND,
-            command: "c",
+            command: "8",
+            commandParameter: [],
+        }
+
+        const test = xbeeAPI.buildFrame(frame_obj).slice(5, -1);
+        port.write(test);
+    });
+
+    socket.on('fu', () => {
+        console.log("flag upright");
+
+        const frame_obj = {
+            type: C.FRAME_TYPE.AT_COMMAND,
+            command: "9",
             commandParameter: [],
         }
 
@@ -309,7 +347,8 @@ io.on('connection', (socket) => {
 
     socket.on('custom', (data) => {
         data = data.join("");
-        console.log("custom-" + data);
+        // console.log("custom-" + data);
+        console.log(data);
 
         const frame_obj = {
             type: C.FRAME_TYPE.AT_COMMAND,

@@ -5,6 +5,21 @@ const obj = Object.freeze({
     "CMD,1033,CX,OFF": () => {
         socket.emit('stop');
     },
+    "CMD,1033,Heat Shield Start":  () => {
+        socket.emit('hs-start')
+    },
+    "CMD,1033,Heat Shield Stop":  () => {
+        socket.emit('hs-stop')
+    },
+    "CMD,1033,Heat Shield close":  () => {
+        socket.emit('hs-close')
+    },
+    "CMD,1033,Parachute in Stowed":  () => {
+        socket.emit('ps')
+    },
+    "CMD,1033,Parachute Opens":  () => {
+        socket.emit('po')
+    },
     "CMD,1033,SET Time": (data) => {
         socket.emit('set-time', data);
     },
@@ -26,18 +41,10 @@ const obj = Object.freeze({
     "CMD,1033,Packet Count Reset": () => {
         socket.emit('pcr')
     },
-    "CMD,1033,Heat Shield Start":  () => {
-        socket.emit('hs-start')
-    },
-    "CMD,1033,Heat Shield Stop":  () => {
-        socket.emit('hs-stop')
-    },
-    "CMD,1033,Parachute Servo":  () => {
-        socket.emit('ps')
-    },
     "CMD,1033,Flag Servo":  () => {
         socket.emit('fs')
     },
+    
 })
 
 let sim_enable;
