@@ -3,7 +3,7 @@ const map = L.map('myMap').setView([19.2105, 72.8242], 14);
 
 const attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 
-const tileUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+const tileUrl = './lib/OSMPublicTransport/{z}/{x}/{y}.png';
 
 const tiles = L.tileLayer(tileUrl);
 tiles.addTo(map);
