@@ -1,4 +1,4 @@
 node_modules
 judges.csv
-/csv_files/Flight*.csv
+csv_files
 .env

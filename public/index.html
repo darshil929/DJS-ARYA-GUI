@@ -2,28 +2,43 @@
 <html lang="en">
 
 <head>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
-    <script type="text/javascript" src="https://unpkg.com/vis-graph3d@latest/dist/vis-graph3d.min.js"></script>
-    <script src="./lib/chart.js"></script>
-    <!-- <script src="./lib/vis-graph3d.min.js"></script> -->
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="icon" href="\images\favicon.ico" />
-    <link rel="stylesheet" href="./css/software_states.css">
-    <!-- <link rel="stylesheet" href="tabs_style.css"> -->
-    <script src="https://cdn.socket.io/4.5.3/socket.io.min.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-    <title>DJS ARYA GUI</title>
+    <link rel="icon" href="\images\favicon.ico" />
 
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/software_states.css">
+    
+    <link rel="stylesheet" href="./lib/all.min.css">
+    <link rel="stylesheet" href="./lib/leaflet.css" />
+
+    <!-- Leaflet -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" /> -->
+    <!-- <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script> -->
+
+    <!-- Chart.js -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+
+    <!-- Vis.js -->
+    <!-- <script type="text/javascript" src="https://unpkg.com/vis-graph3d@latest/dist/vis-graph3d.min.js"></script> -->
+    
+    <!-- Font Awesome -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+
+    <!-- Socket.io -->
+    <!-- <script src="https://cdn.socket.io/4.5.3/socket.io.min.js"></script> -->
+    
+    
+    <!-- js library -->
+    <script src="./lib/socket.io.min.js"></script>
+    <script src="./lib/chart.js"></script>
+    <script src="./lib/vis-graph3d.min.js"></script>
+    <script src="./lib/p5.js"></script>
+    <script src="./lib/leaflet.js"></script>
+
+    <title>DJS ARYA GUI</title>
 </head>
 
 <body onload="drawVisualization();">
@@ -46,26 +61,6 @@
     </div>
 
     <div class="flexbox-data">
-        <!-- <div class="content">
-            <input type="radio" name="slider" checked id="home">
-            <input type="radio" name="slider" id="blog">
-            <input type="radio" name="slider" id="help">
-            <input type="radio" name="slider" id="code">
-            <div class="list">
-                <label for="home" class="home">
-                <i class="fa fa-line-chart"></i>
-                <span class="title">GRAPHS</span>
-            </label>
-            <label for="blog" class="blog">
-                <span class="icon"><i class="fa fa-file-excel-o"></i></span>
-                <span class="title">CSV</span>
-            </label>
-            <label for="help" class="help">
-                <span class="icon"><i class="fa fa-codepen"></i></span>
-                <span class="title">CO-ORDINATES</span>
-            </label>
-        </div> -->
-
         <ul class="tabs">
             <li data-tab-target="#graph" class="active tab">
                 <h2>GRAPHS</h2>
@@ -163,15 +158,6 @@
 
 
     </div>
-    <!-- <div class="flexbox-c">
-        <div class="c1">
-            <form class="example">
-                <input type="text" placeholder="Enter the Command:" name="command">
-                <button type="submit"><i class="fa fa-angle-right"></i></button>
-            </form>
-        </div>
-        <div class="c2">CMD_ECHO: CMD,1033,CX_ON</div>
-    </div> -->
 
     <div class="tab-content">
         <div id="CSV" data-tab-content>
@@ -219,8 +205,7 @@
                         <div class="display-graph"><canvas id="TILT"></canvas></div>
                     </div>
                 </div>
-                <div class="grid-1 part-3" style="gap: 30px !important">
-                    
+                <div class="grid-1 part-3" style="gap: 30px !important"> 
                     <div class="part-3">
                     <!-- <div class="states-heading">
                             <p>SOFTWARE STATES</p>
@@ -363,13 +348,12 @@
                             </div>
                         </div>
                     </main>
+                    </div>
                 </div>
             </div>
-
-
         </div>
         <div id="Coordinates" data-tab-content>
-            <!-- <div class="display-coordinates">
+            <div class="display-coordinates">
                 <div id="mygraph7"></div>
                 <div id="myMap"></div>
                 <div class="part-3">
@@ -394,7 +378,7 @@
                     <h1><i class="fa-solid fa-arrow-down-long ss_arrow"></i></h1>
                     <div class="card-s transition">END</div>
                 </div>
-            </div> -->
+            </div>
         </div>
 
 
@@ -407,7 +391,7 @@
     <script src="./js/app.js"></script>
     <!-- <script src="./js/index.js"></script> -->
     <script src="./js/commands.js"></script>
-    <!-- <script src="./js/map.js"></script> -->
+    <script src="./js/map.js"></script>
     <script src="./js/table.js"></script>
     <script src="./js/chart.js"></script>
     <!-- <script src="./js/3dgraph.js"></script> -->
