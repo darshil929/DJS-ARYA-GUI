@@ -52,7 +52,7 @@ const commandMap = (cmd, data) => {
             return "t";
 
         case 'simp':
-            return `t-${data}`;
+            return `t-${data}-`;
     
         default:
             console.log('Command cannot be mapped')

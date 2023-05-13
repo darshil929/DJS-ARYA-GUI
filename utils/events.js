@@ -3,6 +3,26 @@ import commandMap from './commandMap.js';
 
 let simFlag = 0;
 const events = (port, socket) => {
+    const pressure = [];
+    fs.readFile('simp.txt', async (error, data) => {
+        if(error) {
+            return console.log(error.message);
+        }
+
+        let simp = [];
+        data = data.toString().split("\r\n");
+        // console.log(data);
+        data.forEach(elem => {
+            if (elem[0] != '#' && elem != '')
+                simp.push(elem);
+        });
+
+        // const pressure = [];
+        simp.forEach((elem) => {
+            pressure.push(elem.split(",")[3]);
+        });
+    });
+
     socket.on('stop', () => {
         console.log("stop");
 
@@ -86,36 +106,21 @@ const events = (port, socket) => {
     socket.on('sim-activate', () => {
         if (simFlag == 1) {
             console.log("sim-activate");
-
             port.write(commandMap("sim-activate"));
 
-            fs.readFile('simp.txt', async (error, data) => {
-                let simp = [];
-                data = data.toString().split("\r\n");
-                // console.log(data);
-                data.forEach(elem => {
-                    if (elem[0] != '#' && elem != '')
-                        simp.push(elem);
-                });
+            let i = 0;
+            const id = setInterval(() => {
+                if (simFlag == 1) {
+                    if (pressure.length > i) {
+                        console.log(pressure[i]);
 
-                const pressure = [];
-                simp.forEach((elem) => {
-                    pressure.push("6" + '-' + elem.split(",")[3] + '-');
-                });
-
-                let i = 0;
-                const id = setInterval(() => {
-                if (pressure.length > i ) console.log(pressure[i]);
-                    if (simFlag == 1) {
-                        if (pressure.length > i) {
-                            console.log(pressure[i]);
-                        }
-                    } else {
-                        clearInterval(id);
+                        port.write(commandMap("simp", pressure[i]));
                     }
-                    i++;
-                }, 1000);
-            })
+                } else {
+                    clearInterval(id);
+                }
+                i++;
+            }, 1000);
         }
         else {
             console.log('SIM DISABLED!');
@@ -140,7 +145,6 @@ const events = (port, socket) => {
 
         port.write(commandMap("ssr"));
     });
-
 
     socket.on('custom', (data) => {
         data = data.join("");
