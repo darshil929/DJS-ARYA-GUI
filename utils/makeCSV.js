@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 const date = new Date();
 const folderName = "csv_files"
@@ -26,4 +26,4 @@ const makeCSV = (data) => {
     });
 }
 
-module.exports = makeCSV;
+export default makeCSV;

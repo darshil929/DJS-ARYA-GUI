@@ -41,7 +41,8 @@
     <title>DJS ARYA GUI</title>
 </head>
 
-<body onload="drawVisualization();">
+<!-- <body onload="drawVisualization();"> -->
+<body>
     <div class=" flexbox-head">
         <img src="./images/logo.jpeg" alt="" id="logo">
         <div id="heading">
@@ -120,36 +121,38 @@
                 </label>
                 <!-- <input type="checkbox" id="switch" /><label for="switch">Toggle</label> -->
             </div>
-            <form class="example" id="input-cmd">
-                <input id="command" class="text" type="text" placeholder="Enter the Command:" name="command">
-                <button class="btn-send" id="command-button" type="submit"><i class="fa fa-angle-right"></i></button>
-            </form>
+            <div>
+                <form class="example" id="input-cmd">
+                    <input id="command" class="text" type="text" autocomplete="off" placeholder="Enter the Command:" name="command">
+                    <div class="btn-send" id="command-button"><i class="fa fa-angle-right"></i></div>
+                </form>
+            </div>
             <div class="card-drop">
                 <div class="flex-cards-text">COM:
-                    <select name="COM">
-                        <option value="COM1">1</option>
+                    <select name="COM" id="com">
+                        <!-- <option value="COM1">1</option>
                         <option value="COM2">2</option>
                         <option value="COM3">3</option>
-                        <option value="COM4" selected>4</option>
+                        <option value="COM4" selected>4</option> -->
                     </select>
                 </div>
             </div>
             <div class="card-drop">
                 <div class="flex-cards-text"> BAUDRATE:
-                    <select name="BAUDRATE">
-                        <option value="1">300</option>
-                        <option value="2">600</option>
-                        <option value="3">1200</option>
-                        <option value="4">2400</option>
-                        <option value="5">4800</option>
-                        <option value="6" selected>9600</option>
-                        <option value="7">14400</option>
-                        <option value="8">19200</option>
-                        <option value="9">28800</option>
-                        <option value="10">31250</option>
-                        <option value="11">38400</option>
-                        <option value="12">57600</option>
-                        <option value="13">115200</option>
+                    <select name="BAUDRATE" id="baudRate">
+                        <option>300</option>
+                        <option>600</option>
+                        <option>1200</option>
+                        <option>2400</option>
+                        <option>4800</option>
+                        <option selected>9600</option>
+                        <option>14400</option>
+                        <option>19200</option>
+                        <option>28800</option>
+                        <option>31250</option>
+                        <option>38400</option>
+                        <option>57600</option>
+                        <option>115200</option>
                     </select>
                 </div>
             </div>

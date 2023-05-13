@@ -26,4 +26,4 @@ const parse = (data) => {
     return obj;
 }
 
-module.exports = parse;
+export default parse;

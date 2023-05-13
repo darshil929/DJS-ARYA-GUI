@@ -1,6 +1,5 @@
 const socket = io('http://localhost:5000')
-socket.on('connection', () => {
-})
+socket.on('connection', () => {})
 var voltageData = [];
 var temperatureData = [];
 var altitudeData = [];
@@ -25,6 +24,8 @@ const GPSlong = document.querySelector('.gpsLong');
 const GPSsats = document.querySelector('.gpsSats');
 const CMDecho = document.querySelector('.CMDecho');
 const pressure = document.querySelector('.pressure');
+const inputCommand = document.querySelector('#input-cmd');
+const command = document.querySelector('#command');
 // let threeD;
 // const threeData= new vis.DataSet();
 // let visFlag = 0;
@@ -97,41 +98,81 @@ socket.on('data', (myData) => {
     }).addTo(map);
 })
 
-    // Tab Switch
-    const tabs = document.querySelectorAll('[data-tab-target]')
-    const tabContents = document.querySelectorAll('[data-tab-content]')
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            setTimeout(function () { map.invalidateSize() }, 1)
-            const target = document.querySelector(tab.dataset.tabTarget)
-            tabContents.forEach(tabContent => {
-                tabContent.classList.remove('active')
-            })
-            tabs.forEach(tab => {
-                tab.classList.remove('active')
-            })
-            tab.classList.add('active')
-            target.classList.add('active')
+// Tab Switch
+const tabs = document.querySelectorAll('[data-tab-target]')
+const tabContents = document.querySelectorAll('[data-tab-content]')
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        setTimeout(function () { map.invalidateSize() }, 1)
+        const target = document.querySelector(tab.dataset.tabTarget)
+        tabContents.forEach(tabContent => {
+            tabContent.classList.remove('active')
         })
+        tabs.forEach(tab => {
+            tab.classList.remove('active')
+        })
+        tab.classList.add('active')
+        target.classList.add('active')
     })
-    //BUTTON INTEGRATION
-    // let startFlag=0;
-    // let stopFlag=0;
-    document.querySelector('#btn1').addEventListener('click', async () => {
-        // socket.connect()
-        socket.emit('start');
-        // socket.connect()
-        //// await socket.emit('start');
-        //// writeOnSerial('1');  
-        //startFlag = 1;  
-    })
-    document.querySelector('#btn2').addEventListener('click', async () => {
-        // socket.disconnect();
-        socket.emit('stop');
-        // socket.disconnect();
-    })
+})
+//BUTTON INTEGRATION
+// let startFlag=0;
+// let stopFlag=0;
+document.querySelector('#btn1').addEventListener('click', async () => {
+    const com = document.querySelector('#com').value
+    const baud = document.querySelector('#baudRate').value
+    socket.emit('start', {com, baud});
+    //startFlag = 1;  
+});
 
-    document.querySelector('#input-cmd').addEventListener('submit', (e) => {
-        e.preventDefault();
-        commandButtonCB();
-    })
+document.querySelector('#btn2').addEventListener('click', async () => {
+    socket.emit('stop');
+    // socket.disconnect();
+});
+
+document.querySelector('#btn3').addEventListener('click', async () => {
+    socket.emit('cal');
+    // socket.disconnect();
+});
+
+
+
+command.addEventListener('keyup', (e) => {
+    e.preventDefault();
+    let cmd = command.value.toUpperCase();
+    command.value = cmd;
+})
+
+inputCommand.addEventListener('submit', (e) => {
+    e.preventDefault();
+    commandButtonCB();
+});
+
+document.querySelector('#baudRate').addEventListener('change',(e)=>{
+    socket.emit('baud', e.target.value)
+});
+
+const getCOMPorts = async () => {
+    try {
+        const res = await fetch('http://localhost:5000/com');
+        const coms = await res.json();
+        // console.log(coms)
+        if(coms.length !== 0) {
+            const options = coms.map( (com) => { 
+                const option = document.createElement("option");
+                option.innerHTML = `${com}`;
+                option.value = `${com}`;
+                return option;
+            })
+        
+            options.forEach( (option) => {
+                document.querySelector('#com').appendChild(option)
+            })
+        } else {
+            console.log('COM error at Server')
+        }
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+getCOMPorts();
