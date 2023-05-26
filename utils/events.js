@@ -148,6 +148,7 @@ const events = (port, socket) => {
 
     socket.on('custom', (data) => {
         data = data.join("");
+        data = data.toLowerCase();
         // console.log("custom-" + data);
         console.log(data);
 

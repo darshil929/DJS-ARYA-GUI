@@ -46,8 +46,8 @@ class Port {
                 if (data.toString() === '\n') {
                     console.log(packet);
     
-                    makeCSV(packet + "\n");
-                    // makeCSV(packet);
+                    // makeCSV(packet + "\n");
+                    makeCSV(packet);
                     const dataArr = packet.split(",");
                     const dataObj = parse(dataArr);
                     socket.emit('data', dataObj);
