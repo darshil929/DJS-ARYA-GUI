@@ -18,6 +18,8 @@ const readCSV = (socket, fileName) => {
             clearInterval(interval);
         }
 
+        if(data[cntr] === "") return;
+
         const row = data[cntr].split(',');
         const obj = parse(row);
 
