@@ -152,6 +152,7 @@ input:checked+.button {
     margin-left: 25px;
 }
 
+
 #heading {
     margin-top: 0px;
     display: flex;
@@ -241,14 +242,16 @@ input:checked+.button {
 .flexbox-data {
     display: flex;
     justify-content: space-between;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     align-items: center;
     margin: 16px 2px;
     margin-left: 15px;
     /* padding: 15px; */
     width: 100%;
     height: auto;
+    align-content: space-around;
 }
+
 
 .d1 {
     display: flex;
