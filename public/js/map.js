@@ -3,9 +3,9 @@ const map = L.map('myMap', {
   maxZoom: 16,
   minZoom: 12
 })
-.setView([19.1075, 72.8372], 14);        // College
-// .setView([19.2105, 72.8242], 14);            // Home
-// .setView([37.20048, -80.5644], 14);          // Launch site
+  // .setView([19.1075, 72.8372], 14);        // College
+  // .setView([19.2105, 72.8242], 14);            // Home
+  .setView([37.20048, -80.5644], 14);          // Launch site
 
 // const attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 
@@ -30,7 +30,7 @@ const myIcon = L.icon({
 });
 
 //Marker
-const marker = L.marker([19.1075, 72.8372], {icon: myIcon}).addTo(map);        // College
+// const marker = L.marker([19.1075, 72.8372], {icon: myIcon}).addTo(map);        // College
 // const marker = L.marker([37.236262, -80.4460145], {icon: myIcon}).addTo(map);      // Blacksburg
 // const marker = L.marker([19.2105, 72.8242], {icon: myIcon}).addTo(map);            // Home
-// const marker = L.marker([37.20048, -80.5644], {icon: myIcon}).addTo(map);          // Launch site
+const marker = L.marker([37.20048, -80.5644], { icon: myIcon }).addTo(map);          // Launch site

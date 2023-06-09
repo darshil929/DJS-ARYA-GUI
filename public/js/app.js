@@ -1,5 +1,5 @@
 const socket = io('http://localhost:5000')
-socket.on('connection', () => {})
+socket.on('connection', () => { })
 var voltageData = [];
 var temperatureData = [];
 var altitudeData = [];
@@ -16,6 +16,8 @@ const packet_count = document.querySelector('.packetCount');
 const mode = document.querySelector('.mode');
 const hs_deployed = document.querySelector('.hsDeployed');
 const pc_deployed = document.querySelector('.pcDeployed');
+const altitude = document.querySelector('.altitude');
+const temperature = document.querySelector('.temperature');
 const mast_raised = document.querySelector('.mastRaised');
 const GPStime = document.querySelector('.gpsTime');
 const GPSalt = document.querySelector('.gpsAlt');
@@ -63,13 +65,15 @@ socket.on('data', (myData) => {
     hs_deployed.innerHTML = `${myData.hsDeployed}`;
     pc_deployed.innerHTML = `${myData.pcDeployed}`;
     mast_raised.innerHTML = `${myData.mastRaised}`;
-    GPStime.innerHTML = `${myData.gpsTime}`;
-    GPSalt.innerHTML = `${myData.gpsAltitude}`;
+    // GPStime.innerHTML = `${myData.gpsTime}`;
+    // GPSalt.innerHTML = `${myData.gpsAltitude}`;
     GPSlat.innerHTML = `${myData.gpsLatitude}`;
     GPSlong.innerHTML = `${myData.gpsLongitude}`;
     GPSsats.innerHTML = `${myData.gpsSats}`;
     CMDecho.innerHTML = `${myData.cmdEcho}`;
     pressure.innerHTML = `${myData.pressure}`;
+    temperature.innerHTML = `${myData.temperature}`;
+    altitude.innerHTML = `${myData.altitude}`;
 
     createContainerTable(myData);
     transition_ss(myData.state);
@@ -121,7 +125,7 @@ tabs.forEach(tab => {
 document.querySelector('#btn1').addEventListener('click', async () => {
     const com = document.querySelector('#com').value
     const baud = document.querySelector('#baudRate').value
-    socket.emit('start', {com, baud});
+    socket.emit('start', { com, baud });
     //startFlag = 1;  
 });
 
@@ -148,7 +152,7 @@ inputCommand.addEventListener('submit', (e) => {
     commandButtonCB();
 });
 
-document.querySelector('#baudRate').addEventListener('change',(e)=>{
+document.querySelector('#baudRate').addEventListener('change', (e) => {
     socket.emit('baud', e.target.value)
 });
 
@@ -157,15 +161,15 @@ const getCOMPorts = async () => {
         const res = await fetch('http://localhost:5000/com');
         const coms = await res.json();
         // console.log(coms)
-        if(coms.length !== 0) {
-            const options = coms.map( (com) => { 
+        if (coms.length !== 0) {
+            const options = coms.map((com) => {
                 const option = document.createElement("option");
                 option.innerHTML = `${com}`;
                 option.value = `${com}`;
                 return option;
             })
-        
-            options.forEach( (option) => {
+
+            options.forEach((option) => {
                 document.querySelector('#com').appendChild(option)
             })
         } else {

@@ -13,10 +13,10 @@
     "xbee-api": "^0.6.0"
   },
   "scripts": {
-    "start": "concurrently \"cd ../Arya Tile Server && node server.js\" \"node server.js\"",
-    "dev": "concurrently \"cd ../Arya Tile Server && node server.js\" \"nodemon server.js\"",
+    "start": "concurrently \"cd ../ARYA-Tile-Server && node server.js\" \"node server.js\"",
+    "dev": "concurrently \"cd ../ARYA-Tile-Server && node server.js\" \"nodemon server.js\"",
     "gui": "nodemon server.js",
-    "tile-server": "cd ../Arya Tile Server && node server.js",
+    "tile-server": "cd ../ARYA-Tile-Server && node server.js",
     "csv": "node csv.js"
   },
   "name": "djs-arya-gui",
