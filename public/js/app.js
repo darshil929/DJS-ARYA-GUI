@@ -59,9 +59,9 @@ socket.on('data', (myData) => {
     dynamicChart5.update();
 
     Time.innerHTML = `${myData.missionTime}`;
-    State.innerHTML = `${myData.state}`;
+    // State.innerHTML = `${myData.state}`;
     packet_count.innerHTML = `${myData.packetCount}`;
-    mode.innerHTML = `${myData.mode}`;
+    mode.innerHTML = `${myData.airspeed}`;
     // hs_deployed.innerHTML = `${myData.hsDeployed}`;
     // pc_deployed.innerHTML = `${myData.pcDeployed}`;
     // mast_raised.innerHTML = `${myData.mastRaised}`;

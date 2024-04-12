@@ -17,32 +17,12 @@ function createContainerTable(myData) {
     document.querySelector('#csv').appendChild(tr);
 
     td = document.createElement('td');
-    td.textContent = myData.mode;
-    tr.appendChild(td);
-    document.querySelector('#csv').appendChild(tr);
-
-    td = document.createElement('td');
-    td.textContent = myData.state;
-    tr.appendChild(td);
-    document.querySelector('#csv').appendChild(tr);
-
-    td = document.createElement('td');
     td.textContent = myData.altitude;
     tr.appendChild(td);
     document.querySelector('#csv').appendChild(tr);
 
     td = document.createElement('td');
-    td.textContent = myData.hsDeployed;
-    tr.appendChild(td);
-    document.querySelector('#csv').appendChild(tr);
-
-    td = document.createElement('td');
-    td.textContent = myData.pcDeployed;
-    tr.appendChild(td);
-    document.querySelector('#csv').appendChild(tr);
-
-    td = document.createElement('td');
-    td.textContent = myData.mastRaised;
+    td.textContent = myData.airspeed;
     tr.appendChild(td);
     document.querySelector('#csv').appendChild(tr);
 
@@ -97,7 +77,7 @@ function createContainerTable(myData) {
     document.querySelector('#csv').appendChild(tr);
 
     td = document.createElement('td');
-    td.textContent = myData.cmdEcho;
+    td.textContent = myData.rotZ;
     tr.appendChild(td);
     document.querySelector('#csv').appendChild(tr);
 
